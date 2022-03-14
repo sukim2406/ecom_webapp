@@ -22,7 +22,7 @@ class Dropdown extends StatelessWidget {
           Icons.favorite,
         ),
         items: [
-          'test1',
+          'Home',
           'test2',
           'test3',
         ].map<DropdownMenuItem<String>>(
