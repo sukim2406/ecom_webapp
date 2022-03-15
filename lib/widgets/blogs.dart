@@ -4,8 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import '../globals.dart' as globals;
 import '../widgets/blog_card.dart';
 
-class Blogs extends StatelessWidget {
-  const Blogs({Key? key}) : super(key: key);
+class BlogsMobile extends StatelessWidget {
+  const BlogsMobile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,31 +13,47 @@ class Blogs extends StatelessWidget {
 
     List<Widget> blogSliders = globals.blogList
         .map(
-          (item) => BlogCard(imageUrl: item),
+          (item) => BlogCardMobile(imageUrl: item),
         )
         .toList();
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          width: globals.getWidth(context, .8),
-          child: const Text(
-            'Notice',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
+    return SizedBox(
+      height: 150.0,
+      width: 200.0,
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: 150,
+          viewportFraction: 1.0,
+          enlargeCenterPage: false,
+          autoPlay: true,
         ),
-        CarouselSlider(
-          items: blogSliders,
-          carouselController: controller,
-          options: CarouselOptions(
-            autoPlay: false,
-            enlargeCenterPage: true,
-            enableInfiniteScroll: false,
-          ),
+        items: blogSliders,
+      ),
+    );
+  }
+}
+
+class BlogsTablet extends StatelessWidget {
+  const BlogsTablet({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> blogSliders = globals.blogList
+        .map(
+          (item) => BlogCardTablet(imageUrl: item),
         )
-      ],
+        .toList();
+    return SizedBox(
+      height: 150.0,
+      width: 200.0,
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: 150,
+          viewportFraction: 1.0,
+          enlargeCenterPage: false,
+          autoPlay: true,
+        ),
+        items: blogSliders,
+      ),
     );
   }
 }

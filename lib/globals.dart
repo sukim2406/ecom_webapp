@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const kTabletBreakPoint = 768.0;
 const kDesktopBreakPoint = 1440.0;
-const kMaxWidth = 1180.0;
+const kMaxWidth = 1800.0;
 
 List<String> imgList = [
   'img/temp/new0.png',

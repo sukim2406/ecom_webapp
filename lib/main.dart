@@ -43,7 +43,8 @@ class MyApp extends StatelessWidget {
             return const MaxWidthContainer(
               child: ResponsiveLayout(
                 mobileVer: LandingMobile(),
-                tabletVer: TabletTest(),
+                tabletVer: LandingTablet(),
+                desktopVer: DesktopTest(),
               ),
             );
           }
@@ -55,24 +56,13 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MobileTest extends StatelessWidget {
-  const MobileTest({Key? key}) : super(key: key);
+class DesktopTest extends StatelessWidget {
+  const DesktopTest({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.amber,
-    );
-  }
-}
-
-class TabletTest extends StatelessWidget {
-  const TabletTest({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
+      color: Colors.black,
     );
   }
 }

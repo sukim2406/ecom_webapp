@@ -33,8 +33,7 @@ class NewArrivalsMobile extends StatelessWidget {
           items: imageSliders,
           carouselController: controller,
           options: CarouselOptions(
-            autoPlayInterval: const Duration(seconds: 4),
-            autoPlay: true,
+            autoPlay: false,
             enlargeCenterPage: true,
           ),
         ),

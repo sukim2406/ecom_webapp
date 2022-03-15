@@ -19,12 +19,12 @@ class Dropdown extends StatelessWidget {
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         icon: const Icon(
-          Icons.favorite,
+          Icons.list,
         ),
         items: [
           'Home',
-          'test2',
-          'test3',
+          'Products',
+          'Account',
         ].map<DropdownMenuItem<String>>(
           (String value) {
             return DropdownMenuItem<String>(

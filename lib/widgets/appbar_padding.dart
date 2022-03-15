@@ -7,6 +7,7 @@ class AppbarPadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Text(
       'padd',
+      style: TextStyle(color: Colors.black),
     );
   }
 }

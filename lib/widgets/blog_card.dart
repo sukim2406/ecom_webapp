@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../globals.dart' as globals;
 
-class BlogCard extends StatelessWidget {
+class BlogCardMobile extends StatelessWidget {
   final String imageUrl;
-  const BlogCard({
+  const BlogCardMobile({
     Key? key,
     required this.imageUrl,
   }) : super(key: key);
@@ -14,63 +14,54 @@ class BlogCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(5.0),
       height: globals.getHeight(context, .2),
-      child: Column(
+      child: Stack(
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.all(
-              Radius.circular(5.0),
-            ),
-            child: Image(
-              image: AssetImage(imageUrl),
-              fit: BoxFit.fitHeight,
-              height: globals.getHeight(
-                context,
-                .2,
+          Image(
+            image: AssetImage(imageUrl),
+            fit: BoxFit.cover,
+            width: globals.getWidth(context, 1),
+          ),
+          Positioned(
+            bottom: 0.0,
+            left: 0.0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              child: const Text(
+                'BLOG TITLE',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              width: globals.getWidth(
-                context,
-                .8,
-              ),
             ),
-          ),
-          SizedBox(
-            height: globals.getHeight(context, .02),
-          ),
-          const Text(
-            'Blog Title',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          // const Text('blog post content \n new line '),
+          )
         ],
       ),
     );
-    // return Container(
-    //   margin: const EdgeInsets.all(5.0),
-    //   child: ClipRRect(
-    //     borderRadius: const BorderRadius.all(
-    //       Radius.circular(5.0),
-    //     ),
-    //     child: Column(
-    //       children: [
-    //         Image(
-    //           image: AssetImage(imageUrl),
-    //           fit: BoxFit.fill,
-    //           width: globals.getWidth(context, .8),
-    //         ),
-    //         const Text(
-    //           'Blog Title',
-    //           style: TextStyle(
-    //             fontSize: 30,
-    //             fontWeight: FontWeight.bold,
-    //           ),
-    //         ),
-    //         const Text('blog post hahahaasda;sdklas;dlkasd'),
-    //       ],
-    //     ),
-    //   ),
-    // );
+  }
+}
+
+class BlogCardTablet extends StatelessWidget {
+  final String imageUrl;
+  const BlogCardTablet({
+    Key? key,
+    required this.imageUrl,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(5.0),
+      child: Stack(
+        children: [
+          Image(
+            image: AssetImage(imageUrl),
+            fit: BoxFit.fill,
+            width: globals.getWidth(context, 1),
+            height: globals.getHeight(context, 1),
+          ),
+        ],
+      ),
+    );
   }
 }
