@@ -1,4 +1,9 @@
+// <a href="https://www.flaticon.com/free-icons/person" title="person icons">Person icons created by Ilham Fitrotul Hayat - Flaticon</a>
+
 import 'package:flutter/material.dart';
+
+import '../pages/products.dart';
+import '../pages/landing.dart';
 
 class MenuListMobile extends StatelessWidget {
   const MenuListMobile({Key? key}) : super(key: key);
@@ -8,12 +13,55 @@ class MenuListMobile extends StatelessWidget {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
+        DrawerHeader(
+          child: Column(
+            children: [
+              Expanded(
+                child: Container(),
+              ),
+              const CircleAvatar(
+                backgroundImage: AssetImage('img/default-profile-pic.png'),
+                radius: 40,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Log In',
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'Cart',
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
         ListTile(
           title: const Text(
             'Home',
           ),
           onTap: () {
-            print('Home');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LandingMobile(),
+              ),
+            );
           },
         ),
         ListTile(
@@ -21,12 +69,17 @@ class MenuListMobile extends StatelessWidget {
             'Products',
           ),
           onTap: () {
-            print('Home');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProductsMobile(),
+              ),
+            );
           },
         ),
         ListTile(
           title: const Text(
-            'Account',
+            'About',
           ),
           onTap: () {
             print('Home');

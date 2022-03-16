@@ -12,29 +12,26 @@ class BlogCardMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.grey[100],
       margin: const EdgeInsets.all(5.0),
-      height: globals.getHeight(context, .2),
-      child: Stack(
+      child: Column(
         children: [
           Image(
+            height: globals.getHeight(context, .3),
+            width: globals.getWidth(context, .8),
             image: AssetImage(imageUrl),
             fit: BoxFit.cover,
-            width: globals.getWidth(context, 1),
           ),
-          Positioned(
-            bottom: 0.0,
-            left: 0.0,
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: const Text(
-                'BLOG TITLE',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+          SizedBox(
+            height: globals.getHeight(context, .02),
+          ),
+          const Text(
+            'Blog Title',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
-          )
+          ),
         ],
       ),
     );

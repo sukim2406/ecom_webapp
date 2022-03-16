@@ -9,25 +9,19 @@ class BlogsMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CarouselController controller = CarouselController();
-
     List<Widget> blogSliders = globals.blogList
         .map(
           (item) => BlogCardMobile(imageUrl: item),
         )
         .toList();
-    return SizedBox(
-      height: 150.0,
-      width: 200.0,
-      child: CarouselSlider(
-        options: CarouselOptions(
-          height: 150,
-          viewportFraction: 1.0,
-          enlargeCenterPage: false,
-          autoPlay: true,
-        ),
-        items: blogSliders,
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: globals.getHeight(context, .5),
+        viewportFraction: 1,
+        enlargeCenterPage: false,
+        autoPlay: true,
       ),
+      items: blogSliders,
     );
   }
 }

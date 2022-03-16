@@ -17,27 +17,13 @@ class NewArrivalsMobile extends StatelessWidget {
 
     CarouselController controller = CarouselController();
 
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          width: globals.getWidth(context, .8),
-          child: const Text(
-            'New Arrivals',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
-        ),
-        CarouselSlider(
-          items: imageSliders,
-          carouselController: controller,
-          options: CarouselOptions(
-            autoPlay: false,
-            enlargeCenterPage: true,
-          ),
-        ),
-      ],
+    return CarouselSlider(
+      items: imageSliders,
+      carouselController: controller,
+      options: CarouselOptions(
+        autoPlay: true,
+        enlargeCenterPage: true,
+      ),
     );
   }
 }

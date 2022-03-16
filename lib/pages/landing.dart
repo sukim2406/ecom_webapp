@@ -19,9 +19,9 @@ class LandingMobile extends StatelessWidget {
           appBar: AppBar(
             iconTheme: const IconThemeData(color: Colors.white),
             backgroundColor: Colors.black,
-            flexibleSpace: Image(
-              image: const AssetImage('img/Supreme-Logo.png'),
-              height: globals.getHeight(context, .1),
+            flexibleSpace: const Image(
+              image: AssetImage('img/Supreme-Logo.png'),
+              height: 80.0,
               fit: BoxFit.fitHeight,
             ),
             actions: const [
