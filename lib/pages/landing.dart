@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../globals.dart' as globals;
-import '../widgets/appbar_padding.dart';
 import '../widgets/new_arrivals.dart';
 import '../widgets/bestsellers.dart';
 import '../widgets/blogs.dart';
 import '../widgets/menu_list.dart';
+import '../widgets/appbar_widget.dart';
+import '../static.dart';
 
 class LandingMobile extends StatelessWidget {
-  const LandingMobile({Key? key}) : super(key: key);
+  final myUid;
+  const LandingMobile({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,44 +21,13 @@ class LandingMobile extends StatelessWidget {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
-            iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: Colors.black,
-            flexibleSpace: const Image(
-              image: AssetImage('img/Supreme-Logo.png'),
-              height: 80.0,
-              fit: BoxFit.fitHeight,
-            ),
-            actions: const [
-              Icon(
-                Icons.favorite,
-              ),
-              AppbarPadding(),
-              Icon(
-                Icons.search,
-              ),
-              AppbarPadding(),
-            ],
-            bottom: const TabBar(
-              indicatorColor: Colors.red,
-              labelStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-              tabs: [
-                Tab(
-                  text: 'NEWSLETTERS',
-                ),
-                Tab(
-                  text: 'NEW ARRIVALS',
-                ),
-                Tab(
-                  text: 'BEST',
-                ),
-              ],
-            ),
+          appBar: const AppbarWidget(
+            tabBar: true,
           ),
-          drawer: const Drawer(
-            child: MenuListMobile(),
+          drawer: Drawer(
+            child: MenuListMobile(
+              myUid: myUid,
+            ),
           ),
           body: TabBarView(
             children: [

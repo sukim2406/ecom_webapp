@@ -1,12 +1,30 @@
+import 'package:ecom_webapp/controllers/auth_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get.dart';
 
 import './pages/landing.dart';
 import './widgets/responsive_layout.dart';
 import './widgets/max_width_container.dart';
+import './controllers/auth_controller.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyAixDHyf8mBMWfbweKEh2sDsLfVWHXdNxY",
+      authDomain: "sosodev-ecom-webapp.firebaseapp.com",
+      projectId: "sosodev-ecom-webapp",
+      storageBucket: "sosodev-ecom-webapp.appspot.com",
+      messagingSenderId: "475130475964",
+      appId: "1:475130475964:web:789d029339270525cd27b9",
+    ),
+  ).then(
+    (value) {
+      Get.put(AuthController());
+    },
+  );
   runApp(
     MyApp(),
   );
@@ -19,7 +37,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -39,15 +57,17 @@ class MyApp extends StatelessWidget {
           if (snapshot.hasError) {
             print(snapshot.error.toString());
           }
-          if (snapshot.connectionState == ConnectionState.done) {
-            return const MaxWidthContainer(
-              child: ResponsiveLayout(
-                mobileVer: LandingMobile(),
-                tabletVer: LandingTablet(),
-                desktopVer: DesktopTest(),
-              ),
-            );
-          }
+          // if (snapshot.connectionState == ConnectionState.done) {
+          //   return const MaxWidthContainer(
+          //     child: ResponsiveLayout(
+          //       mobileVer: LandingMobile(
+          //         user: User
+          //       ),
+          //       tabletVer: LandingTablet(),
+          //       desktopVer: DesktopTest(),
+          //     ),
+          //   );
+          // }
           return const CircularProgressIndicator();
         },
         // child: const MyHomePage(title: 'Flutter Demo Home Page')

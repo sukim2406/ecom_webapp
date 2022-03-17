@@ -2,88 +2,193 @@
 
 import 'package:flutter/material.dart';
 
+import '../globals.dart' as globals;
 import '../pages/products.dart';
 import '../pages/landing.dart';
+import '../pages/about.dart';
+import '../pages/login.dart';
+import '../static.dart';
+import '../controllers/auth_controller.dart';
 
 class MenuListMobile extends StatelessWidget {
-  const MenuListMobile({Key? key}) : super(key: key);
+  final String myUid;
+  const MenuListMobile({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       padding: EdgeInsets.zero,
       children: [
-        DrawerHeader(
+        Container(
+          color: Colors.black87,
+          child: DrawerHeader(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(),
+                ),
+                const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  backgroundImage: AssetImage('img/default-profile-pic.png'),
+                  radius: 40,
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                (myUid == '')
+                    ? Row(
+                        children: [
+                          Expanded(
+                            child: Container(),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LogInMobile(
+                                    myUid: myUid,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Log In',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Cart',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                        ],
+                      )
+                    : Row(
+                        children: [
+                          Expanded(
+                            child: Container(),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              AuthController.instance.logout();
+                            },
+                            child: const Text(
+                              'Log out',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              print('favorites');
+                            },
+                            child: const Text(
+                              'Favorites',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Cart',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                        ],
+                      ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          color: Colors.black54,
+          height: globals.getHeight(context, 1),
           child: Column(
             children: [
-              Expanded(
-                child: Container(),
-              ),
-              const CircleAvatar(
-                backgroundImage: AssetImage('img/default-profile-pic.png'),
-                radius: 40,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(),
+              ListTile(
+                title: const Text(
+                  'Products',
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Log In',
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductsMobile(
+                        myUid: myUid,
+                      ),
                     ),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text(
+                  'Home',
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Cart',
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LandingMobile(
+                        myUid: myUid,
+                      ),
                     ),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text(
+                  'About',
+                  style: TextStyle(
+                    color: Colors.white,
                   ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                ],
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AboutMobile(),
+                    ),
+                  );
+                },
               ),
             ],
           ),
-        ),
-        ListTile(
-          title: const Text(
-            'Home',
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LandingMobile(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          title: const Text(
-            'Products',
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ProductsMobile(),
-              ),
-            );
-          },
-        ),
-        ListTile(
-          title: const Text(
-            'About',
-          ),
-          onTap: () {
-            print('Home');
-          },
         ),
       ],
     );

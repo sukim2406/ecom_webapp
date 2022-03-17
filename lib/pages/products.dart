@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../globals.dart' as globals;
-import '../widgets/appbar_padding.dart';
 import '../widgets/menu_list.dart';
 import '../widgets/product_card.dart';
+import '../widgets/appbar_widget.dart';
 
 class ProductsMobile extends StatelessWidget {
-  const ProductsMobile({Key? key}) : super(key: key);
+  final String myUid;
+  const ProductsMobile({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,27 +21,13 @@ class ProductsMobile extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.white),
-        backgroundColor: Colors.black,
-        flexibleSpace: const Image(
-          image: AssetImage('img/Supreme-Logo.png'),
-          height: 80.0,
-          fit: BoxFit.fitHeight,
-        ),
-        actions: const [
-          Icon(
-            Icons.favorite,
-          ),
-          AppbarPadding(),
-          Icon(
-            Icons.search,
-          ),
-          AppbarPadding(),
-        ],
+      appBar: const AppbarWidget(
+        tabBar: false,
       ),
-      drawer: const Drawer(
-        child: MenuListMobile(),
+      drawer: Drawer(
+        child: MenuListMobile(
+          myUid: myUid,
+        ),
       ),
       body: Container(
         color: Colors.black,
