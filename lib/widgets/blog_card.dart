@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../globals.dart' as globals;
 
 class BlogCardMobile extends StatelessWidget {
-  final String imageUrl;
+  final Map blog;
   const BlogCardMobile({
     Key? key,
-    required this.imageUrl,
+    required this.blog,
   }) : super(key: key);
 
   @override
@@ -19,15 +19,15 @@ class BlogCardMobile extends StatelessWidget {
           Image(
             height: globals.getHeight(context, .3),
             width: globals.getWidth(context, .8),
-            image: AssetImage(imageUrl),
+            image: AssetImage(blog['image']),
             fit: BoxFit.cover,
           ),
           SizedBox(
             height: globals.getHeight(context, .02),
           ),
-          const Text(
-            'Blog Title',
-            style: TextStyle(
+          Text(
+            blog['title'],
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
@@ -39,10 +39,10 @@ class BlogCardMobile extends StatelessWidget {
 }
 
 class BlogCardTablet extends StatelessWidget {
-  final String imageUrl;
+  final Map blog;
   const BlogCardTablet({
     Key? key,
-    required this.imageUrl,
+    required this.blog,
   }) : super(key: key);
 
   @override
@@ -52,7 +52,7 @@ class BlogCardTablet extends StatelessWidget {
       child: Stack(
         children: [
           Image(
-            image: AssetImage(imageUrl),
+            image: AssetImage(blog['image']),
             fit: BoxFit.fill,
             width: globals.getWidth(context, 1),
             height: globals.getHeight(context, 1),

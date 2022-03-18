@@ -9,9 +9,9 @@ class BlogsMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> blogSliders = globals.blogList
+    List<Widget> blogSliders = globals.tempBlogData
         .map(
-          (item) => BlogCardMobile(imageUrl: item),
+          (item) => BlogCardMobile(blog: item),
         )
         .toList();
     return CarouselSlider(
@@ -31,9 +31,9 @@ class BlogsTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> blogSliders = globals.blogList
+    List<Widget> blogSliders = globals.tempBlogData
         .map(
-          (item) => BlogCardTablet(imageUrl: item),
+          (item) => BlogCardTablet(blog: item),
         )
         .toList();
     return SizedBox(

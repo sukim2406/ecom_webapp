@@ -9,9 +9,9 @@ class NewArrivalsMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> imageSliders = globals.imgList
+    List<Widget> imageSliders = globals.tempProductData
         .map(
-          (item) => ProductCard(imageUrl: item),
+          (item) => ProductCard(product: item),
         )
         .toList();
 

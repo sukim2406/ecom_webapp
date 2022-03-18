@@ -137,24 +137,6 @@ class MenuListMobile extends StatelessWidget {
             children: [
               ListTile(
                 title: const Text(
-                  'Products',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductsMobile(
-                        myUid: myUid,
-                      ),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                title: const Text(
                   'Home',
                   style: TextStyle(
                     color: Colors.white,
@@ -165,6 +147,24 @@ class MenuListMobile extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => LandingMobile(
+                        myUid: myUid,
+                      ),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text(
+                  'Products',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductsMobile(
                         myUid: myUid,
                       ),
                     ),

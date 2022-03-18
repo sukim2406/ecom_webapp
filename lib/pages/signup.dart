@@ -35,129 +35,132 @@ class _SignupMobileState extends State<SignupMobile> {
           myUid: widget.myUid,
         ),
       ),
-      body: Container(
-        color: Colors.black,
-        width: globals.getWidth(context, 1.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: TextField(
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(
-                    color: Colors.grey,
+      body: SingleChildScrollView(
+        child: Container(
+          color: Colors.black,
+          width: globals.getWidth(context, 1.0),
+          height: globals.getHeight(context, 1.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: globals.getWidth(context, .5),
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.white,
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
                       color: Colors.grey,
                     ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.red,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: TextField(
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-                obscureText: true,
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(
-                    color: Colors.grey,
+              const SizedBox(
+                height: 30.0,
+              ),
+              SizedBox(
+                width: globals.getWidth(context, .5),
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.white,
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                  obscureText: true,
+                  controller: passwordController,
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
                       color: Colors.grey,
                     ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.red,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: TextField(
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-                obscureText: true,
-                controller: confirmController,
-                decoration: const InputDecoration(
-                  labelText: 'Password Confirm',
-                  labelStyle: TextStyle(
-                    color: Colors.grey,
+              const SizedBox(
+                height: 30.0,
+              ),
+              SizedBox(
+                width: globals.getWidth(context, .5),
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.white,
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                  obscureText: true,
+                  controller: confirmController,
+                  decoration: const InputDecoration(
+                    labelText: 'Password Confirm',
+                    labelStyle: TextStyle(
                       color: Colors.grey,
                     ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.red,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            SizedBox(
-              width: globals.getWidth(context, .2),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                    side: const BorderSide(
-                      width: 2.0,
-                      color: Colors.red,
-                    )),
-                onPressed: () {
-                  if (passwordController.text != confirmController.text) {
-                    Fluttertoast.showToast(
-                      msg: 'Password does not match',
-                      toastLength: Toast.LENGTH_SHORT,
-                      gravity: ToastGravity.SNACKBAR,
-                      timeInSecForIosWeb: 1,
-                      backgroundColor: Colors.red,
-                      textColor: Colors.white,
-                      fontSize: 16.0,
-                    );
-                  } else {
-                    AuthController.instance.register(
-                      emailController.text,
-                      passwordController.text,
-                    );
-                  }
-                },
-                child: const Text('SIGN UP'),
+              const SizedBox(
+                height: 30.0,
               ),
-            ),
-          ],
+              SizedBox(
+                width: globals.getWidth(context, .2),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      side: const BorderSide(
+                        width: 2.0,
+                        color: Colors.red,
+                      )),
+                  onPressed: () {
+                    if (passwordController.text != confirmController.text) {
+                      Fluttertoast.showToast(
+                        msg: 'Password does not match',
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.SNACKBAR,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.red,
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                    } else {
+                      AuthController.instance.register(
+                        emailController.text,
+                        passwordController.text,
+                      );
+                    }
+                  },
+                  child: const Text('SIGN UP'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -26,119 +26,163 @@ class LogInMobile extends StatelessWidget {
           myUid: myUid,
         ),
       ),
-      body: Container(
-        width: globals.getWidth(context, 1),
-        color: Colors.black,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: TextField(
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(
-                    color: Colors.grey,
+      body: SingleChildScrollView(
+        child: Container(
+          height: globals.getHeight(context, 1),
+          width: globals.getWidth(context, 1),
+          color: Colors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: globals.getWidth(context, .5),
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.white,
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    labelStyle: TextStyle(
                       color: Colors.grey,
                     ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.red,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: TextField(
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-                controller: passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(
-                    color: Colors.grey,
+              const SizedBox(
+                height: 30.0,
+              ),
+              SizedBox(
+                width: globals.getWidth(context, .5),
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.white,
                   ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
+                  controller: passwordController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(
                       color: Colors.grey,
                     ),
-                  ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.red,
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.red,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 30.0,
-            ),
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: globals.getWidth(context, .2),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                          side: const BorderSide(
-                            width: 2.0,
-                            color: Colors.red,
-                          )),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignupMobile(
-                              myUid: myUid,
-                            ),
-                          ),
-                        );
-                      },
-                      child: const Text('SIGN UP'),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                  SizedBox(
-                    width: globals.getWidth(context, .2),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                          side: const BorderSide(
-                            width: 2.0,
-                            color: Colors.red,
-                          )),
-                      onPressed: () {
-                        AuthController.instance.login(
-                            emailController.text, passwordController.text);
-                      },
-                      child: const Text('LOG IN'),
-                    ),
-                  ),
-                ],
+              const SizedBox(
+                height: 30.0,
               ),
-            )
-          ],
+              SizedBox(
+                width: globals.getWidth(context, .4),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      side: const BorderSide(
+                        width: 2.0,
+                        color: Colors.red,
+                      )),
+                  onPressed: () {
+                    AuthController.instance
+                        .login(emailController.text, passwordController.text);
+                  },
+                  child: const Text('LOG IN'),
+                ),
+              ),
+              const SizedBox(
+                height: 30.0,
+              ),
+              SizedBox(
+                width: globals.getWidth(context, .4),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      side: const BorderSide(
+                        width: 2.0,
+                        color: Colors.red,
+                      )),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignupMobile(
+                          myUid: myUid,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('SIGN UP'),
+                ),
+              ),
+              // SizedBox(
+              //   width: globals.getWidth(context, .5),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       SizedBox(
+              //         width: globals.getWidth(context, .2),
+              //         child: ElevatedButton(
+              //           style: ElevatedButton.styleFrom(
+              //               primary: Colors.black,
+              //               side: const BorderSide(
+              //                 width: 2.0,
+              //                 color: Colors.red,
+              //               )),
+              //           onPressed: () {
+              //             Navigator.push(
+              //               context,
+              //               MaterialPageRoute(
+              //                 builder: (context) => SignupMobile(
+              //                   myUid: myUid,
+              //                 ),
+              //               ),
+              //             );
+              //           },
+              //           child: const Text('SIGN UP'),
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: Container(),
+              //       ),
+              //       SizedBox(
+              //         width: globals.getWidth(context, .2),
+              //         child: ElevatedButton(
+              //           style: ElevatedButton.styleFrom(
+              //               primary: Colors.black,
+              //               side: const BorderSide(
+              //                 width: 2.0,
+              //                 color: Colors.red,
+              //               )),
+              //           onPressed: () {
+              //             AuthController.instance.login(
+              //                 emailController.text, passwordController.text);
+              //           },
+              //           child: const Text('LOG IN'),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // )
+            ],
+          ),
         ),
       ),
     );

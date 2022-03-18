@@ -11,9 +11,9 @@ class BestsellersMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     CarouselController controller = CarouselController();
 
-    List<Widget> imageSliders = globals.imgList
+    List<Widget> imageSliders = globals.tempProductData
         .map(
-          (item) => ProductCard(imageUrl: item),
+          (item) => ProductCard(product: item),
         )
         .toList();
 
