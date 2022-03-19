@@ -9,6 +9,7 @@ import '../pages/about.dart';
 import '../pages/login.dart';
 import '../static.dart';
 import '../controllers/auth_controller.dart';
+import '../pages/cart.dart';
 
 class MenuListMobile extends StatelessWidget {
   final String myUid;
@@ -66,7 +67,16 @@ class MenuListMobile extends StatelessWidget {
                             child: Container(),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CartMobile(
+                                    cartItems: GuestCart.cartItems,
+                                  ),
+                                ),
+                              );
+                            },
                             child: const Text(
                               'Cart',
                               style: TextStyle(
@@ -113,7 +123,16 @@ class MenuListMobile extends StatelessWidget {
                             child: Container(),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CartMobile(
+                                    cartItems: GuestCart.getCartItems(),
+                                  ),
+                                ),
+                              );
+                            },
                             child: const Text(
                               'Cart',
                               style: TextStyle(

@@ -111,3 +111,15 @@ getHeight(context, multiple) {
 getWidth(context, multiple) {
   return MediaQuery.of(context).size.width * multiple;
 }
+
+Map getProductById(pid) {
+  var temp;
+  tempProductData.forEach(
+    (item) {
+      if (item['pid'] == pid) {
+        temp = item;
+      }
+    },
+  );
+  return temp;
+}

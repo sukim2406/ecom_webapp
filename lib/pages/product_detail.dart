@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import '../globals.dart' as globals;
 import '../widgets/appbar_widget.dart';
 import '../pages/cart.dart';
+import '../static.dart';
 
 class ProductDetailMobile extends StatelessWidget {
+  final String myUid;
   final Map product;
   const ProductDetailMobile({
     Key? key,
     required this.product,
+    required this.myUid,
   }) : super(key: key);
 
   @override
@@ -108,7 +111,14 @@ class ProductDetailMobile extends StatelessWidget {
                       width: 2.0,
                       color: Colors.red,
                     )),
-                onPressed: () {},
+                onPressed: () {
+                  if (myUid == '') {
+                    GuestCart.addItemToCart(product['pid']);
+                    print(
+                      GuestCart.getCartItems().toString(),
+                    );
+                  }
+                },
                 child: const Text('Add to cart'),
               ),
             ),

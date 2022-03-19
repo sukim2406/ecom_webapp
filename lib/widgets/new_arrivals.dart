@@ -5,13 +5,20 @@ import '../globals.dart' as globals;
 import '../widgets/product_card.dart';
 
 class NewArrivalsMobile extends StatelessWidget {
-  const NewArrivalsMobile({Key? key}) : super(key: key);
+  final myUid;
+  const NewArrivalsMobile({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> imageSliders = globals.tempProductData
         .map(
-          (item) => ProductCard(product: item),
+          (item) => ProductCard(
+            product: item,
+            myUid: myUid,
+          ),
         )
         .toList();
 

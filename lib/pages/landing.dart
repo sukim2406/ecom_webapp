@@ -37,11 +37,15 @@ class LandingMobile extends StatelessWidget {
               ),
               Container(
                 color: Colors.black,
-                child: const NewArrivalsMobile(),
+                child: NewArrivalsMobile(
+                  myUid: myUid,
+                ),
               ),
               Container(
                 color: Colors.black,
-                child: const BestsellersMobile(),
+                child: BestsellersMobile(
+                  myUid: myUid,
+                ),
               ),
             ],
           ),

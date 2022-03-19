@@ -16,7 +16,10 @@ class ProductsMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> productList = globals.tempProductData
         .map(
-          (item) => ProductCard(product: item),
+          (item) => ProductCard(
+            product: item,
+            myUid: myUid,
+          ),
         )
         .toList();
 

@@ -5,9 +5,11 @@ import '../pages/product_detail.dart';
 
 class ProductCard extends StatelessWidget {
   final Map product;
+  final String myUid;
   const ProductCard({
     Key? key,
     required this.product,
+    required this.myUid,
   }) : super(key: key);
 
   @override
@@ -19,6 +21,7 @@ class ProductCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => ProductDetailMobile(
               product: product,
+              myUid: myUid,
             ),
           ),
         );

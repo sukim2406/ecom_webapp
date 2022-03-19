@@ -15,11 +15,15 @@ class CartMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     double getTotalPrice() {
       double totalPrice = 0.0;
-      globals.tempProductData.forEach(
-        (element) {
-          totalPrice += element['price'];
-        },
-      );
+      if (cartItems.isNotEmpty) {
+        cartItems.forEach(
+          (item) {
+            // totalPrice += (globals.getProductById(item['pid'])['price']);
+            totalPrice = totalPrice +
+                (globals.getProductById(item['pid'])['price'] * item['cnt']);
+          },
+        );
+      }
       return totalPrice;
     }
 
@@ -78,17 +82,27 @@ class CartMobile extends StatelessWidget {
                   const SizedBox(
                     height: 5.0,
                   ),
-                  Container(
-                    color: Colors.grey[200],
-                    height: globals.getHeight(context, .4),
-                    child: ListView.builder(
-                      itemCount: globals.tempProductData.length,
-                      itemBuilder: (context, index) {
-                        return CartItemMobile(
-                            item: globals.tempProductData[index]);
-                      },
-                    ),
-                  ),
+                  (cartItems.isNotEmpty)
+                      ? Container(
+                          color: Colors.grey[200],
+                          height: globals.getHeight(context, .4),
+                          child: ListView.builder(
+                            itemCount: cartItems.length,
+                            itemBuilder: (context, index) {
+                              return CartItemMobile(
+                                  item: globals
+                                      .getProductById(cartItems[index]['pid']));
+                              // return CartItemMobile(item: cartItems[index]['pid']);
+                            },
+                          ),
+                        )
+                      : Container(
+                          color: Colors.grey[200],
+                          height: globals.getHeight(context, .4),
+                          child: Text(
+                            'no items yet',
+                          ),
+                        ),
                   Container(
                     padding: const EdgeInsets.only(top: 40.0),
                     child: Row(
