@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../globals.dart' as globals;
 import '../widgets/appbar_widget.dart';
@@ -87,11 +88,12 @@ class ProductDetailMobile extends StatelessWidget {
                       color: Colors.red,
                     )),
                 onPressed: () {
+                  GuestCart.addItemToCart(product['pid']);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => CartMobile(
-                        cartItems: [product],
+                        myUid: myUid,
                       ),
                     ),
                   );
@@ -114,10 +116,16 @@ class ProductDetailMobile extends StatelessWidget {
                 onPressed: () {
                   if (myUid == '') {
                     GuestCart.addItemToCart(product['pid']);
-                    print(
-                      GuestCart.getCartItems().toString(),
-                    );
                   }
+                  Fluttertoast.showToast(
+                    msg: 'item added',
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0,
+                  );
                 },
                 child: const Text('Add to cart'),
               ),

@@ -1,6 +1,8 @@
+import 'package:ecom_webapp/static.dart';
 import 'package:flutter/material.dart';
 
 import '../globals.dart' as globals;
+import '../pages/cart.dart';
 
 class CartItemMobile extends StatelessWidget {
   final Map item;
@@ -17,6 +19,42 @@ class CartItemMobile extends StatelessWidget {
       height: globals.getHeight(context, .15),
       child: Row(
         children: [
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Remove item?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            'Cancel',
+                          ),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              GuestCart.removeItemFromCart(item['pid']);
+                              Navigator.pop(context);
+                            },
+                            child: const Text(
+                              'OK',
+                            ))
+                      ],
+                    );
+                  });
+            },
+            child: const Icon(
+              Icons.cancel_outlined,
+              color: Colors.white,
+            ),
+          ),
+          Expanded(
+            child: Container(),
+          ),
           SizedBox(
             width: globals.getWidth(context, .2),
             child: Image(
@@ -33,21 +71,36 @@ class CartItemMobile extends StatelessWidget {
             width: globals.getWidth(context, .2),
             child: Text(
               item['name'],
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
               ),
+              textAlign: TextAlign.end,
             ),
           ),
           Expanded(
             child: Container(),
           ),
           SizedBox(
-            width: globals.getWidth(context, .2),
+            width: globals.getWidth(context, .1),
             child: Text(
-              item['price'].toString(),
-              style: TextStyle(
+              item['qty'].toString(),
+              style: const TextStyle(
                 color: Colors.white,
               ),
+              textAlign: TextAlign.end,
+            ),
+          ),
+          Expanded(
+            child: Container(),
+          ),
+          SizedBox(
+            width: globals.getWidth(context, .1),
+            child: Text(
+              item['price'].toString(),
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+              textAlign: TextAlign.end,
             ),
           ),
         ],

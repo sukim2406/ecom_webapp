@@ -72,7 +72,7 @@ class MenuListMobile extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CartMobile(
-                                    cartItems: GuestCart.cartItems,
+                                    myUid: myUid,
                                   ),
                                 ),
                               );
@@ -128,7 +128,7 @@ class MenuListMobile extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CartMobile(
-                                    cartItems: GuestCart.getCartItems(),
+                                    myUid: myUid,
                                   ),
                                 ),
                               );

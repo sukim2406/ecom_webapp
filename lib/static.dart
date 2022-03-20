@@ -47,4 +47,27 @@ class GuestCart {
       cartItems.add(item);
     }
   }
+
+  static List singleItemCheckOut(pid) {
+    Map item = {
+      'pid': pid,
+      'cnt': 1,
+    };
+
+    cartItems.add(item);
+
+    return cartItems;
+  }
+
+  static void removeItemFromCart(pid) {
+    if (findDuplicateItem(pid)) {
+      cartItems.forEach(
+        (element) {
+          if (element['pid'] == pid) {
+            cartItems.remove(element);
+          }
+        },
+      );
+    }
+  }
 }
