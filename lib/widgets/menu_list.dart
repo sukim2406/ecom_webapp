@@ -201,7 +201,9 @@ class MenuListMobile extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AboutMobile(),
+                      builder: (context) => AboutMobile(
+                        myUid: myUid,
+                      ),
                     ),
                   );
                 },

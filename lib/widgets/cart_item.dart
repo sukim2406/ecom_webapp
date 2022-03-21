@@ -6,9 +6,11 @@ import '../pages/cart.dart';
 
 class CartItemMobile extends StatelessWidget {
   final Map item;
+  final Function update;
   const CartItemMobile({
     Key? key,
     required this.item,
+    required this.update,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,7 @@ class CartItemMobile extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                              GuestCart.removeItemFromCart(item['pid']);
+                              update(item['pid']);
                               Navigator.pop(context);
                             },
                             child: const Text(

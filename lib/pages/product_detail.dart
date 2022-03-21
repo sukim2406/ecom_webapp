@@ -18,7 +18,10 @@ class ProductDetailMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(tabBar: false),
+      appBar: AppbarWidget(
+        tabBar: false,
+        myUid: myUid,
+      ),
       body: Container(
         width: globals.getWidth(context, 1),
         height: globals.getHeight(context, 1),

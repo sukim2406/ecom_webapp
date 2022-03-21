@@ -8,6 +8,7 @@ import './pages/landing.dart';
 import './widgets/responsive_layout.dart';
 import './widgets/max_width_container.dart';
 import './controllers/auth_controller.dart';
+import './controllers/product_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,12 @@ void main() async {
     ),
   ).then(
     (value) {
-      Get.put(AuthController());
+      Get.put(
+        AuthController(),
+      );
+      Get.put(
+        ProductController(),
+      );
     },
   );
   runApp(

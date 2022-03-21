@@ -21,8 +21,9 @@ class LandingMobile extends StatelessWidget {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: const AppbarWidget(
+          appBar: AppbarWidget(
             tabBar: true,
+            myUid: myUid,
           ),
           drawer: Drawer(
             child: MenuListMobile(
@@ -33,7 +34,9 @@ class LandingMobile extends StatelessWidget {
             children: [
               Container(
                 color: Colors.black,
-                child: const BlogsMobile(),
+                child: BlogsMobile(
+                  myUid: myUid,
+                ),
               ),
               Container(
                 color: Colors.black,

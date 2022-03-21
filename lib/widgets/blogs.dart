@@ -5,13 +5,20 @@ import '../globals.dart' as globals;
 import '../widgets/blog_card.dart';
 
 class BlogsMobile extends StatelessWidget {
-  const BlogsMobile({Key? key}) : super(key: key);
+  final String myUid;
+  const BlogsMobile({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     List<Widget> blogSliders = globals.tempBlogData
         .map(
-          (item) => BlogCardMobile(blog: item),
+          (item) => BlogCardMobile(
+            blog: item,
+            myUid: myUid,
+          ),
         )
         .toList();
     return CarouselSlider(

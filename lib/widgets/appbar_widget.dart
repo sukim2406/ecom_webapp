@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../globals.dart' as globals;
 import '../widgets/appbar_padding.dart';
+import '../pages/login.dart';
+import '../widgets/search_product.dart';
 
 class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
+  final String myUid;
   final bool tabBar;
   const AppbarWidget({
     Key? key,
     required this.tabBar,
+    required this.myUid,
   }) : super(key: key);
 
   @override
@@ -22,15 +27,14 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
         height: 80.0,
         fit: BoxFit.fitHeight,
       ),
-      actions: const [
-        Icon(
-          Icons.favorite,
+      actions: [
+        const AppbarPadding(),
+        SizedBox(
+          width: globals.getWidth(context, .3),
+          child: SearchProduct(
+            myUid: myUid,
+          ),
         ),
-        AppbarPadding(),
-        Icon(
-          Icons.search,
-        ),
-        AppbarPadding(),
       ],
       bottom: (tabBar)
           ? const TabBar(

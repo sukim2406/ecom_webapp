@@ -27,8 +27,9 @@ class _SignupMobileState extends State<SignupMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(
+      appBar: AppbarWidget(
         tabBar: false,
+        myUid: widget.myUid,
       ),
       drawer: Drawer(
         child: MenuListMobile(

@@ -60,14 +60,7 @@ class GuestCart {
   }
 
   static void removeItemFromCart(pid) {
-    if (findDuplicateItem(pid)) {
-      cartItems.forEach(
-        (element) {
-          if (element['pid'] == pid) {
-            cartItems.remove(element);
-          }
-        },
-      );
-    }
+    cartItems.removeWhere((element) => element[pid] == pid);
+    print(cartItems);
   }
 }

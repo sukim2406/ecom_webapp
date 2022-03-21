@@ -4,12 +4,19 @@ import '../globals.dart' as globals;
 import '../widgets/appbar_widget.dart';
 
 class AboutMobile extends StatelessWidget {
-  const AboutMobile({Key? key}) : super(key: key);
+  final String myUid;
+  const AboutMobile({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppbarWidget(tabBar: false),
+      appBar: AppbarWidget(
+        tabBar: false,
+        myUid: myUid,
+      ),
       body: Container(
         color: Colors.black,
         width: globals.getWidth(context, 1),

@@ -18,8 +18,9 @@ class LogInMobile extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return Scaffold(
-      appBar: const AppbarWidget(
+      appBar: AppbarWidget(
         tabBar: false,
+        myUid: myUid,
       ),
       drawer: Drawer(
         child: MenuListMobile(
