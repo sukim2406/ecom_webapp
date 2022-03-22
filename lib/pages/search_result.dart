@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../globals.dart' as globals;
 import '../widgets/appbar_widget.dart';
 import '../widgets/product_card.dart';
+import '../controllers/product_controller.dart';
 
 class SearchResultMobile extends StatefulWidget {
   final String keyword;
@@ -110,16 +111,44 @@ class _SearchResultMobileState extends State<SearchResultMobile> {
             SizedBox(
               height: globals.getHeight(context, .7),
               width: globals.getWidth(context, .8),
-              child: (searchResult.isEmpty)
-                  ? const Text('Result not found')
-                  : GridView.count(
+              child: FutureBuilder(
+                future: ProductController.instance.getProductsByName(
+                  widget.keyword,
+                ),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    var temp = snapshot.data! as List<Object?>;
+                    searchResult = temp
+                        .map(
+                          (doc) => ProductCard(
+                            product: doc as Map,
+                            myUid: widget.myUid,
+                          ),
+                        )
+                        .toList();
+                    return GridView.count(
                       primary: false,
                       padding: const EdgeInsets.all(20.0),
                       crossAxisCount: 2,
                       mainAxisSpacing: 10.0,
                       crossAxisSpacing: 10.0,
                       children: getProductCards(),
-                    ),
+                    );
+                  } else {
+                    return const Text('Result not found');
+                  }
+                },
+              ),
+              // child: (searchResult.isEmpty)
+              //     ? const Text('Result not found')
+              //     : GridView.count(
+              //         primary: false,
+              //         padding: const EdgeInsets.all(20.0),
+              //         crossAxisCount: 2,
+              //         mainAxisSpacing: 10.0,
+              //         crossAxisSpacing: 10.0,
+              //         children: getProductCards(),
+              //       ),
             ),
             Expanded(
               child: Container(),

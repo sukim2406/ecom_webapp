@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 import '../globals.dart' as globals;
 import '../widgets/blog_card.dart';
+import '../controllers/blog_controller.dart';
 
 class BlogsMobile extends StatelessWidget {
   final String myUid;
@@ -13,23 +14,48 @@ class BlogsMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> blogSliders = globals.tempBlogData
-        .map(
-          (item) => BlogCardMobile(
-            blog: item,
-            myUid: myUid,
-          ),
-        )
-        .toList();
-    return CarouselSlider(
-      options: CarouselOptions(
-        height: globals.getHeight(context, .5),
-        viewportFraction: 1,
-        enlargeCenterPage: false,
-        autoPlay: true,
-      ),
-      items: blogSliders,
+    List<Widget> blogSliders = [];
+    // = globals.tempBlogData
+    //     .map(
+    //       (item) => BlogCardMobile(
+    //         blog: item,
+    //         myUid: myUid,
+    //       ),
+    //     )
+    //     .toList();
+    return FutureBuilder(
+      future: BlogController.instance.getAllBlogs(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          var temp = snapshot.data! as List<Object?>;
+          blogSliders = temp
+              .map(
+                (doc) => BlogCardMobile(blog: doc as Map, myUid: myUid),
+              )
+              .toList();
+          return CarouselSlider(
+            options: CarouselOptions(
+              height: globals.getHeight(context, .5),
+              viewportFraction: 1,
+              enlargeCenterPage: false,
+              autoPlay: true,
+            ),
+            items: blogSliders,
+          );
+        } else {
+          return Container();
+        }
+      },
     );
+    // return CarouselSlider(
+    //   options: CarouselOptions(
+    //     height: globals.getHeight(context, .5),
+    //     viewportFraction: 1,
+    //     enlargeCenterPage: false,
+    //     autoPlay: true,
+    //   ),
+    //   items: blogSliders,
+    // );
   }
 }
 

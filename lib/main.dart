@@ -9,6 +9,8 @@ import './widgets/responsive_layout.dart';
 import './widgets/max_width_container.dart';
 import './controllers/auth_controller.dart';
 import './controllers/product_controller.dart';
+import './controllers/storage_controller.dart';
+import './controllers/blog_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +30,12 @@ void main() async {
       );
       Get.put(
         ProductController(),
+      );
+      Get.put(
+        StorageController(),
+      );
+      Get.put(
+        BlogController(),
       );
     },
   );

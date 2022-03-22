@@ -31,10 +31,10 @@ class BlogCardMobile extends StatelessWidget {
         margin: const EdgeInsets.all(5.0),
         child: Column(
           children: [
-            Image(
+            Image.network(
+              blog['image'],
               height: globals.getHeight(context, .3),
               width: globals.getWidth(context, .8),
-              image: AssetImage(blog['image']),
               fit: BoxFit.cover,
             ),
             SizedBox(

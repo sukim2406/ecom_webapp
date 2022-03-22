@@ -32,11 +32,16 @@ class ProductCard extends StatelessWidget {
         ),
         child: Container(
           color: Colors.red,
-          child: Image(
-            image: AssetImage(product['image']),
+          child: Image.network(
+            product['image'],
             fit: BoxFit.contain,
             width: globals.getWidth(context, .8),
           ),
+          // child: Image(
+          //   image: NetworkImage(product['image']),
+          //   fit: BoxFit.contain,
+          //   width: globals.getWidth(context, .8),
+          // ),
         ),
       ),
     );

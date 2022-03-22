@@ -19,55 +19,63 @@ class BlogDetailMobile extends StatelessWidget {
         tabBar: false,
         myUid: myUid,
       ),
-      body: Container(
-        width: globals.getWidth(context, 1),
-        height: globals.getHeight(context, 1),
-        color: Colors.black,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: globals.getHeight(context, .3),
-              width: globals.getWidth(context, .8),
-              color: Colors.red,
-              child: Image(
-                image: AssetImage(
-                  blog['image'],
+      body: SingleChildScrollView(
+        child: Container(
+          width: globals.getWidth(context, 1),
+          height: globals.getHeight(context, 1),
+          color: Colors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                  height: globals.getHeight(context, .3),
+                  width: globals.getWidth(context, .8),
+                  color: Colors.red,
+                  child: Image.network(
+                    blog['image'],
+                  )),
+              const SizedBox(
+                height: 20.0,
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .4),
+                width: globals.getWidth(context, .6),
+                child: Column(
+                  children: [
+                    Text(
+                      blog['title'],
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      blog['date'].toDate().toString().substring(0, 11),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      blog['content'],
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            SizedBox(
-              height: globals.getHeight(context, .3),
-              width: globals.getWidth(context, .6),
-              child: Column(
-                children: [
-                  Text(
-                    blog['title'],
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    blog['content'],
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+              Expanded(
+                child: Container(),
               ),
-            ),
-            Expanded(
-              child: Container(),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
