@@ -6,7 +6,7 @@ const kMaxWidth = 1800.0;
 
 List<Map> tempProductData = [
   {
-    'pid': 'pid0',
+    'pid': '6g2D0PT1evae7mAmhYwI',
     'name': 'product 1',
     'category': 'category 1',
     'price': 10.00,
@@ -14,7 +14,7 @@ List<Map> tempProductData = [
     'detail': 'some detail goes here',
   },
   {
-    'pid': 'pid1',
+    'pid': 'UO6YKqx9L04JXVDxEXB9',
     'name': 'product 2',
     'category': 'category 1',
     'price': 20.00,
@@ -22,7 +22,7 @@ List<Map> tempProductData = [
     'detail': 'some detail goes here',
   },
   {
-    'pid': 'pid2',
+    'pid': 'XCLNcq8POEJP93Hdz5gT',
     'name': 'product 3',
     'category': 'category 1',
     'price': 30.00,
@@ -30,7 +30,7 @@ List<Map> tempProductData = [
     'detail': 'some detail goes here',
   },
   {
-    'pid': 'pid3',
+    'pid': 'YxAtM6WjMWQxwSitOL12',
     'name': 'product 4',
     'category': 'category 2',
     'price': 40.00,
@@ -38,7 +38,7 @@ List<Map> tempProductData = [
     'detail': 'some detail goes here',
   },
   {
-    'pid': 'pid4',
+    'pid': 'dQXgfMkCRDWNVo51wgfP',
     'name': 'product 5',
     'category': 'category 2',
     'price': 50.00,
@@ -46,7 +46,7 @@ List<Map> tempProductData = [
     'detail': 'some detail goes here',
   },
   {
-    'pid': 'pid5',
+    'pid': 'k829ky5VCxbH2HfMstJI',
     'name': 'product 6',
     'category': 'category 3',
     'price': 60.00,
@@ -54,7 +54,7 @@ List<Map> tempProductData = [
     'detail': 'some detail goes here',
   },
   {
-    'pid': 'pid6',
+    'pid': 'k8nmzQ9rGXJdTv5T1d4f',
     'name': 'product 7',
     'category': 'category 3',
     'price': 70.00,
@@ -62,7 +62,7 @@ List<Map> tempProductData = [
     'detail': 'some detail goes here',
   },
   {
-    'pid': 'pid7',
+    'pid': 'uHIwmAlq8Erq0xiyqpG6',
     'name': 'product 8',
     'category': 'category 3',
     'price': 80.00,

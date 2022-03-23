@@ -26,10 +26,10 @@ class AuthController extends GetxController {
   _initialScreen(User? user) async {
     if (user != null) {
       print('currently logged in');
-      Holder.setUid(user.uid);
+      // Holder.setUid(user.uid);
     } else {
       print('currently logged out');
-      Holder.setUid('');
+      // Holder.setUid('');
     }
     Get.offAll(
       () => MaxWidthContainer(
@@ -95,8 +95,8 @@ class AuthController extends GetxController {
     try {
       await auth.signOut().then(
         (result) {
-          Holder.setUid('');
-          print(Holder.getUid());
+          // Holder.setUid('');
+          // print(Holder.getUid());
         },
       );
     } catch (e) {

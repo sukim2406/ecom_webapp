@@ -4,6 +4,7 @@ import '../globals.dart' as globals;
 import '../widgets/appbar_widget.dart';
 import '../widgets/cart_item.dart';
 import '../static.dart';
+import '../controllers/product_controller.dart';
 
 class CartMobile extends StatefulWidget {
   final String myUid;
@@ -18,17 +19,20 @@ class CartMobile extends StatefulWidget {
 
 class _CartMobileState extends State<CartMobile> {
   List cartItems = [];
+  List productList = [];
+  double totalPrice = 0.0;
   @override
   void initState() {
     getCartItems();
+    getTotalPrice();
     super.initState();
   }
 
-  void getCartItems() {
+  void getCartItems() async {
     if (widget.myUid == '') {
       cartItems = GuestCart.cartItems;
     } else {
-      cartItems = globals.tempProductData;
+      cartItems = [];
     }
     setState(() {});
   }
@@ -40,17 +44,21 @@ class _CartMobileState extends State<CartMobile> {
     });
   }
 
-  double getTotalPrice() {
-    double totalPrice = 0.0;
+  getTotalPrice() async {
     if (cartItems.isNotEmpty) {
       cartItems.forEach(
-        (item) {
-          totalPrice = totalPrice +
-              (globals.getProductById(item['pid'])['price'] * item['cnt']);
+        (element) async {
+          var temp = await ProductController.instance.getProductByPid(
+            element['pid'],
+          );
+          setState(
+            () {
+              totalPrice += (element['cnt'] * temp['price']);
+            },
+          );
         },
       );
     }
-    return totalPrice;
   }
 
   num getTotalItemCnt() {
@@ -62,25 +70,6 @@ class _CartMobileState extends State<CartMobile> {
     }
 
     return totalCnt;
-  }
-
-  createCartList() {
-    List<Widget> list = [];
-    getCartItems();
-    cartItems.forEach(
-      (element) {
-        Map tempItem = globals.getProductById(element['pid']);
-        tempItem['qty'] = element['cnt'];
-        list.add(
-          CartItemMobile(
-            item: tempItem,
-            update: updateCart,
-          ),
-        );
-      },
-    );
-
-    return list;
   }
 
   @override
@@ -145,19 +134,33 @@ class _CartMobileState extends State<CartMobile> {
                       ? Container(
                           color: Colors.grey,
                           height: globals.getHeight(context, .4),
-                          // child: ListView(children: createCartList())
-                          child: ListView.builder(
-                            itemCount: cartItems.length,
-                            itemBuilder: (context, index) {
-                              Map cartItem = globals
-                                  .getProductById(cartItems[index]['pid']);
-                              cartItem['qty'] = cartItems[index]['cnt'];
-                              return CartItemMobile(
-                                item: cartItem,
-                                update: updateCart,
-                              );
+                          child: FutureBuilder(
+                            future: ProductController.instance
+                                .getProductsFromCart(cartItems),
+                            builder: (context, snapshot) {
+                              print('snapshot');
+                              print(snapshot);
+                              return Container();
+                              // return ListView.builder(
+                              //   itemCount: cartItems.length,
+                              //   itemBuilder: (context, index) {
+                              //     Map cartItem = snapshot[index];
+                              //   },
+                              // );
                             },
                           ),
+                          // child: ListView.builder(
+                          //   itemCount: cartItems.length,
+                          //   itemBuilder: (context, index) {
+                          //     Map cartItem = globals
+                          //         .getProductById(cartItems[index]['pid']);
+                          //     cartItem['qty'] = cartItems[index]['cnt'];
+                          //     return CartItemMobile(
+                          //       item: cartItem,
+                          //       update: updateCart,
+                          //     );
+                          //   },
+                          // ),
                         )
                       : Container(
                           color: Colors.grey,
@@ -197,7 +200,7 @@ class _CartMobileState extends State<CartMobile> {
                           child: Container(),
                         ),
                         Text(
-                          getTotalPrice().toString(),
+                          totalPrice.toString(),
                           style: const TextStyle(
                             color: Colors.white,
                           ),

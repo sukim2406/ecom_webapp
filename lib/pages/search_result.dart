@@ -19,37 +19,10 @@ class SearchResultMobile extends StatefulWidget {
 }
 
 class _SearchResultMobileState extends State<SearchResultMobile> {
-  List searchResult = [];
+  List<Widget> searchResult = [];
   @override
   void initState() {
-    getSearchResults();
-    // TODO: implement initState
     super.initState();
-  }
-
-  getSearchResults() {
-    globals.tempProductData.forEach(
-      (element) {
-        if (element['name'].contains(widget.keyword)) {
-          searchResult.add(element);
-        } else {
-          print('not found');
-        }
-      },
-    );
-    setState(() {});
-  }
-
-  getProductCards() {
-    List<Widget> temp = [];
-    searchResult.forEach(
-      (element) {
-        temp.add(
-          ProductCard(product: element, myUid: widget.myUid),
-        );
-      },
-    );
-    return temp;
   }
 
   @override
@@ -63,120 +36,127 @@ class _SearchResultMobileState extends State<SearchResultMobile> {
         height: globals.getHeight(context, 1),
         width: globals.getHeight(context, 1),
         color: Colors.black,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 30,
-            ),
-            RichText(
-              text: TextSpan(
-                text: 'Search Result for : ',
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
+        child: FutureBuilder(
+          future: ProductController.instance.getProductsByName(
+            widget.keyword,
+          ),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return CircularProgressIndicator();
+            }
+            if (snapshot.hasData) {
+              var temp = snapshot.data! as List<Object?>;
+              searchResult = temp
+                  .map(
+                    (doc) => ProductCard(
+                      product: doc as Map,
+                      myUid: widget.myUid,
+                    ),
+                  )
+                  .toList();
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextSpan(
-                    text: widget.keyword,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+                  const SizedBox(
+                    height: 30,
                   ),
-                  const TextSpan(
-                    text: '   ( ',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  TextSpan(
-                    text: searchResult.length.toString(),
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                  const TextSpan(
-                    text: ' found )',
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: globals.getHeight(context, .7),
-              width: globals.getWidth(context, .8),
-              child: FutureBuilder(
-                future: ProductController.instance.getProductsByName(
-                  widget.keyword,
-                ),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    var temp = snapshot.data! as List<Object?>;
-                    searchResult = temp
-                        .map(
-                          (doc) => ProductCard(
-                            product: doc as Map,
-                            myUid: widget.myUid,
+                  RichText(
+                    text: TextSpan(
+                      text: 'Search Result for : ',
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: widget.keyword,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
                           ),
-                        )
-                        .toList();
-                    return GridView.count(
+                        ),
+                        const TextSpan(
+                          text: '   ( ',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: searchResult.length.toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: ' found )',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: globals.getHeight(context, .7),
+                    width: globals.getWidth(context, .8),
+                    child: GridView.count(
                       primary: false,
                       padding: const EdgeInsets.all(20.0),
                       crossAxisCount: 2,
                       mainAxisSpacing: 10.0,
                       crossAxisSpacing: 10.0,
-                      children: getProductCards(),
-                    );
-                  } else {
-                    return const Text('Result not found');
-                  }
-                },
-              ),
-              // child: (searchResult.isEmpty)
-              //     ? const Text('Result not found')
-              //     : GridView.count(
-              //         primary: false,
-              //         padding: const EdgeInsets.all(20.0),
-              //         crossAxisCount: 2,
-              //         mainAxisSpacing: 10.0,
-              //         crossAxisSpacing: 10.0,
-              //         children: getProductCards(),
-              //       ),
-            ),
-            Expanded(
-              child: Container(),
-            ),
-          ],
+                      children: searchResult,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                ],
+              );
+            } else {
+              return RichText(
+                text: TextSpan(
+                  text: 'Search Result for : ',
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: widget.keyword,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const TextSpan(
+                      text: '   ( ',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextSpan(
+                      text: searchResult.length.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    const TextSpan(
+                      text: ' found )',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            }
+          },
         ),
       ),
     );
   }
 }
-
-// class SearchResultMobile extends StatelessWidget {
-//   final String keyword;
-//   final String myUid;
-//   const SearchResultMobile({
-//     Key? key,
-//     required this.myUid,
-//     required this.keyword,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppbarWidget(
-//         myUid: myUid,
-//         tabBar: false,
-//       ),
-//       body: Container(color: Colors.amber),
-//     );
-//   }
-// }

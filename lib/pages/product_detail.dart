@@ -48,37 +48,44 @@ class ProductDetailMobile extends StatelessWidget {
               const SizedBox(
                 height: 20.0,
               ),
-              Text(
-                product['name'],
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              Text(
-                product['detail'],
-                style: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              RichText(
-                text: TextSpan(
-                  text: product['price'].toString(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                  children: const [
-                    TextSpan(
-                      text: ' USD',
-                      style: TextStyle(
+              SizedBox(
+                width: globals.getWidth(context, .8),
+                child: Column(
+                  children: [
+                    Text(
+                      product['name'],
+                      style: const TextStyle(
                         color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    Text(
+                      product['detail'],
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        text: product['price'].toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        children: const [
+                          TextSpan(
+                            text: ' USD',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

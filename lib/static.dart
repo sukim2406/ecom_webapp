@@ -1,15 +1,3 @@
-class Holder {
-  static String uid = '';
-
-  static void setUid(newUid) {
-    uid = newUid;
-  }
-
-  static String getUid() {
-    return uid;
-  }
-}
-
 class GuestCart {
   static List cartItems = [];
 
@@ -19,7 +7,6 @@ class GuestCart {
 
   static bool findDuplicateItem(pid) {
     bool found = false;
-    print(cartItems);
     cartItems.forEach(
       (item) {
         if (item['pid'] == pid) {

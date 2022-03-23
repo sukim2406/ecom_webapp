@@ -56,29 +56,54 @@ class ProductController extends GetxController {
     try {
       return firestore.collection('Products').get().then(
         (QuerySnapshot qs) {
-          final result = qs.docs.map(
+          List result = [];
+          qs.docs.forEach(
             (doc) {
               if (doc['name'].contains(keyword)) {
-                doc.data();
+                result.add(doc.data() as Map);
               }
             },
-          ).toList();
+          );
           return result;
         },
       );
-      //   final result = qs.docs.map(
-      //     // (doc) => doc.data(),
-      //     (doc) {
-      //       if (doc['name'].contains(keyword)) {
-      //         doc.data();
-      //       }
-      //     },
-      //   ).toList();
-      //   return result;
-      // });
     } catch (e) {
       print(
         'getProductsByName error',
+      );
+      print(
+        e.toString(),
+      );
+    }
+  }
+
+  Future getProductByPid(pid) async {
+    try {
+      return await firestore.collection('Products').doc(pid).get();
+    } catch (e) {
+      print(
+        'getProductByPid error',
+      );
+      print(
+        e.toString(),
+      );
+    }
+  }
+
+  Future getProductsFromCart(cart) async {
+    try {
+      List<Map> temp = [];
+      cart.forEach(
+        (item) async {
+          var data =
+              await firestore.collection('Products').doc(item['pid']).get();
+          temp.add(data.data() as Map);
+        },
+      );
+      return temp;
+    } catch (e) {
+      print(
+        'getProductsFromCart error',
       );
       print(
         e.toString(),
