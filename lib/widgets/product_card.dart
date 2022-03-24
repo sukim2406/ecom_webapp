@@ -37,11 +37,6 @@ class ProductCard extends StatelessWidget {
             fit: BoxFit.contain,
             width: globals.getWidth(context, .8),
           ),
-          // child: Image(
-          //   image: NetworkImage(product['image']),
-          //   fit: BoxFit.contain,
-          //   width: globals.getWidth(context, .8),
-          // ),
         ),
       ),
     );

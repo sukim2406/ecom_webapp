@@ -89,25 +89,4 @@ class ProductController extends GetxController {
       );
     }
   }
-
-  Future getProductsFromCart(cart) async {
-    try {
-      List<Map> temp = [];
-      cart.forEach(
-        (item) async {
-          var data =
-              await firestore.collection('Products').doc(item['pid']).get();
-          temp.add(data.data() as Map);
-        },
-      );
-      return temp;
-    } catch (e) {
-      print(
-        'getProductsFromCart error',
-      );
-      print(
-        e.toString(),
-      );
-    }
-  }
 }

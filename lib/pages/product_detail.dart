@@ -1,3 +1,4 @@
+import 'package:ecom_webapp/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -5,6 +6,7 @@ import '../globals.dart' as globals;
 import '../widgets/appbar_widget.dart';
 import '../pages/cart.dart';
 import '../static.dart';
+import '../controllers/user_controller.dart';
 
 class ProductDetailMobile extends StatelessWidget {
   final String myUid;
@@ -17,6 +19,7 @@ class ProductDetailMobile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List favorites = [];
     return Scaffold(
       appBar: AppbarWidget(
         tabBar: false,
@@ -31,20 +34,14 @@ class ProductDetailMobile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  color: Colors.red,
-                  height: globals.getHeight(context, .4),
-                  width: globals.getWidth(context, .8),
-                  child: Image.network(
-                    product['image'],
-                    fit: BoxFit.fill,
-                  )
-                  // child: Image(
-                  //   image: NetworkImage(
-                  //     product['image'],
-                  //   ),
-                  //   fit: BoxFit.fill,
-                  // ),
-                  ),
+                color: Colors.red,
+                height: globals.getHeight(context, .4),
+                width: globals.getWidth(context, .8),
+                child: Image.network(
+                  product['image'],
+                  fit: BoxFit.fill,
+                ),
+              ),
               const SizedBox(
                 height: 20.0,
               ),
@@ -146,9 +143,64 @@ class ProductDetailMobile extends StatelessWidget {
                   child: const Text('Add to cart'),
                 ),
               ),
-              SizedBox(
-                height: globals.getHeight(context, .1),
-              ),
+              const SizedBox(height: 20.0),
+              (myUid.isNotEmpty)
+                  ? FutureBuilder(
+                      future: UserController.instance.getFavorites(myUid),
+                      builder: (context, snapshot) {
+                        if (snapshot.data != null) {
+                          favorites = snapshot.data as List;
+                        }
+                        return (favorites.contains(product['pid']))
+                            ? Column(
+                                children: [
+                                  const Text(
+                                    'Unset favorite',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      List temp = favorites;
+                                      temp.remove(product['pid']);
+                                      UserController.instance
+                                          .updateFavorites(myUid, temp);
+                                    },
+                                    child: const Icon(
+                                      Icons.favorite,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Column(
+                                children: [
+                                  const Text(
+                                    'Save as favorite',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      List temp = favorites;
+                                      temp.add(product['pid']);
+                                      UserController.instance
+                                          .updateFavorites(myUid, temp);
+                                    },
+                                    child: const Icon(
+                                      Icons.favorite_border_outlined,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              );
+                      },
+                    )
+                  : SizedBox(
+                      height: globals.getHeight(context, .1),
+                    ),
             ],
           ),
         ),

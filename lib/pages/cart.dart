@@ -25,6 +25,7 @@ class _CartMobileState extends State<CartMobile> {
   void initState() {
     getCartItems();
     getTotalPrice();
+    getProducts();
     super.initState();
   }
 
@@ -41,6 +42,8 @@ class _CartMobileState extends State<CartMobile> {
     setState(() {
       cartItems.removeWhere((element) => element['pid'] == pid);
       getCartItems();
+      getProducts();
+      getTotalPrice();
     });
   }
 
@@ -58,7 +61,22 @@ class _CartMobileState extends State<CartMobile> {
           );
         },
       );
+    } else {
+      totalPrice = 0;
     }
+  }
+
+  getProducts() async {
+    cartItems.forEach(
+      (item) async {
+        var temp =
+            await ProductController.instance.getProductByPid(item['pid']);
+        Map tempMap = temp.data();
+        tempMap['qty'] = item['cnt'];
+        productList.add(tempMap);
+      },
+    );
+    setState(() {});
   }
 
   num getTotalItemCnt() {
@@ -74,6 +92,8 @@ class _CartMobileState extends State<CartMobile> {
 
   @override
   Widget build(BuildContext context) {
+    print('gslkdfjasdlkjasd');
+    print(cartItems);
     return Scaffold(
       appBar: AppbarWidget(
         tabBar: false,
@@ -134,33 +154,15 @@ class _CartMobileState extends State<CartMobile> {
                       ? Container(
                           color: Colors.grey,
                           height: globals.getHeight(context, .4),
-                          child: FutureBuilder(
-                            future: ProductController.instance
-                                .getProductsFromCart(cartItems),
-                            builder: (context, snapshot) {
-                              print('snapshot');
-                              print(snapshot);
-                              return Container();
-                              // return ListView.builder(
-                              //   itemCount: cartItems.length,
-                              //   itemBuilder: (context, index) {
-                              //     Map cartItem = snapshot[index];
-                              //   },
-                              // );
+                          child: ListView.builder(
+                            itemCount: productList.length,
+                            itemBuilder: (context, index) {
+                              return CartItemMobile(
+                                item: productList[index],
+                                update: updateCart,
+                              );
                             },
                           ),
-                          // child: ListView.builder(
-                          //   itemCount: cartItems.length,
-                          //   itemBuilder: (context, index) {
-                          //     Map cartItem = globals
-                          //         .getProductById(cartItems[index]['pid']);
-                          //     cartItem['qty'] = cartItems[index]['cnt'];
-                          //     return CartItemMobile(
-                          //       item: cartItem,
-                          //       update: updateCart,
-                          //     );
-                          //   },
-                          // ),
                         )
                       : Container(
                           color: Colors.grey,

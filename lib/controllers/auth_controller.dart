@@ -7,6 +7,7 @@ import '../widgets/max_width_container.dart';
 import '../widgets/responsive_layout.dart';
 import '../pages/landing.dart';
 import '../static.dart';
+import './user_controller.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -52,6 +53,12 @@ class AuthController extends GetxController {
         password: password,
       )
           .then((value) {
+        Map<String, dynamic> user = {
+          'email': auth.currentUser?.email,
+          'favorit': [],
+          'cart': [],
+        };
+        UserController.instance.createUserDocument(user);
         Fluttertoast.showToast(
           msg: 'Register successful',
           toastLength: Toast.LENGTH_SHORT,
@@ -72,6 +79,8 @@ class AuthController extends GetxController {
         textColor: Colors.white,
         fontSize: 16.0,
       );
+
+      print(e.toString());
     }
   }
 
@@ -110,5 +119,10 @@ class AuthController extends GetxController {
         fontSize: 16.0,
       );
     }
+  }
+
+  String? getCurUserUid() {
+    final user = auth.currentUser;
+    return user?.uid;
   }
 }

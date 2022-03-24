@@ -59,10 +59,8 @@ class CartItemMobile extends StatelessWidget {
           ),
           SizedBox(
             width: globals.getWidth(context, .2),
-            child: Image(
-              image: AssetImage(
-                item['image'],
-              ),
+            child: Image.network(
+              item['image'],
               fit: BoxFit.contain,
             ),
           ),
