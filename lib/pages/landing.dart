@@ -6,6 +6,7 @@ import '../widgets/bestsellers.dart';
 import '../widgets/blogs.dart';
 import '../widgets/menu_list.dart';
 import '../widgets/appbar_widget.dart';
+import '../widgets/favorites.dart';
 import '../static.dart';
 
 class LandingMobile extends StatelessWidget {
@@ -19,7 +20,7 @@ class LandingMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppbarWidget(
             tabBar: true,
@@ -47,6 +48,12 @@ class LandingMobile extends StatelessWidget {
               Container(
                 color: Colors.black,
                 child: BestsellersMobile(
+                  myUid: myUid,
+                ),
+              ),
+              Container(
+                color: Colors.black,
+                child: FavoritesMobile(
                   myUid: myUid,
                 ),
               ),

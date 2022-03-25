@@ -52,6 +52,7 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
                 Tab(
                   text: 'BEST',
                 ),
+                Tab(text: 'FAVORITES'),
               ],
             )
           : null,

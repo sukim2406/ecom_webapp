@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
 import './auth_controller.dart';
+import './product_controller.dart';
 
 class UserController extends GetxController {
   static UserController instance = Get.find();
@@ -48,6 +49,45 @@ class UserController extends GetxController {
     } catch (e) {
       print(
         'updateFavorites error',
+      );
+      print(
+        e.toString(),
+      );
+    }
+  }
+
+  getFavoriteStream(myUid) {
+    try {
+      return firestore.collection('Users').doc(myUid).snapshots();
+    } catch (e) {
+      print(
+        'getFavoriteStream error',
+      );
+      print(
+        e.toString(),
+      );
+    }
+  }
+
+  getFavoriteProducts(myUid) async {
+    try {
+      List temp = [];
+      var list = await getFavorites(myUid);
+      temp = list
+          .map((doc) async =>
+              await ProductController.instance.getProductByPid(doc))
+          .toList();
+      // list.forEach(
+      //   (pid) async {
+      //     var tempItem = await ProductController.instance.getProductByPid(pid);
+      //     temp.add(tempItem.data() as Map);
+      //   },
+      // );
+      print(temp);
+      return temp;
+    } catch (e) {
+      print(
+        'getFavoriteProducts error',
       );
       print(
         e.toString(),
