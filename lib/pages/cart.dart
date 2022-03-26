@@ -5,6 +5,7 @@ import '../widgets/appbar_widget.dart';
 import '../widgets/cart_item.dart';
 import '../static.dart';
 import '../controllers/product_controller.dart';
+import '../controllers/user_controller.dart';
 
 class CartMobile extends StatefulWidget {
   final String myUid;
@@ -33,9 +34,19 @@ class _CartMobileState extends State<CartMobile> {
     if (widget.myUid == '') {
       cartItems = GuestCart.cartItems;
     } else {
-      cartItems = [];
+      var temp = await UserController.instance.getCartFromUser(widget.myUid);
+      temp.forEach(
+        (item) {
+          var tempItem =
+              cartItems.firstWhere((element) => element['pid'] == item);
+          print('tempItem');
+          print(tempItem);
+        },
+      );
     }
     setState(() {});
+    print('ggggg');
+    print(cartItems);
   }
 
   void updateCart(pid) {
@@ -92,8 +103,6 @@ class _CartMobileState extends State<CartMobile> {
 
   @override
   Widget build(BuildContext context) {
-    print('gslkdfjasdlkjasd');
-    print(cartItems);
     return Scaffold(
       appBar: AppbarWidget(
         tabBar: false,

@@ -77,17 +77,55 @@ class UserController extends GetxController {
           .map((doc) async =>
               await ProductController.instance.getProductByPid(doc))
           .toList();
-      // list.forEach(
-      //   (pid) async {
-      //     var tempItem = await ProductController.instance.getProductByPid(pid);
-      //     temp.add(tempItem.data() as Map);
-      //   },
-      // );
       print(temp);
       return temp;
     } catch (e) {
       print(
         'getFavoriteProducts error',
+      );
+      print(
+        e.toString(),
+      );
+    }
+  }
+
+  getCartFromUser(myUid) async {
+    try {
+      return await firestore.collection('Users').doc(myUid).get().then(
+        (DocumentSnapshot ds) {
+          return ds['cart'];
+        },
+      );
+    } catch (e) {
+      print(
+        'getCartFromUser error',
+      );
+      print(
+        e.toString(),
+      );
+    }
+  }
+
+  Future updateCart(myUid, list) async {
+    try {
+      await firestore.collection('Users').doc(myUid).update({'cart': list});
+    } catch (e) {
+      print(
+        'updateCart error',
+      );
+      print(
+        e.toString(),
+      );
+    }
+  }
+
+  Future getSortedCart(myUid) async {
+    try {
+      var temp = await getCartFromUser(myUid);
+      List<Map> sortedCart = [];
+    } catch (e) {
+      print(
+        'getSortedCart error',
       );
       print(
         e.toString(),

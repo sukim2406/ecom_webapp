@@ -49,23 +49,28 @@ class _FavoritesMobileState extends State<FavoritesMobile> {
         )
         .toList();
 
-    return StreamBuilder(
-      stream: UserController.instance.getFavoriteStream(widget.myUid),
-      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-        var tempMap = snapshot.data?.data() as Map;
-        print(tempMap);
-        if (!listEquals(tempMap['favorite'], pids)) {
-          pids = tempMap['favorite'];
-        }
-        return GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(20.0),
-          crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
-          children: productList,
-        );
-      },
-    );
+    return (widget.myUid != '')
+        ? StreamBuilder(
+            stream: UserController.instance.getFavoriteStream(widget.myUid),
+            builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              var tempMap = snapshot.data?.data() as Map;
+              print(tempMap);
+              if (!listEquals(tempMap['favorite'], pids)) {
+                pids = tempMap['favorite'];
+              }
+              return GridView.count(
+                primary: false,
+                padding: const EdgeInsets.all(20.0),
+                crossAxisCount: 2,
+                crossAxisSpacing: 10.0,
+                mainAxisSpacing: 10.0,
+                children: productList,
+              );
+            },
+          )
+        : Text(
+            'Log In to see favorites',
+            style: TextStyle(color: Colors.white),
+          );
   }
 }

@@ -11,9 +11,11 @@ import '../static.dart';
 
 class LandingMobile extends StatelessWidget {
   final myUid;
-  const LandingMobile({
+  int initialIndex;
+  LandingMobile({
     Key? key,
     required this.myUid,
+    this.initialIndex = 0,
   }) : super(key: key);
 
   @override
@@ -21,6 +23,7 @@ class LandingMobile extends StatelessWidget {
     return MaterialApp(
       home: DefaultTabController(
         length: 4,
+        initialIndex: initialIndex,
         child: Scaffold(
           appBar: AppbarWidget(
             tabBar: true,
