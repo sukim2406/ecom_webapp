@@ -25,8 +25,7 @@ class _CartMobileState extends State<CartMobile> {
   @override
   void initState() {
     getCartItems();
-    getTotalPrice();
-    getProducts();
+    // getProducts();
     super.initState();
   }
 
@@ -34,34 +33,31 @@ class _CartMobileState extends State<CartMobile> {
     if (widget.myUid == '') {
       cartItems = GuestCart.cartItems;
     } else {
-      var temp = await UserController.instance.getCartFromUser(widget.myUid);
-      temp.forEach(
-        (item) {
-          var tempItem =
-              cartItems.firstWhere((element) => element['pid'] == item);
-          print('tempItem');
-          print(tempItem);
-        },
-      );
+      cartItems = await UserController.instance.getCartFromUser(widget.myUid);
     }
+    getProducts();
+    getTotalPrice();
     setState(() {});
-    print('ggggg');
-    print(cartItems);
   }
 
-  void updateCart(pid) {
-    setState(() {
-      cartItems.removeWhere((element) => element['pid'] == pid);
+  void updateCart(pid) async {
+    cartItems.removeWhere((element) => element['pid'] == pid);
+    print(cartItems);
+    await UserController.instance
+        .updateCart(widget.myUid, cartItems)
+        .then((result) {
       getCartItems();
-      getProducts();
       getTotalPrice();
     });
+    setState(() {});
   }
 
   getTotalPrice() async {
     if (cartItems.isNotEmpty) {
       cartItems.forEach(
         (element) async {
+          print('element is =');
+          print(element);
           var temp = await ProductController.instance.getProductByPid(
             element['pid'],
           );
@@ -84,10 +80,11 @@ class _CartMobileState extends State<CartMobile> {
             await ProductController.instance.getProductByPid(item['pid']);
         Map tempMap = temp.data();
         tempMap['qty'] = item['cnt'];
-        productList.add(tempMap);
+        setState(() {
+          productList.add(tempMap);
+        });
       },
     );
-    setState(() {});
   }
 
   num getTotalItemCnt() {

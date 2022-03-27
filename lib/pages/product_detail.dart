@@ -118,10 +118,24 @@ class _ProductDetailMobileState extends State<ProductDetailMobile> {
                     if (widget.myUid == '') {
                       GuestCart.addItemToCart(widget.product['pid']);
                     } else {
-                      var temp;
-                      temp = await UserController.instance
+                      bool duplicate = false;
+                      var temp = await UserController.instance
                           .getCartFromUser(widget.myUid);
-                      temp.add(widget.product['pid']);
+                      temp.forEach(
+                        (item) {
+                          if (item['pid'] == widget.product['pid']) {
+                            item['cnt'] += 1;
+                            duplicate = true;
+                          }
+                        },
+                      );
+                      if (!duplicate) {
+                        var tempMap = {
+                          'pid': widget.product['pid'],
+                          'cnt': 1,
+                        };
+                        temp.add(tempMap);
+                      }
                       UserController.instance.updateCart(widget.myUid, temp);
                     }
                     Navigator.push(
@@ -152,11 +166,24 @@ class _ProductDetailMobileState extends State<ProductDetailMobile> {
                     if (widget.myUid == '') {
                       GuestCart.addItemToCart(widget.product['pid']);
                     } else {
-                      print('hihi');
-                      var temp;
-                      temp = await UserController.instance
+                      bool duplicate = false;
+                      var temp = await UserController.instance
                           .getCartFromUser(widget.myUid);
-                      temp.add(widget.product['pid']);
+                      temp.forEach(
+                        (item) {
+                          if (item['pid'] == widget.product['pid']) {
+                            item['cnt'] += 1;
+                            duplicate = true;
+                          }
+                        },
+                      );
+                      if (!duplicate) {
+                        var tempMap = {
+                          'pid': widget.product['pid'],
+                          'cnt': 1,
+                        };
+                        temp.add(tempMap);
+                      }
                       UserController.instance.updateCart(widget.myUid, temp);
                     }
                     Fluttertoast.showToast(

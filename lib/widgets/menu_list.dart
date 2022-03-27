@@ -108,17 +108,6 @@ class MenuListMobile extends StatelessWidget {
                           Expanded(
                             child: Container(),
                           ),
-                          TextButton(
-                            onPressed: () {
-                              print('favorites');
-                            },
-                            child: const Text(
-                              'Favorites',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
                           Expanded(
                             child: Container(),
                           ),
