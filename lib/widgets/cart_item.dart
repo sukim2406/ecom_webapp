@@ -5,12 +5,14 @@ import '../globals.dart' as globals;
 import '../pages/cart.dart';
 
 class CartItemMobile extends StatelessWidget {
+  final String myUid;
   final Map item;
   final Function update;
   const CartItemMobile({
     Key? key,
     required this.item,
     required this.update,
+    required this.myUid,
   }) : super(key: key);
 
   @override
@@ -38,13 +40,22 @@ class CartItemMobile extends StatelessWidget {
                           ),
                         ),
                         TextButton(
-                            onPressed: () {
-                              update(item['pid']);
-                              Navigator.pop(context);
-                            },
-                            child: const Text(
-                              'OK',
-                            ))
+                          onPressed: () {
+                            update(item['pid']);
+                            Navigator.pop(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CartMobile(
+                                        myUid: myUid,
+                                      )),
+                            );
+                            // Navigator.pop(context);
+                          },
+                          child: const Text(
+                            'OK',
+                          ),
+                        )
                       ],
                     );
                   });

@@ -125,4 +125,9 @@ class AuthController extends GetxController {
     final user = auth.currentUser;
     return user?.uid;
   }
+
+  String? getCurUserEmail() {
+    final user = auth.currentUser;
+    return user?.email;
+  }
 }

@@ -6,6 +6,8 @@ import '../widgets/cart_item.dart';
 import '../static.dart';
 import '../controllers/product_controller.dart';
 import '../controllers/user_controller.dart';
+import '../widgets/menu_list.dart';
+import '../pages/checkout.dart';
 
 class CartMobile extends StatefulWidget {
   final String myUid;
@@ -42,22 +44,20 @@ class _CartMobileState extends State<CartMobile> {
 
   void updateCart(pid) async {
     cartItems.removeWhere((element) => element['pid'] == pid);
-    print(cartItems);
     await UserController.instance
         .updateCart(widget.myUid, cartItems)
         .then((result) {
       getCartItems();
       getTotalPrice();
+    }).then((result) {
+      setState(() {});
     });
-    setState(() {});
   }
 
   getTotalPrice() async {
     if (cartItems.isNotEmpty) {
       cartItems.forEach(
         (element) async {
-          print('element is =');
-          print(element);
           var temp = await ProductController.instance.getProductByPid(
             element['pid'],
           );
@@ -74,6 +74,7 @@ class _CartMobileState extends State<CartMobile> {
   }
 
   getProducts() async {
+    setState(() {});
     cartItems.forEach(
       (item) async {
         var temp =
@@ -98,12 +99,29 @@ class _CartMobileState extends State<CartMobile> {
     return totalCnt;
   }
 
+  generateCartItems() {
+    List<Widget> cartItems = [];
+
+    productList.forEach((item) {
+      cartItems.add(
+        CartItemMobile(item: item, update: updateCart, myUid: widget.myUid),
+      );
+    });
+
+    return cartItems;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppbarWidget(
         tabBar: false,
         myUid: widget.myUid,
+      ),
+      drawer: Drawer(
+        child: MenuListMobile(
+          myUid: widget.myUid,
+        ),
       ),
       body: Container(
         width: globals.getWidth(context, 1.0),
@@ -160,15 +178,19 @@ class _CartMobileState extends State<CartMobile> {
                       ? Container(
                           color: Colors.grey,
                           height: globals.getHeight(context, .4),
-                          child: ListView.builder(
-                            itemCount: productList.length,
-                            itemBuilder: (context, index) {
-                              return CartItemMobile(
-                                item: productList[index],
-                                update: updateCart,
-                              );
-                            },
+                          child: ListView(
+                            key: Key(cartItems.length.toString()),
+                            children: generateCartItems(),
                           ),
+                          // child: ListView.builder(
+                          //   itemCount: productList.length,
+                          //   itemBuilder: (context, index) {
+                          //     return CartItemMobile(
+                          //       item: productList[index],
+                          //       update: updateCart,
+                          //     );
+                          //   },
+                          // ),
                         )
                       : Container(
                           color: Colors.grey,
@@ -240,7 +262,17 @@ class _CartMobileState extends State<CartMobile> {
                                 width: 2.0,
                                 color: Colors.red,
                               )),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CheckoutMobile(
+                                  myUid: widget.myUid,
+                                  items: productList,
+                                ),
+                              ),
+                            );
+                          },
                           child: const Text('CHECK OUT'),
                         ),
                       ),
