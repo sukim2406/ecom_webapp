@@ -12,6 +12,7 @@ import './controllers/product_controller.dart';
 import './controllers/storage_controller.dart';
 import './controllers/blog_controller.dart';
 import './controllers/user_controller.dart';
+import './controllers/order_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,9 @@ void main() async {
       );
       Get.put(
         UserController(),
+      );
+      Get.put(
+        OrderController(),
       );
     },
   );
