@@ -513,7 +513,7 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                             order['products'] = products;
                             order['subtotal'] = getSubtotal();
                             order['tax'] = getTax();
-                            order['total'] = getTax();
+                            order['total'] = getTotal();
                             Map<String, dynamic> data = {
                               'email': emailController.text,
                               'shipping': addressController.text,
@@ -521,6 +521,7 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                               'payment': paymentController.text,
                               'order': order,
                               'status': 'pending',
+                              'uid': widget.myUid,
                             };
                             await OrderController.instance
                                 .createOrderDocument(data)
@@ -529,8 +530,10 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        OrderReceiptMobile(orderId: orderId),
+                                    builder: (context) => OrderReceiptMobile(
+                                      orderId: orderId,
+                                      myUid: widget.myUid,
+                                    ),
                                   ),
                                 );
                               },

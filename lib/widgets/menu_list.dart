@@ -10,6 +10,7 @@ import '../pages/login.dart';
 import '../static.dart';
 import '../controllers/auth_controller.dart';
 import '../pages/cart.dart';
+import '../pages/find_order.dart';
 
 class MenuListMobile extends StatelessWidget {
   final String myUid;
@@ -87,6 +88,27 @@ class MenuListMobile extends StatelessWidget {
                           Expanded(
                             child: Container(),
                           ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FindOrderMobile(
+                                    myUid: myUid,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Orders',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
                         ],
                       )
                     : Row(
@@ -124,6 +146,27 @@ class MenuListMobile extends StatelessWidget {
                             },
                             child: const Text(
                               'Cart',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => FindOrderMobile(
+                                    myUid: myUid,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'Orders',
                               style: TextStyle(
                                 color: Colors.white,
                               ),
