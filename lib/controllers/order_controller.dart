@@ -34,4 +34,27 @@ class OrderController extends GetxController {
       );
     }
   }
+
+  findOrdersByUid(uid) async {
+    try {
+      return await firestore
+          .collection('Orders')
+          .where('uid', isEqualTo: uid)
+          .get()
+          .then((QuerySnapshot qs) {
+        List result = [];
+        qs.docs.forEach(
+          (doc) {
+            Map tempData = doc.data() as Map;
+            tempData['oid'] = doc.id;
+            result.add(tempData);
+          },
+        );
+        return result;
+      });
+    } catch (e) {
+      print('findOrdersByUid error');
+      print(e.toString());
+    }
+  }
 }

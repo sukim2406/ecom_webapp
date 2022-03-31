@@ -132,4 +132,19 @@ class UserController extends GetxController {
       );
     }
   }
+
+  clearCart(myUid) async {
+    try {
+      await firestore.collection('Users').doc(myUid).update(
+        {'cart': []},
+      );
+    } catch (e) {
+      print(
+        'clearCart error',
+      );
+      print(
+        e.toString(),
+      );
+    }
+  }
 }

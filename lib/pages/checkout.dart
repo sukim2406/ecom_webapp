@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/appbar_widget.dart';
@@ -7,6 +8,7 @@ import '../globals.dart' as globals;
 import '../controllers/auth_controller.dart';
 import '../controllers/order_controller.dart';
 import '../pages/order_receipt.dart';
+import '../controllers/user_controller.dart';
 
 class CheckoutMobile extends StatefulWidget {
   final String myUid;
@@ -522,11 +524,13 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                               'order': order,
                               'status': 'pending',
                               'uid': widget.myUid,
+                              'time': Timestamp.now(),
                             };
                             await OrderController.instance
                                 .createOrderDocument(data)
                                 .then(
                               (orderId) {
+                                UserController.instance.clearCart(widget.myUid);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

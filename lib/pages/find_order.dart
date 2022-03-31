@@ -115,7 +115,86 @@ class FindOrderMobile extends StatelessWidget {
                   ),
                 ],
               )
-            : Text('logged in'),
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'ORDER HISTORY',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: globals.getHeight(context, .025),
+                  ),
+                  SizedBox(
+                    height: globals.getHeight(context, .5),
+                    width: globals.getWidth(context, .8),
+                    child: FutureBuilder(
+                      future: OrderController.instance.findOrdersByUid(myUid),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          List data = snapshot.data as List;
+                          return ListView.builder(
+                            itemCount: data.length,
+                            itemBuilder: (context, index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OrderReceiptMobile(
+                                          orderId: data[index]['oid'],
+                                          myUid: myUid),
+                                    ),
+                                  );
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        width: globals.getWidth(context, .1),
+                                      ),
+                                      Text(
+                                        data[index]['time']
+                                            .toDate()
+                                            .toString()
+                                            .substring(0, 10),
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(),
+                                      ),
+                                      Text(
+                                        data[index]['oid'],
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: globals.getWidth(context, .1),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          return const Text('error');
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }
