@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +7,8 @@ import '../controllers/auth_controller.dart';
 import '../controllers/order_controller.dart';
 import '../pages/order_receipt.dart';
 import '../controllers/user_controller.dart';
+import '../widgets/checkout_input.dart';
+import '../widgets/text_btn.dart';
 
 class CheckoutMobile extends StatefulWidget {
   final String myUid;
@@ -112,54 +112,11 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
               ),
               SizedBox(
                 width: globals.getWidth(context, .8),
-                child: Row(
-                  children: [
-                    const Text(
-                      'Email :',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                    SizedBox(
-                      width: globals.getWidth(context, .5),
-                      child: (widget.myUid != '')
-                          ? TextField(
-                              controller: emailController,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              enabled: false,
-                              decoration: const InputDecoration(
-                                disabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            )
-                          : TextField(
-                              controller: emailController,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                              decoration: const InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            ),
-                    )
-                  ],
+                child: CheckoutInput(
+                  label: 'EMAIL : ',
+                  myUid: widget.myUid,
+                  controller: emailController,
+                  width: globals.getWidth(context, .5),
                 ),
               ),
               SizedBox(
@@ -167,39 +124,11 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
               ),
               SizedBox(
                 width: globals.getWidth(context, .8),
-                child: Row(
-                  children: [
-                    const Text(
-                      'Shipping Address :',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                    SizedBox(
-                      width: globals.getWidth(context, .5),
-                      child: TextField(
-                        controller: addressController,
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        decoration: const InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: CheckoutInput(
+                  label: 'SHIPPING ADDRESS : ',
+                  myUid: widget.myUid,
+                  controller: addressController,
+                  width: globals.getWidth(context, .5),
                 ),
               ),
               SizedBox(
@@ -290,40 +219,11 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
               ),
               SizedBox(
                 width: globals.getWidth(context, .8),
-                child: Row(
-                  children: [
-                    const Text(
-                      'Payment Info. :',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                    SizedBox(
-                      width: globals.getWidth(context, .5),
-                      child: TextField(
-                        controller: paymentController,
-                        obscureText: true,
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                        decoration: const InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: CheckoutInput(
+                  label: 'PAYMENT INFO. : ',
+                  myUid: widget.myUid,
+                  controller: paymentController,
+                  width: globals.getWidth(context, .5),
                 ),
               ),
               SizedBox(
@@ -472,14 +372,9 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                     ),
                     SizedBox(
                       width: globals.getWidth(context, .4),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
-                            side: const BorderSide(
-                              width: 2.0,
-                              color: Colors.red,
-                            )),
-                        onPressed: () async {
+                      child: TextBtn(
+                        label: 'PLACE ORDER',
+                        function: () async {
                           if (checkEmptyInputs()) {
                             showDialog(
                               context: context,
@@ -544,7 +439,6 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                             );
                           }
                         },
-                        child: const Text('PLACE ORDER'),
                       ),
                     ),
                   ],

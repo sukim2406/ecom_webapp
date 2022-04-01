@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../globals.dart' as globals;
 import '../widgets/menu_list.dart';
 import '../widgets/product_card.dart';
 import '../widgets/appbar_widget.dart';

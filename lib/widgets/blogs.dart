@@ -15,14 +15,6 @@ class BlogsMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> blogSliders = [];
-    // = globals.tempBlogData
-    //     .map(
-    //       (item) => BlogCardMobile(
-    //         blog: item,
-    //         myUid: myUid,
-    //       ),
-    //     )
-    //     .toList();
     return FutureBuilder(
       future: BlogController.instance.getAllBlogs(),
       builder: (context, snapshot) {
@@ -47,15 +39,6 @@ class BlogsMobile extends StatelessWidget {
         }
       },
     );
-    // return CarouselSlider(
-    //   options: CarouselOptions(
-    //     height: globals.getHeight(context, .5),
-    //     viewportFraction: 1,
-    //     enlargeCenterPage: false,
-    //     autoPlay: true,
-    //   ),
-    //   items: blogSliders,
-    // );
   }
 }
 

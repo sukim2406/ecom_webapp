@@ -5,6 +5,8 @@ import '../widgets/appbar_widget.dart';
 import '../widgets/menu_list.dart';
 import '../pages/signup.dart';
 import '../controllers/auth_controller.dart';
+import '../widgets/text_input.dart';
+import '../widgets/text_btn.dart';
 
 class LogInMobile extends StatelessWidget {
   final String myUid;
@@ -37,27 +39,10 @@ class LogInMobile extends StatelessWidget {
             children: [
               SizedBox(
                 width: globals.getWidth(context, .5),
-                child: TextField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+                child: TextInput(
                   controller: emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
+                  obsecure: false,
+                  label: 'EMAIL',
                 ),
               ),
               const SizedBox(
@@ -65,28 +50,10 @@ class LogInMobile extends StatelessWidget {
               ),
               SizedBox(
                 width: globals.getWidth(context, .5),
-                child: TextField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+                child: TextInput(
                   controller: passwordController,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
+                  obsecure: true,
+                  label: 'PASSWORD',
                 ),
               ),
               const SizedBox(
@@ -94,18 +61,12 @@ class LogInMobile extends StatelessWidget {
               ),
               SizedBox(
                 width: globals.getWidth(context, .4),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      side: const BorderSide(
-                        width: 2.0,
-                        color: Colors.red,
-                      )),
-                  onPressed: () {
+                child: TextBtn(
+                  label: 'LOG IN',
+                  function: () {
                     AuthController.instance
                         .login(emailController.text, passwordController.text);
                   },
-                  child: const Text('LOG IN'),
                 ),
               ),
               const SizedBox(
@@ -113,14 +74,9 @@ class LogInMobile extends StatelessWidget {
               ),
               SizedBox(
                 width: globals.getWidth(context, .4),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      side: const BorderSide(
-                        width: 2.0,
-                        color: Colors.red,
-                      )),
-                  onPressed: () {
+                child: TextBtn(
+                  label: 'SIGN UP',
+                  function: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -130,58 +86,8 @@ class LogInMobile extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('SIGN UP'),
                 ),
               ),
-              // SizedBox(
-              //   width: globals.getWidth(context, .5),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       SizedBox(
-              //         width: globals.getWidth(context, .2),
-              //         child: ElevatedButton(
-              //           style: ElevatedButton.styleFrom(
-              //               primary: Colors.black,
-              //               side: const BorderSide(
-              //                 width: 2.0,
-              //                 color: Colors.red,
-              //               )),
-              //           onPressed: () {
-              //             Navigator.push(
-              //               context,
-              //               MaterialPageRoute(
-              //                 builder: (context) => SignupMobile(
-              //                   myUid: myUid,
-              //                 ),
-              //               ),
-              //             );
-              //           },
-              //           child: const Text('SIGN UP'),
-              //         ),
-              //       ),
-              //       Expanded(
-              //         child: Container(),
-              //       ),
-              //       SizedBox(
-              //         width: globals.getWidth(context, .2),
-              //         child: ElevatedButton(
-              //           style: ElevatedButton.styleFrom(
-              //               primary: Colors.black,
-              //               side: const BorderSide(
-              //                 width: 2.0,
-              //                 color: Colors.red,
-              //               )),
-              //           onPressed: () {
-              //             AuthController.instance.login(
-              //                 emailController.text, passwordController.text);
-              //           },
-              //           child: const Text('LOG IN'),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // )
             ],
           ),
         ),

@@ -5,6 +5,8 @@ import '../globals.dart' as globals;
 import '../widgets/appbar_widget.dart';
 import '../widgets/menu_list.dart';
 import '../controllers/auth_controller.dart';
+import '../widgets/text_btn.dart';
+import '../widgets/text_input.dart';
 
 class SignupMobile extends StatefulWidget {
   final String myUid;
@@ -46,27 +48,10 @@ class _SignupMobileState extends State<SignupMobile> {
             children: [
               SizedBox(
                 width: globals.getWidth(context, .5),
-                child: TextField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+                child: TextInput(
                   controller: emailController,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
+                  obsecure: false,
+                  label: 'EMAIL',
                 ),
               ),
               const SizedBox(
@@ -74,28 +59,10 @@ class _SignupMobileState extends State<SignupMobile> {
               ),
               SizedBox(
                 width: globals.getWidth(context, .5),
-                child: TextField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                  obscureText: true,
+                child: TextInput(
                   controller: passwordController,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
+                  obsecure: true,
+                  label: 'PASSWORD',
                 ),
               ),
               const SizedBox(
@@ -103,28 +70,10 @@ class _SignupMobileState extends State<SignupMobile> {
               ),
               SizedBox(
                 width: globals.getWidth(context, .5),
-                child: TextField(
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
-                  obscureText: true,
+                child: TextInput(
                   controller: confirmController,
-                  decoration: const InputDecoration(
-                    labelText: 'Password Confirm',
-                    labelStyle: TextStyle(
-                      color: Colors.grey,
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.grey,
-                      ),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.red,
-                      ),
-                    ),
-                  ),
+                  obsecure: true,
+                  label: 'PASSWORD CONFIRM',
                 ),
               ),
               const SizedBox(
@@ -132,14 +81,9 @@ class _SignupMobileState extends State<SignupMobile> {
               ),
               SizedBox(
                 width: globals.getWidth(context, .2),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
-                      side: const BorderSide(
-                        width: 2.0,
-                        color: Colors.red,
-                      )),
-                  onPressed: () {
+                child: TextBtn(
+                  label: 'SIGN UP',
+                  function: () {
                     if (passwordController.text != confirmController.text) {
                       Fluttertoast.showToast(
                         msg: 'Password does not match',
@@ -157,7 +101,6 @@ class _SignupMobileState extends State<SignupMobile> {
                       );
                     }
                   },
-                  child: const Text('SIGN UP'),
                 ),
               ),
             ],

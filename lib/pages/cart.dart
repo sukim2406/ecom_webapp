@@ -8,6 +8,7 @@ import '../controllers/product_controller.dart';
 import '../controllers/user_controller.dart';
 import '../widgets/menu_list.dart';
 import '../pages/checkout.dart';
+import '../widgets/text_btn.dart';
 
 class CartMobile extends StatefulWidget {
   final String myUid;
@@ -182,21 +183,12 @@ class _CartMobileState extends State<CartMobile> {
                             key: Key(cartItems.length.toString()),
                             children: generateCartItems(),
                           ),
-                          // child: ListView.builder(
-                          //   itemCount: productList.length,
-                          //   itemBuilder: (context, index) {
-                          //     return CartItemMobile(
-                          //       item: productList[index],
-                          //       update: updateCart,
-                          //     );
-                          //   },
-                          // ),
                         )
                       : Container(
                           color: Colors.grey,
                           height: globals.getHeight(context, .4),
                           width: globals.getWidth(context, 1),
-                          child: Text(
+                          child: const Text(
                             'no items yet',
                           ),
                         ),
@@ -255,14 +247,9 @@ class _CartMobileState extends State<CartMobile> {
                       ),
                       SizedBox(
                         width: globals.getWidth(context, .4),
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.black,
-                              side: const BorderSide(
-                                width: 2.0,
-                                color: Colors.red,
-                              )),
-                          onPressed: () {
+                        child: TextBtn(
+                          label: 'CHECK OUT',
+                          function: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -273,7 +260,6 @@ class _CartMobileState extends State<CartMobile> {
                               ),
                             );
                           },
-                          child: const Text('CHECK OUT'),
                         ),
                       ),
                     ],

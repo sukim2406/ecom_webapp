@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '../globals.dart' as globals;
 import '../widgets/product_card.dart';
 import '../controllers/product_controller.dart';
 
