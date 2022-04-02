@@ -38,6 +38,9 @@ class AuthController extends GetxController {
           mobileVer: LandingMobile(
             myUid: (user != null) ? user.uid : '',
           ),
+          tabletVer: LandingTablet(
+            myUid: (user != null) ? user.uid : '',
+          ),
         ),
       ),
     );

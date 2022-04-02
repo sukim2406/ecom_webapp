@@ -69,7 +69,13 @@ class LandingMobile extends StatelessWidget {
 }
 
 class LandingTablet extends StatelessWidget {
-  const LandingTablet({Key? key}) : super(key: key);
+  final myUid;
+  int initialIndex;
+  LandingTablet({
+    Key? key,
+    required this.myUid,
+    this.initialIndex = 0,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +96,9 @@ class LandingTablet extends StatelessWidget {
             SizedBox(
               height: globals.getHeight(context, .02),
             ),
-            const MenuListTablet(),
+            MenuListTablet(
+              myUid: myUid,
+            ),
             SizedBox(
               height: globals.getHeight(context, .02),
             ),

@@ -11,6 +11,7 @@ import '../static.dart';
 import '../controllers/auth_controller.dart';
 import '../pages/cart.dart';
 import '../pages/find_order.dart';
+import '../widgets/responsive_layout.dart';
 
 class MenuListMobile extends StatelessWidget {
   final String myUid;
@@ -249,7 +250,11 @@ class MenuListMobile extends StatelessWidget {
 }
 
 class MenuListTablet extends StatelessWidget {
-  const MenuListTablet({Key? key}) : super(key: key);
+  final String myUid;
+  const MenuListTablet({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -257,9 +262,21 @@ class MenuListTablet extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResponsiveLayout(
+                  mobileVer: ProductsMobile(
+                    myUid: myUid,
+                  ),
+                  tabletVer: ProductsTablet(myUid: myUid),
+                ),
+              ),
+            );
+          },
           child: const Text(
-            'Products',
+            'PRODUCTS',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -269,7 +286,7 @@ class MenuListTablet extends StatelessWidget {
         TextButton(
           onPressed: () {},
           child: const Text(
-            'Log in',
+            'LOG IN',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -279,13 +296,33 @@ class MenuListTablet extends StatelessWidget {
         TextButton(
           onPressed: () {},
           child: const Text(
-            'About',
+            'ABOUT',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
           ),
-        )
+        ),
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            'CART',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            'ORDERS',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ],
     );
   }

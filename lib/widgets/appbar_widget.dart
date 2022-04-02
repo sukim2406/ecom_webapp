@@ -41,6 +41,7 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
               indicatorColor: Colors.red,
               labelStyle: TextStyle(
                 fontWeight: FontWeight.bold,
+                fontSize: 12,
               ),
               tabs: [
                 Tab(
@@ -53,6 +54,65 @@ class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
                   text: 'BEST',
                 ),
                 Tab(text: 'FAVORITES'),
+              ],
+            )
+          : null,
+    );
+  }
+}
+
+class AppbarWidgetTablet extends StatelessWidget
+    implements PreferredSizeWidget {
+  final String myUid;
+  final bool tabBar;
+  const AppbarWidgetTablet({
+    Key? key,
+    required this.tabBar,
+    required this.myUid,
+  }) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(120.0);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      iconTheme: const IconThemeData(color: Colors.white),
+      backgroundColor: Colors.black,
+      flexibleSpace: const Image(
+        image: AssetImage('img/Supreme-Logo.png'),
+        height: 80.0,
+        fit: BoxFit.fitHeight,
+      ),
+      actions: [
+        const AppbarPadding(),
+        SizedBox(
+          width: globals.getWidth(context, .3),
+          child: SearchProduct(
+            myUid: myUid,
+          ),
+        ),
+      ],
+      bottom: (tabBar)
+          ? const TabBar(
+              indicatorColor: Colors.red,
+              labelStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+              tabs: [
+                Tab(
+                  text: 'NEW ARRIVALS',
+                ),
+                Tab(
+                  text: 'BEST',
+                ),
+                Tab(
+                  text: 'ALL PRODUCTS',
+                ),
+                Tab(
+                  text: 'FAVORITES',
+                ),
               ],
             )
           : null,
