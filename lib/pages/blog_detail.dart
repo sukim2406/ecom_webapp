@@ -38,7 +38,7 @@ class BlogDetailMobile extends StatelessWidget {
                 height: 20.0,
               ),
               SizedBox(
-                height: globals.getHeight(context, .4),
+                // height: globals.getHeight(context, .4),
                 width: globals.getWidth(context, .6),
                 child: Column(
                   children: [

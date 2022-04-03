@@ -1,3 +1,4 @@
+import 'package:ecom_webapp/widgets/responsive_layout.dart';
 import 'package:flutter/material.dart';
 
 import '../globals.dart' as globals;
@@ -56,24 +57,35 @@ class BlogCardMobile extends StatelessWidget {
 
 class BlogCardTablet extends StatelessWidget {
   final Map blog;
+  final String myUid;
   const BlogCardTablet({
     Key? key,
+    required this.myUid,
     required this.blog,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(5.0),
-      child: Stack(
-        children: [
-          Image(
-            image: AssetImage(blog['image']),
-            fit: BoxFit.fill,
-            width: globals.getWidth(context, 1),
-            height: globals.getHeight(context, 1),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BlogDetailMobile(
+              blog: blog,
+              myUid: myUid,
+            ),
           ),
-        ],
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.all(5.0),
+        child: Image.network(
+          blog['image'],
+          fit: BoxFit.contain,
+          width: globals.getWidth(context, 1),
+          height: globals.getHeight(context, 1),
+        ),
       ),
     );
   }

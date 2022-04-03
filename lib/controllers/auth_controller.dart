@@ -44,7 +44,6 @@ class AuthController extends GetxController {
         ),
       ),
     );
-    // print('hi');
     // print(Holder.getUid());
   }
 

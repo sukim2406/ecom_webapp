@@ -102,7 +102,9 @@ class LandingTablet extends StatelessWidget {
             SizedBox(
               height: globals.getHeight(context, .02),
             ),
-            const BlogsTablet(),
+            BlogsTablet(
+              myUid: myUid,
+            ),
           ],
         ),
       ),
