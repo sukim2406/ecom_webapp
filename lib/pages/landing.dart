@@ -79,33 +79,35 @@ class LandingTablet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(
-              width: 400.0,
-              height: 150.0,
-              child: Image(
-                image: AssetImage('img/Supreme-Logo.png'),
-                fit: BoxFit.fitWidth,
+    return Scaffold(
+      body: Container(
+        color: Colors.black,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                width: 400.0,
+                height: 150.0,
+                child: Image(
+                  image: AssetImage('img/Supreme-Logo.png'),
+                  fit: BoxFit.fitWidth,
+                ),
               ),
-            ),
-            SizedBox(
-              height: globals.getHeight(context, .02),
-            ),
-            MenuListTablet(
-              myUid: myUid,
-            ),
-            SizedBox(
-              height: globals.getHeight(context, .02),
-            ),
-            BlogsTablet(
-              myUid: myUid,
-            ),
-          ],
+              SizedBox(
+                height: globals.getHeight(context, .02),
+              ),
+              MenuListTablet(
+                myUid: myUid,
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .02),
+              ),
+              BlogsTablet(
+                myUid: myUid,
+              ),
+            ],
+          ),
         ),
       ),
     );

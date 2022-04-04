@@ -42,7 +42,7 @@ class _ProductDetailMobileState extends State<ProductDetailMobile> {
       body: SingleChildScrollView(
         child: Container(
           width: globals.getWidth(context, 1),
-          height: globals.getHeight(context, 1),
+          // height: globals.getHeight(context, 1),
           color: Colors.black,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +53,7 @@ class _ProductDetailMobileState extends State<ProductDetailMobile> {
                 width: globals.getWidth(context, .8),
                 child: Image.network(
                   widget.product['image'],
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ),
               ),
               const SizedBox(

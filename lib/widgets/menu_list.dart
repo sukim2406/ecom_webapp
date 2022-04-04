@@ -7,7 +7,6 @@ import '../pages/products.dart';
 import '../pages/landing.dart';
 import '../pages/about.dart';
 import '../pages/login.dart';
-import '../static.dart';
 import '../controllers/auth_controller.dart';
 import '../pages/cart.dart';
 import '../pages/find_order.dart';
@@ -267,6 +266,30 @@ class MenuListTablet extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => ResponsiveLayout(
+                  mobileVer: LandingMobile(
+                    myUid: myUid,
+                  ),
+                  tabletVer: LandingTablet(
+                    myUid: myUid,
+                  ),
+                ),
+              ),
+            );
+          },
+          child: const Text(
+            'HOME',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ResponsiveLayout(
                   mobileVer: ProductsMobile(
                     myUid: myUid,
                   ),
@@ -277,26 +300,6 @@ class MenuListTablet extends StatelessWidget {
           },
           child: const Text(
             'PRODUCTS',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: const Text(
-            'LOG IN',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: const Text(
-            'ABOUT',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -317,6 +320,53 @@ class MenuListTablet extends StatelessWidget {
           onPressed: () {},
           child: const Text(
             'ORDERS',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        (myUid == '')
+            ? TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResponsiveLayout(
+                        mobileVer: LogInMobile(
+                          myUid: myUid,
+                        ),
+                        tabletVer: LogInTablet(
+                          myUid: myUid,
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'LOG IN',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            : TextButton(
+                onPressed: () {
+                  AuthController.instance.logout();
+                },
+                child: const Text(
+                  'LOG OUT',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+        TextButton(
+          onPressed: () {},
+          child: const Text(
+            'ABOUT',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,

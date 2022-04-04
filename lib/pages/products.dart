@@ -7,6 +7,7 @@ import '../controllers/product_controller.dart';
 import '../widgets/new_arrivals.dart';
 import '../widgets/bestsellers.dart';
 import '../widgets/favorites.dart';
+import '../globals.dart' as globals;
 
 class ProductsMobile extends StatelessWidget {
   final String myUid;
@@ -81,54 +82,73 @@ class ProductsTablet extends StatelessWidget {
             myUid: myUid,
             tabBar: true,
           ),
-          body: TabBarView(
-            children: [
-              Container(
-                color: Colors.black,
-                child: NewArrivalsMobile(
-                  myUid: myUid,
+          // drawer: Drawer(
+          //   child: MenuListTablet(
+          //     myUid: myUid,
+          //   ),
+          // ),
+          body: Container(
+            color: Colors.black,
+            height: globals.getHeight(context, 1),
+            width: globals.getWidth(context, 1),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: globals.getHeight(context, .8),
+                  width: globals.getWidth(context, 1),
+                  child: TabBarView(
+                    children: [
+                      Container(
+                        color: Colors.black,
+                        child: NewArrivalsTablet(
+                          myUid: myUid,
+                        ),
+                      ),
+                      Container(
+                        color: Colors.black,
+                        child: BestsellersTablet(
+                          myUid: myUid,
+                        ),
+                      ),
+                      FutureBuilder(
+                        future: ProductController.instance.getAllProducts(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            var temp = snapshot.data! as List<Object?>;
+                            productList = temp
+                                .map((doc) => ProductCard(
+                                      product: doc as Map,
+                                      myUid: myUid,
+                                    ))
+                                .toList();
+                          }
+                          return Container(
+                            color: Colors.black,
+                            child: (snapshot.hasData)
+                                ? GridView.count(
+                                    primary: false,
+                                    padding: const EdgeInsets.all(20.0),
+                                    crossAxisCount: 4,
+                                    crossAxisSpacing: 10.0,
+                                    mainAxisSpacing: 10.0,
+                                    children: productList,
+                                  )
+                                : Container(),
+                          );
+                        },
+                      ),
+                      Container(
+                        color: Colors.black,
+                        child: FavoritesMobile(
+                          myUid: myUid,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                color: Colors.black,
-                child: BestsellersMobile(
-                  myUid: myUid,
-                ),
-              ),
-              FutureBuilder(
-                future: ProductController.instance.getAllProducts(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    var temp = snapshot.data! as List<Object?>;
-                    productList = temp
-                        .map((doc) => ProductCard(
-                              product: doc as Map,
-                              myUid: myUid,
-                            ))
-                        .toList();
-                  }
-                  return Container(
-                    color: Colors.black,
-                    child: (snapshot.hasData)
-                        ? GridView.count(
-                            primary: false,
-                            padding: const EdgeInsets.all(20.0),
-                            crossAxisCount: 4,
-                            crossAxisSpacing: 10.0,
-                            mainAxisSpacing: 10.0,
-                            children: productList,
-                          )
-                        : Container(),
-                  );
-                },
-              ),
-              Container(
-                color: Colors.black,
-                child: FavoritesMobile(
-                  myUid: myUid,
-                ),
-              ),
-            ],
+                MenuListTablet(myUid: myUid),
+              ],
+            ),
           ),
         ),
       ),

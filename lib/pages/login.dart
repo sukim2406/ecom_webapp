@@ -1,3 +1,4 @@
+import 'package:ecom_webapp/widgets/responsive_layout.dart';
 import 'package:flutter/material.dart';
 
 import '../globals.dart' as globals;
@@ -88,6 +89,108 @@ class LogInMobile extends StatelessWidget {
                   },
                 ),
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LogInTablet extends StatelessWidget {
+  final String myUid;
+  const LogInTablet({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    return Scaffold(
+      body: Container(
+        color: Colors.black,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                width: 400,
+                height: 150,
+                child: Image(
+                  image: AssetImage('img/Supreme-Logo.png'),
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .03),
+              ),
+              SizedBox(
+                width: globals.getWidth(context, .5),
+                child: TextInput(
+                    controller: emailController,
+                    obsecure: false,
+                    label: 'EMAIL'),
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .02),
+              ),
+              SizedBox(
+                width: globals.getWidth(context, .5),
+                child: TextInput(
+                    controller: passwordController,
+                    obsecure: true,
+                    label: 'PASSWORD'),
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .03),
+              ),
+              SizedBox(
+                width: globals.getWidth(context, .5),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: globals.getWidth(context, .2),
+                      child: TextBtn(
+                        function: () {
+                          AuthController.instance.login(
+                              emailController.text, passwordController.text);
+                        },
+                        label: 'LOG IN',
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(),
+                    ),
+                    SizedBox(
+                      width: globals.getWidth(context, .2),
+                      child: TextBtn(
+                        function: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResponsiveLayout(
+                                mobileVer: SignupMobile(
+                                  myUid: myUid,
+                                ),
+                                tabletVer: SingupTablet(
+                                  myUid: myUid,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        label: 'SIGN UP',
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .1),
+              ),
+              MenuListTablet(myUid: myUid),
             ],
           ),
         ),
