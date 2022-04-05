@@ -9,19 +9,20 @@ import '../controllers/user_controller.dart';
 import '../widgets/menu_list.dart';
 import '../pages/checkout.dart';
 import '../widgets/text_btn.dart';
+import '../widgets/responsive_layout.dart';
 
-class CartMobile extends StatefulWidget {
+class Cart extends StatefulWidget {
   final String myUid;
-  const CartMobile({
+  const Cart({
     Key? key,
     required this.myUid,
   }) : super(key: key);
 
   @override
-  State<CartMobile> createState() => _CartMobileState();
+  State<Cart> createState() => _CartState();
 }
 
-class _CartMobileState extends State<CartMobile> {
+class _CartState extends State<Cart> {
   List cartItems = [];
   List productList = [];
   double totalPrice = 0.0;
@@ -114,163 +115,336 @@ class _CartMobileState extends State<CartMobile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppbarWidget(
-        tabBar: false,
-        myUid: widget.myUid,
-      ),
-      drawer: Drawer(
-        child: MenuListMobile(
+    return ResponsiveLayout(
+      mobileVer: Scaffold(
+        appBar: AppbarWidget(
+          tabBar: false,
           myUid: widget.myUid,
         ),
-      ),
-      body: Container(
-        width: globals.getWidth(context, 1.0),
-        height: globals.getHeight(context, 1.0),
-        color: Colors.black,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(
-                top: 10,
-                bottom: 20,
-              ),
-              width: globals.getWidth(context, .8),
-              child: const Text(
-                'SHOPPING BAG',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey,
-                  fontWeight: FontWeight.bold,
+        drawer: Drawer(
+          child: MenuList(
+            myUid: widget.myUid,
+          ),
+        ),
+        body: Container(
+          width: globals.getWidth(context, 1.0),
+          height: globals.getHeight(context, 1.0),
+          color: Colors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  bottom: 20,
                 ),
-                textAlign: TextAlign.left,
+                width: globals.getWidth(context, .8),
+                child: const Text(
+                  'SHOPPING BAG',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
               ),
-            ),
-            SizedBox(
-              height: globals.getHeight(context, .6),
-              width: globals.getWidth(context, .8),
-              // color: Colors.amber,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Text(
-                        'ITEM',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      const Icon(
-                        Icons.refresh,
-                        color: Colors.white,
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  (cartItems.isNotEmpty)
-                      ? Container(
-                          color: Colors.grey,
-                          height: globals.getHeight(context, .4),
-                          child: ListView(
-                            key: Key(cartItems.length.toString()),
-                            children: generateCartItems(),
-                          ),
-                        )
-                      : Container(
-                          color: Colors.grey,
-                          height: globals.getHeight(context, .4),
-                          width: globals.getWidth(context, 1),
-                          child: const Text(
-                            'no items yet',
-                          ),
-                        ),
-                  Container(
-                    padding: const EdgeInsets.only(top: 40.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
+              SizedBox(
+                height: globals.getHeight(context, .6),
+                width: globals.getWidth(context, .8),
+                // color: Colors.amber,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
                         const Text(
-                          'Total',
+                          'ITEM',
                           style: TextStyle(
                             color: Colors.white,
                           ),
+                          textAlign: TextAlign.left,
                         ),
                         Expanded(
                           child: Container(),
                         ),
-                        Text(
-                          getTotalItemCnt().toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        const Text(
-                          ' items',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(),
-                        ),
-                        Text(
-                          totalPrice.toString(),
-                          style: const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                        const Text(
-                          ' USD',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                        const Icon(
+                          Icons.refresh,
+                          color: Colors.white,
                         )
                       ],
                     ),
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        child: Container(),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    (cartItems.isNotEmpty)
+                        ? Container(
+                            color: Colors.grey,
+                            height: globals.getHeight(context, .4),
+                            child: ListView(
+                              key: Key(cartItems.length.toString()),
+                              children: generateCartItems(),
+                            ),
+                          )
+                        : Container(
+                            color: Colors.grey,
+                            height: globals.getHeight(context, .4),
+                            width: globals.getWidth(context, 1),
+                            child: const Text(
+                              'no items yet',
+                            ),
+                          ),
+                    Container(
+                      padding: const EdgeInsets.only(top: 40.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Text(
+                            'Total',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          Text(
+                            getTotalItemCnt().toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          const Text(
+                            ' items',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          Text(
+                            totalPrice.toString(),
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          const Text(
+                            ' USD',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
                       ),
-                      SizedBox(
-                        width: globals.getWidth(context, .4),
-                        child: TextBtn(
-                          label: 'CHECK OUT',
-                          function: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CheckoutMobile(
-                                  myUid: widget.myUid,
-                                  items: productList,
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Container(),
+                        ),
+                        SizedBox(
+                          width: globals.getWidth(context, .4),
+                          child: TextBtn(
+                            label: 'CHECK OUT',
+                            function: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CheckoutMobile(
+                                    myUid: widget.myUid,
+                                    items: productList,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Container(),
+              ),
+            ],
+          ),
+        ),
+      ),
+      tabletVer: Scaffold(
+        body: Container(
+          color: Colors.black,
+          width: globals.getWidth(context, 1.0),
+          height: globals.getHeight(context, 1.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                width: 400,
+                height: 150,
+                child: Image(
+                  image: AssetImage('img/Supreme-Logo.png'),
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .03),
+              ),
+              Container(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  bottom: 20,
+                ),
+                width: globals.getWidth(context, .8),
+                child: const Text(
+                  'SHOPPING BAG',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .6),
+                width: globals.getWidth(context, .8),
+                // color: Colors.amber,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          'ITEM',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Expanded(
+                          child: Container(),
+                        ),
+                        const Icon(
+                          Icons.refresh,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 5.0,
+                    ),
+                    (cartItems.isNotEmpty)
+                        ? Container(
+                            color: Colors.grey,
+                            height: globals.getHeight(context, .4),
+                            child: ListView(
+                              key: Key(cartItems.length.toString()),
+                              children: generateCartItems(),
+                            ),
+                          )
+                        : Container(
+                            color: Colors.grey,
+                            height: globals.getHeight(context, .4),
+                            width: globals.getWidth(context, 1),
+                            child: const Text(
+                              'no items yet',
+                            ),
+                          ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(),
+                        ),
+                        Container(
+                          width: globals.getWidth(context, .4),
+                          padding: const EdgeInsets.only(top: 40.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text(
+                                'Total',
+                                style: TextStyle(
+                                  color: Colors.white,
                                 ),
                               ),
-                            );
-                          },
+                              Expanded(
+                                child: Container(),
+                              ),
+                              Text(
+                                getTotalItemCnt().toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const Text(
+                                ' items',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(),
+                              ),
+                              Text(
+                                totalPrice.toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const Text(
+                                ' USD',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          child: Container(),
+                        ),
+                        SizedBox(
+                          width: globals.getWidth(context, .4),
+                          child: TextBtn(
+                            label: 'CHECK OUT',
+                            function: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CheckoutMobile(
+                                    myUid: widget.myUid,
+                                    items: productList,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-              child: Container(),
-            ),
-          ],
+              SizedBox(
+                height: globals.getHeight(context, .05),
+              ),
+              MenuList(myUid: widget.myUid),
+            ],
+          ),
         ),
       ),
     );

@@ -46,7 +46,7 @@ class CartItemMobile extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CartMobile(
+                                  builder: (context) => Cart(
                                         myUid: myUid,
                                       )),
                             );

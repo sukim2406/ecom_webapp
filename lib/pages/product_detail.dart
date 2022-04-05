@@ -42,7 +42,7 @@ class _ProductDetailMobileState extends State<ProductDetailMobile> {
       body: SingleChildScrollView(
         child: Container(
           width: globals.getWidth(context, 1),
-          // height: globals.getHeight(context, 1),
+          height: globals.getHeight(context, 1.2),
           color: Colors.black,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +141,7 @@ class _ProductDetailMobileState extends State<ProductDetailMobile> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CartMobile(
+                        builder: (context) => Cart(
                           myUid: widget.myUid,
                         ),
                       ),

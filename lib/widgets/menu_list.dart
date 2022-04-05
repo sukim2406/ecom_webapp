@@ -12,6 +12,385 @@ import '../pages/cart.dart';
 import '../pages/find_order.dart';
 import '../widgets/responsive_layout.dart';
 
+class MenuList extends StatelessWidget {
+  final String myUid;
+  const MenuList({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ResponsiveLayout(
+      mobileVer: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          Container(
+            color: Colors.black87,
+            child: DrawerHeader(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(),
+                  ),
+                  const CircleAvatar(
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage('img/default-profile-pic.png'),
+                    radius: 40,
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  (myUid == '')
+                      ? Row(
+                          children: [
+                            Expanded(
+                              child: Container(),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LogIn(
+                                      myUid: myUid,
+                                    ),
+                                    // LogInMobile(
+                                    //   myUid: myUid,
+                                    // ),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Log In',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Cart(
+                                      myUid: myUid,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Cart',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FindOrder(
+                                      myUid: myUid,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Orders',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                          ],
+                        )
+                      : Row(
+                          children: [
+                            Expanded(
+                              child: Container(),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                AuthController.instance.logout();
+                              },
+                              child: const Text(
+                                'Log out',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Cart(
+                                      myUid: myUid,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Cart',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FindOrder(
+                                      myUid: myUid,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Orders',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                          ],
+                        ),
+                ],
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.black54,
+            height: globals.getHeight(context, 1),
+            child: Column(
+              children: [
+                ListTile(
+                  title: const Text(
+                    'Home',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Landing(
+                          myUid: myUid,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    'Products',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Products(
+                          myUid: myUid,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                ListTile(
+                  title: const Text(
+                    'About',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => About(
+                          myUid: myUid,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      tabletVer: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Landing(
+                    myUid: myUid,
+                  ),
+                ),
+              );
+            },
+            child: const Text(
+              'HOME',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Products(myUid: myUid),
+                ),
+              );
+            },
+            child: const Text(
+              'PRODUCTS',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Cart(
+                    myUid: myUid,
+                  ),
+                ),
+              );
+            },
+            child: const Text(
+              'CART',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FindOrder(
+                    myUid: myUid,
+                  ),
+                ),
+              );
+            },
+            child: const Text(
+              'ORDERS',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          (myUid == '')
+              ? TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LogIn(
+                                myUid: myUid,
+                              )
+                          // ResponsiveLayout(
+                          //   mobileVer: LogInMobile(
+                          //     myUid: myUid,
+                          //   ),
+                          //   tabletVer: LogInTablet(
+                          //     myUid: myUid,
+                          //   ),
+                          // ),
+                          ),
+                    );
+                  },
+                  child: const Text(
+                    'LOG IN',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              : TextButton(
+                  onPressed: () {
+                    AuthController.instance.logout();
+                  },
+                  child: const Text(
+                    'LOG OUT',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => About(
+                    myUid: myUid,
+                  ),
+                ),
+              );
+            },
+            child: const Text(
+              'ABOUT',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class MenuListMobile extends StatelessWidget {
   final String myUid;
   const MenuListMobile({
@@ -51,9 +430,12 @@ class MenuListMobile extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => LogInMobile(
+                                  builder: (context) => LogIn(
                                     myUid: myUid,
                                   ),
+                                  // LogInMobile(
+                                  //   myUid: myUid,
+                                  // ),
                                 ),
                               );
                             },
@@ -72,7 +454,7 @@ class MenuListMobile extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CartMobile(
+                                  builder: (context) => Cart(
                                     myUid: myUid,
                                   ),
                                 ),
@@ -93,7 +475,7 @@ class MenuListMobile extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => FindOrderMobile(
+                                  builder: (context) => FindOrder(
                                     myUid: myUid,
                                   ),
                                 ),
@@ -138,7 +520,7 @@ class MenuListMobile extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CartMobile(
+                                  builder: (context) => Cart(
                                     myUid: myUid,
                                   ),
                                 ),
@@ -159,7 +541,7 @@ class MenuListMobile extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => FindOrderMobile(
+                                  builder: (context) => FindOrder(
                                     myUid: myUid,
                                   ),
                                 ),
@@ -197,7 +579,7 @@ class MenuListMobile extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => LandingMobile(
+                      builder: (context) => Landing(
                         myUid: myUid,
                       ),
                     ),
@@ -215,7 +597,7 @@ class MenuListMobile extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ProductsMobile(
+                      builder: (context) => Products(
                         myUid: myUid,
                       ),
                     ),
@@ -233,7 +615,7 @@ class MenuListMobile extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AboutMobile(
+                      builder: (context) => About(
                         myUid: myUid,
                       ),
                     ),
@@ -265,13 +647,8 @@ class MenuListTablet extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ResponsiveLayout(
-                  mobileVer: LandingMobile(
-                    myUid: myUid,
-                  ),
-                  tabletVer: LandingTablet(
-                    myUid: myUid,
-                  ),
+                builder: (context) => Landing(
+                  myUid: myUid,
                 ),
               ),
             );
@@ -289,12 +666,7 @@ class MenuListTablet extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ResponsiveLayout(
-                  mobileVer: ProductsMobile(
-                    myUid: myUid,
-                  ),
-                  tabletVer: ProductsTablet(myUid: myUid),
-                ),
+                builder: (context) => Products(myUid: myUid),
               ),
             );
           },
@@ -307,7 +679,16 @@ class MenuListTablet extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Cart(
+                  myUid: myUid,
+                ),
+              ),
+            );
+          },
           child: const Text(
             'CART',
             style: TextStyle(
@@ -332,15 +713,18 @@ class MenuListTablet extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ResponsiveLayout(
-                        mobileVer: LogInMobile(
-                          myUid: myUid,
+                        builder: (context) => LogIn(
+                              myUid: myUid,
+                            )
+                        // ResponsiveLayout(
+                        //   mobileVer: LogInMobile(
+                        //     myUid: myUid,
+                        //   ),
+                        //   tabletVer: LogInTablet(
+                        //     myUid: myUid,
+                        //   ),
+                        // ),
                         ),
-                        tabletVer: LogInTablet(
-                          myUid: myUid,
-                        ),
-                      ),
-                    ),
                   );
                 },
                 child: const Text(

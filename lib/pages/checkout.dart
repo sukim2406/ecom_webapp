@@ -429,7 +429,7 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => OrderReceiptMobile(
+                                    builder: (context) => OrderReceipt(
                                       orderId: orderId,
                                       myUid: widget.myUid,
                                     ),

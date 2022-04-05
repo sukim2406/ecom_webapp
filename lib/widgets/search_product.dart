@@ -45,7 +45,7 @@ class SearchProduct extends StatelessWidget {
                   ? Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SearchResultMobile(
+                        builder: (context) => SearchResult(
                           keyword: searchController.text,
                           myUid: myUid,
                         ),

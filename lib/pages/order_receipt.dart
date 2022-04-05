@@ -7,10 +7,10 @@ import '../widgets/responsive_layout.dart';
 import '../widgets/max_width_container.dart';
 import '../pages/landing.dart';
 
-class OrderReceiptMobile extends StatelessWidget {
+class OrderReceipt extends StatelessWidget {
   final String myUid;
   final String orderId;
-  const OrderReceiptMobile({
+  const OrderReceipt({
     Key? key,
     required this.orderId,
     required this.myUid,
@@ -27,7 +27,7 @@ class OrderReceiptMobile extends StatelessWidget {
           future: OrderController.instance.getOrderDocument(orderId),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Text('Error');
+              return const Text('Error');
             } else if (snapshot.hasData) {
               var orderData = snapshot.data! as Map;
               return Column(
@@ -259,41 +259,43 @@ class OrderReceiptMobile extends StatelessWidget {
                         width: globals.getWidth(context, .05),
                       ),
                       SingleChildScrollView(
-                        child: Container(
-                          color: Colors.amber,
+                        child: SizedBox(
                           width: globals.getWidth(context, .5),
                           height: globals.getHeight(context, .1),
                           child: ListView.builder(
                             itemCount: orderData['order']['products'].length,
                             itemBuilder: (context, index) {
-                              return Container(
-                                width: globals.getWidth(context, .5),
+                              return SizedBox(
+                                width: globals.getWidth(context, .3),
                                 child: Row(
                                   children: [
                                     SizedBox(
-                                      width: globals.getWidth(context, .3),
+                                      width: globals.getWidth(context, .15),
                                       child: Text(
                                         orderData['order']['products'][index]
                                             ['name'],
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(
+                                            color: Colors.white),
                                       ),
                                     ),
                                     SizedBox(
-                                      width: globals.getWidth(context, .1),
+                                      width: globals.getWidth(context, .075),
                                       child: Text(
                                         orderData['order']['products'][index]
                                                 ['qty']
                                             .toString(),
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(
+                                            color: Colors.white),
                                       ),
                                     ),
                                     SizedBox(
-                                      width: globals.getWidth(context, .1),
+                                      width: globals.getWidth(context, .075),
                                       child: Text(
                                         orderData['order']['products'][index]
                                                 ['price']
                                             .toString(),
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -421,7 +423,7 @@ class OrderReceiptMobile extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       'go back to home',
                       style: TextStyle(
                         color: Colors.white,
@@ -432,7 +434,7 @@ class OrderReceiptMobile extends StatelessWidget {
                 ],
               );
             } else {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
           },
         ),

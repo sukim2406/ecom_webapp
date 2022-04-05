@@ -34,17 +34,19 @@ class AuthController extends GetxController {
     }
     Get.offAll(
       () => MaxWidthContainer(
-        child: ResponsiveLayout(
-          mobileVer: LandingMobile(
-            myUid: (user != null) ? user.uid : '',
-          ),
-          tabletVer: LandingTablet(
-            myUid: (user != null) ? user.uid : '',
-          ),
+        child: Landing(
+          myUid: (user != null) ? user.uid : '',
         ),
+        // child: ResponsiveLayout(
+        //   mobileVer: LandingMobile(
+        //     myUid: (user != null) ? user.uid : '',
+        //   ),
+        //   tabletVer: LandingTablet(
+        //     myUid: (user != null) ? user.uid : '',
+        //   ),
+        // ),
       ),
     );
-    // print(Holder.getUid());
   }
 
   void register(String email, password) async {
