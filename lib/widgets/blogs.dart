@@ -76,15 +76,23 @@ class Blogs extends StatelessWidget {
         future: BlogController.instance.getAllBlogs(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            var tempData = snapshot.data! as List;
             var temp = snapshot.data! as List<Object?>;
             blogSliders = temp
-                .map((doc) => BlogCardDesktop(
-                      blog: doc as Map,
-                      myUid: myUid,
-                    ))
+                .map(
+                  (doc) => BlogCardDesktop(
+                    blog: doc as Map,
+                    myUid: myUid,
+                  ),
+                )
                 .toList();
-            return ListView(
-              children: blogSliders,
+            return Container(
+              height: globals.getHeight(context, .1),
+              width: globals.getWidth(context, .4),
+              child: ListView(
+                reverse: true,
+                children: blogSliders,
+              ),
             );
           } else {
             return Text('Error');

@@ -190,8 +190,18 @@ class BlogCardDesktop extends StatelessWidget {
           ),
         );
       },
-      title: blog['title'],
-      trailing: blog['date'],
+      title: Text(
+        blog['title'],
+        style: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      trailing: Text(
+        blog['date'].toDate().toString().substring(0, 10),
+        style: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }

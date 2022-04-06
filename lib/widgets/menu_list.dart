@@ -13,10 +13,12 @@ import '../pages/find_order.dart';
 import '../widgets/responsive_layout.dart';
 
 class MenuList extends StatelessWidget {
+  final Function? scrollTo;
   final String myUid;
-  const MenuList({
+  MenuList({
     Key? key,
     required this.myUid,
+    this.scrollTo,
   }) : super(key: key);
 
   @override
@@ -376,6 +378,97 @@ class MenuList extends StatelessWidget {
                   ),
                 ),
               );
+            },
+            child: const Text(
+              'ABOUT',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+      desktopVer: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          TextButton(
+            onPressed: () {
+              scrollTo!(0);
+            },
+            child: const Text(
+              'HOME',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              scrollTo!(1);
+            },
+            child: const Text(
+              'PRODUCTS',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              scrollTo!(2);
+            },
+            child: const Text(
+              'CART',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              scrollTo!(3);
+            },
+            child: const Text(
+              'ORDERS',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          (myUid == '')
+              ? TextButton(
+                  onPressed: () {
+                    scrollTo!(4);
+                  },
+                  child: const Text(
+                    'LOG IN',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              : TextButton(
+                  onPressed: () {
+                    AuthController.instance.logout();
+                    scrollTo!(0);
+                  },
+                  child: const Text(
+                    'LOG OUT',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+          TextButton(
+            onPressed: () {
+              scrollTo!(5);
             },
             child: const Text(
               'ABOUT',

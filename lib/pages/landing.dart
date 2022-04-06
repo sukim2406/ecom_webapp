@@ -20,6 +20,16 @@ class Landing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
+
+    scrollFunction(to) {
+      scrollController.animateTo(globals.getHeight(context, to),
+          duration: Duration(
+            seconds: 1,
+          ),
+          curve: Curves.ease);
+    }
+
     return ResponsiveLayout(
       mobileVer: MaterialApp(
         home: DefaultTabController(
@@ -99,25 +109,173 @@ class Landing extends StatelessWidget {
         ),
       ),
       desktopVer: Scaffold(
-        body: Container(
-          height: globals.getHeight(context, 1),
-          width: globals.getWidth(context, 1),
-          color: Colors.black,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Image(
-                image: AssetImage('img/Supreme-Logo.png'),
-              ),
-              Container(
-                height: globals.getHeight(context, .3),
-                width: globals.getWidth(context, .3),
-                color: Colors.grey,
-                child: Blogs(
-                  myUid: myUid,
+        body: SingleChildScrollView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: scrollController,
+          child: Container(
+            width: globals.getWidth(context, 1),
+            height: globals.getHeight(context, 5),
+            color: Colors.black,
+            child: ListView(
+              children: [
+                Container(
+                  height: globals.getHeight(
+                    context,
+                    1,
+                  ),
+                  color: Colors.black,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: globals.getHeight(
+                          context,
+                          .01,
+                        ),
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(context, .09),
+                        child: MenuList(
+                          myUid: myUid,
+                          scrollTo: scrollFunction,
+                        ),
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(context, .8),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Image(
+                              image: AssetImage('img/Supreme-Logo.png'),
+                            ),
+                            SizedBox(
+                              width: globals.getWidth(context, .4),
+                              child: const Text(
+                                'NOTICE',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            Blogs(
+                              myUid: myUid,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(
+                          context,
+                          .1,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Container(
+                  height: globals.getHeight(
+                    context,
+                    1,
+                  ),
+                  color: Colors.black,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: globals.getHeight(context, .01),
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(context, .09),
+                        child: MenuList(
+                          myUid: myUid,
+                          scrollTo: scrollFunction,
+                        ),
+                      ),
+                      SizedBox(
+                        width: globals.getWidth(context, .8),
+                        height: globals.getHeight(context, .05),
+                        child: const Image(
+                          image: AssetImage('img/Supreme-Logo.png'),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(context, .05),
+                      ),
+                      SizedBox(
+                        width: globals.getWidth(context, .8),
+                        height: globals.getHeight(context, .7),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: globals.getHeight(context, .05),
+                                width: globals.getWidth(context, .8),
+                                alignment: Alignment.centerLeft,
+                                child: const Text(
+                                  'NEW ARRIVALS',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: globals.getHeight(context, .2),
+                                color: Colors.orange,
+                              ),
+                              Container(
+                                height: globals.getHeight(context, .05),
+                                width: globals.getWidth(context, .8),
+                                alignment: Alignment.centerLeft,
+                                child: const Text(
+                                  'BESTSELLERS',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: globals.getHeight(context, .2),
+                                color: Colors.orange,
+                              ),
+                              Container(
+                                height: globals.getHeight(context, .05),
+                                width: globals.getWidth(context, .8),
+                                alignment: Alignment.centerLeft,
+                                child: const Text(
+                                  'ALL PRODUCTS',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: globals.getHeight(context, .2),
+                                color: Colors.orange,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(context, .1),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  height: globals.getHeight(context, 1),
+                  color: Colors.grey,
+                ),
+              ],
+            ),
           ),
         ),
       ),
