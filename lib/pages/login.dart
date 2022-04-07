@@ -9,12 +9,15 @@ import '../controllers/auth_controller.dart';
 import '../widgets/text_input.dart';
 import '../widgets/text_btn.dart';
 import '../widgets/responsive_layout.dart';
+import '../pages/landing.dart';
 
 class LogIn extends StatelessWidget {
   final String myUid;
-  const LogIn({
+  Function? func;
+  LogIn({
     Key? key,
     required this.myUid,
+    this.func,
   }) : super(key: key);
 
   @override
@@ -176,6 +179,78 @@ class LogIn extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+      desktopVer: SizedBox(
+        width: globals.getWidth(context, .8),
+        height: globals.getHeight(context, .8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: globals.getHeight(context, .3),
+              width: globals.getWidth(context, .8),
+              child: const Image(
+                image: AssetImage('img/Supreme-Logo.png'),
+              ),
+            ),
+            SizedBox(
+              height: globals.getHeight(context, .03),
+            ),
+            SizedBox(
+              width: globals.getWidth(context, .5),
+              child: TextInput(
+                  controller: emailController, obsecure: false, label: 'EMAIL'),
+            ),
+            SizedBox(
+              height: globals.getHeight(context, .02),
+            ),
+            SizedBox(
+              width: globals.getWidth(context, .5),
+              child: TextInput(
+                  controller: passwordController,
+                  obsecure: true,
+                  label: 'PASSWORD'),
+            ),
+            SizedBox(
+              height: globals.getHeight(context, .1),
+            ),
+            SizedBox(
+              width: globals.getWidth(context, .5),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: globals.getWidth(context, .2),
+                    child: TextBtn(
+                      function: () {
+                        AuthController.instance.login(
+                            emailController.text, passwordController.text);
+                        func!(0);
+                      },
+                      label: 'LOG IN',
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(),
+                  ),
+                  SizedBox(
+                    width: globals.getWidth(context, .2),
+                    child: TextBtn(
+                      function: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUp(myUid: myUid),
+                          ),
+                        );
+                      },
+                      label: 'SIGN UP',
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

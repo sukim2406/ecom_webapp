@@ -74,6 +74,29 @@ class About extends StatelessWidget {
           ),
         ),
       ),
+      desktopVer: Container(
+        width: globals.getWidth(context, .8),
+        height: globals.getHeight(context, .8),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'About Page',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              'About this page',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

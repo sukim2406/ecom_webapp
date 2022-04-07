@@ -440,10 +440,22 @@ class MenuList extends StatelessWidget {
               ),
             ),
           ),
+          TextButton(
+            onPressed: () {
+              scrollTo!(4);
+            },
+            child: const Text(
+              'ABOUT',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           (myUid == '')
               ? TextButton(
                   onPressed: () {
-                    scrollTo!(4);
+                    scrollTo!(5);
                   },
                   child: const Text(
                     'LOG IN',
@@ -456,7 +468,6 @@ class MenuList extends StatelessWidget {
               : TextButton(
                   onPressed: () {
                     AuthController.instance.logout();
-                    scrollTo!(0);
                   },
                   child: const Text(
                     'LOG OUT',
@@ -466,18 +477,6 @@ class MenuList extends StatelessWidget {
                     ),
                   ),
                 ),
-          TextButton(
-            onPressed: () {
-              scrollTo!(5);
-            },
-            child: const Text(
-              'ABOUT',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
         ],
       ),
     );

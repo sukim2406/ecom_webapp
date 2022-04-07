@@ -447,6 +447,131 @@ class _CartState extends State<Cart> {
           ),
         ),
       ),
+      desktopVer: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: globals.getWidth(context, .8),
+            height: globals.getHeight(context, .05),
+            child: const Text(
+              'SHOPPING CART',
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          (cartItems.isNotEmpty)
+              ? Container(
+                  color: Colors.grey,
+                  height: globals.getHeight(context, .5),
+                  width: globals.getWidth(context, .8),
+                  child: ListView(
+                    key: Key(cartItems.length.toString()),
+                    children: generateCartItems(),
+                  ),
+                )
+              : Container(
+                  color: Colors.grey,
+                  height: globals.getHeight(context, .5),
+                  width: globals.getWidth(context, .8),
+                  child: const Text(
+                    'no items yet',
+                  ),
+                ),
+          // Container(
+          //   color: Colors.grey,
+          //   width: globals.getWidth(context, .8),
+          //   height: globals.getHeight(context, .5),
+
+          // ),
+
+          SizedBox(
+            height: globals.getHeight(context, .05),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(),
+                ),
+                SizedBox(
+                  width: globals.getWidth(context, .4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const Text(
+                        'Total',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(),
+                      ),
+                      Text(
+                        getTotalItemCnt().toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      const Text(
+                        ' items',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(),
+                      ),
+                      Text(
+                        totalPrice.toString(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      const Text(
+                        ' USD',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .05),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                child: Container(),
+              ),
+              SizedBox(
+                width: globals.getWidth(context, .4),
+                child: TextBtn(
+                  label: 'CHECK OUT',
+                  function: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckoutMobile(
+                          myUid: widget.myUid,
+                          items: productList,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

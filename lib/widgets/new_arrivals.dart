@@ -113,3 +113,44 @@ class NewArrivalsTablet extends StatelessWidget {
     );
   }
 }
+
+class NewArrivalsDesktop extends StatelessWidget {
+  final String myUid;
+  const NewArrivalsDesktop({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> imageSliders = [];
+    return FutureBuilder(
+      future: ProductController.instance.getProductsByCategory('new'),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData || snapshot.hasError) {
+          return const Text('Error');
+        }
+        var temp = snapshot.data! as List<Object?>;
+        imageSliders = temp
+            .map(
+              (doc) => ProductCardTablet(
+                product: doc as Map,
+                myUid: myUid,
+              ),
+            )
+            .toList();
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: imageSliders.length,
+          itemBuilder: (context, index) {
+            return SizedBox(
+              height: globals.getHeight(context, .2),
+              width: globals.getWidth(context, .2),
+              child: imageSliders[index],
+            );
+          },
+        );
+      },
+    );
+  }
+}
