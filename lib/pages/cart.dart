@@ -255,7 +255,7 @@ class _CartState extends State<Cart> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CheckoutMobile(
+                                  builder: (context) => Checkout(
                                     myUid: widget.myUid,
                                     items: productList,
                                   ),
@@ -425,7 +425,7 @@ class _CartState extends State<Cart> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CheckoutMobile(
+                                  builder: (context) => Checkout(
                                     myUid: widget.myUid,
                                     items: productList,
                                   ),
@@ -559,7 +559,7 @@ class _CartState extends State<Cart> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CheckoutMobile(
+                        builder: (context) => Checkout(
                           myUid: widget.myUid,
                           items: productList,
                         ),

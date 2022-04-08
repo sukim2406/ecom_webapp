@@ -141,88 +141,94 @@ class Products extends StatelessWidget {
           ),
         ),
       ),
-      desktopVer: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: globals.getHeight(context, .05),
-            width: globals.getWidth(context, .8),
-            alignment: Alignment.centerLeft,
-            child: const Text(
-              'NEW ARRIVALS',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
+      desktopVer: SizedBox(
+        width: globals.getWidth(context, .8),
+        height: globals.getHeight(context, .7),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: globals.getHeight(context, .05),
+                width: globals.getWidth(context, .8),
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  'NEW ARRIVALS',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
               ),
-            ),
-          ),
-          SizedBox(
-            height: globals.getHeight(context, .2),
-            child: NewArrivalsDesktop(
-              myUid: myUid,
-            ),
-          ),
-          Container(
-            height: globals.getHeight(context, .05),
-            width: globals.getWidth(context, .8),
-            alignment: Alignment.centerLeft,
-            child: const Text(
-              'BESTSELLERS',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
+              SizedBox(
+                height: globals.getHeight(context, .2),
+                child: NewArrivalsDesktop(
+                  myUid: myUid,
+                ),
               ),
-            ),
-          ),
-          SizedBox(
-            height: globals.getHeight(context, .2),
-            child: BestsellersDesktop(
-              myUid: myUid,
-            ),
-          ),
-          Container(
-            height: globals.getHeight(context, .05),
-            width: globals.getWidth(context, .8),
-            alignment: Alignment.centerLeft,
-            child: const Text(
-              'ALL PRODUCTS',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 20,
+              Container(
+                height: globals.getHeight(context, .05),
+                width: globals.getWidth(context, .8),
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  'BESTSELLERS',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
               ),
-            ),
+              SizedBox(
+                height: globals.getHeight(context, .2),
+                child: BestsellersDesktop(
+                  myUid: myUid,
+                ),
+              ),
+              Container(
+                height: globals.getHeight(context, .05),
+                width: globals.getWidth(context, .8),
+                alignment: Alignment.centerLeft,
+                child: const Text(
+                  'ALL PRODUCTS',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .8),
+                child: FutureBuilder(
+                  future: ProductController.instance.getAllProducts(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      var temp = snapshot.data! as List<Object?>;
+                      productList = temp
+                          .map((doc) => ProductCard(
+                                product: doc as Map,
+                                myUid: myUid,
+                              ))
+                          .toList();
+                    }
+                    return Container(
+                      color: Colors.black,
+                      child: (snapshot.hasData)
+                          ? GridView.count(
+                              primary: false,
+                              padding: const EdgeInsets.all(20.0),
+                              crossAxisCount: 4,
+                              crossAxisSpacing: 10.0,
+                              mainAxisSpacing: 10.0,
+                              children: productList,
+                            )
+                          : Container(),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: globals.getHeight(context, .8),
-            child: FutureBuilder(
-              future: ProductController.instance.getAllProducts(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  var temp = snapshot.data! as List<Object?>;
-                  productList = temp
-                      .map((doc) => ProductCard(
-                            product: doc as Map,
-                            myUid: myUid,
-                          ))
-                      .toList();
-                }
-                return Container(
-                  color: Colors.black,
-                  child: (snapshot.hasData)
-                      ? GridView.count(
-                          primary: false,
-                          padding: const EdgeInsets.all(20.0),
-                          crossAxisCount: 4,
-                          crossAxisSpacing: 10.0,
-                          mainAxisSpacing: 10.0,
-                          children: productList,
-                        )
-                      : Container(),
-                );
-              },
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

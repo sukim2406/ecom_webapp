@@ -389,95 +389,108 @@ class MenuList extends StatelessWidget {
           ),
         ],
       ),
-      desktopVer: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextButton(
-            onPressed: () {
-              scrollTo!(0);
-            },
-            child: const Text(
-              'HOME',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
+      desktopVer: SizedBox(
+        height: globals.getHeight(context, .1),
+        child: Column(
+          children: [
+            SizedBox(
+              height: globals.getHeight(context, .01),
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              scrollTo!(1);
-            },
-            child: const Text(
-              'PRODUCTS',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              scrollTo!(2);
-            },
-            child: const Text(
-              'CART',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              scrollTo!(3);
-            },
-            child: const Text(
-              'ORDERS',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              scrollTo!(4);
-            },
-            child: const Text(
-              'ABOUT',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          (myUid == '')
-              ? TextButton(
-                  onPressed: () {
-                    scrollTo!(5);
-                  },
-                  child: const Text(
-                    'LOG IN',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+            SizedBox(
+              height: globals.getHeight(context, .09),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      scrollTo!(0);
+                    },
+                    child: const Text(
+                      'HOME',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                )
-              : TextButton(
-                  onPressed: () {
-                    AuthController.instance.logout();
-                  },
-                  child: const Text(
-                    'LOG OUT',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  TextButton(
+                    onPressed: () {
+                      scrollTo!(1);
+                    },
+                    child: const Text(
+                      'PRODUCTS',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-        ],
+                  TextButton(
+                    onPressed: () {
+                      scrollTo!(2);
+                    },
+                    child: const Text(
+                      'CART',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      scrollTo!(3);
+                    },
+                    child: const Text(
+                      'ORDERS',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      scrollTo!(4);
+                    },
+                    child: const Text(
+                      'ABOUT',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  (myUid == '')
+                      ? TextButton(
+                          onPressed: () {
+                            scrollTo!(5);
+                          },
+                          child: const Text(
+                            'LOG IN',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      : TextButton(
+                          onPressed: () {
+                            AuthController.instance.logout();
+                          },
+                          child: const Text(
+                            'LOG OUT',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

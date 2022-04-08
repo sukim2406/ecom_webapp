@@ -17,87 +17,14 @@ class Blogs extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> blogSliders = [];
     return ResponsiveLayout(
-      mobileVer: FutureBuilder(
-        future: BlogController.instance.getAllBlogs(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            var temp = snapshot.data! as List<Object?>;
-            blogSliders = temp
-                .map(
-                  (doc) => BlogCard(blog: doc as Map, myUid: myUid),
-                )
-                .toList();
-            return CarouselSlider(
-              options: CarouselOptions(
-                height: globals.getHeight(context, .5),
-                viewportFraction: 1,
-                enlargeCenterPage: false,
-                autoPlay: true,
-              ),
-              items: blogSliders,
-            );
-          } else {
-            return Container();
-          }
-        },
+      mobileVer: BlogsMobile(
+        myUid: myUid,
       ),
-      tabletVer: FutureBuilder(
-        future: BlogController.instance.getAllBlogs(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            var temp = snapshot.data! as List<Object?>;
-            blogSliders = temp
-                .map(
-                  (doc) => BlogCardTablet(
-                    blog: doc as Map,
-                    myUid: myUid,
-                  ),
-                )
-                .toList();
-            return SizedBox(
-              height: 150.0,
-              width: 200.0,
-              child: CarouselSlider(
-                options: CarouselOptions(
-                  height: globals.getHeight(context, .5),
-                  viewportFraction: 1,
-                  enlargeCenterPage: false,
-                  autoPlay: true,
-                ),
-                items: blogSliders,
-              ),
-            );
-          } else {
-            return Container();
-          }
-        },
+      tabletVer: BlogsTablet(
+        myUid: myUid,
       ),
-      desktopVer: FutureBuilder(
-        future: BlogController.instance.getAllBlogs(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            var tempData = snapshot.data! as List;
-            var temp = snapshot.data! as List<Object?>;
-            blogSliders = temp
-                .map(
-                  (doc) => BlogCardDesktop(
-                    blog: doc as Map,
-                    myUid: myUid,
-                  ),
-                )
-                .toList();
-            return Container(
-              height: globals.getHeight(context, .1),
-              width: globals.getWidth(context, .4),
-              child: ListView(
-                reverse: true,
-                children: blogSliders,
-              ),
-            );
-          } else {
-            return Text('Error');
-          }
-        },
+      desktopVer: BlogsDesktop(
+        myUid: myUid,
       ),
     );
   }
@@ -120,7 +47,7 @@ class BlogsMobile extends StatelessWidget {
           var temp = snapshot.data! as List<Object?>;
           blogSliders = temp
               .map(
-                (doc) => BlogCardMobile(blog: doc as Map, myUid: myUid),
+                (doc) => BlogCard(blog: doc as Map, myUid: myUid),
               )
               .toList();
           return CarouselSlider(
@@ -180,6 +107,79 @@ class BlogsTablet extends StatelessWidget {
           return Container();
         }
       },
+    );
+  }
+}
+
+class BlogsDesktop extends StatelessWidget {
+  final String myUid;
+  const BlogsDesktop({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> blogSliders = [];
+    return SizedBox(
+      height: globals.getHeight(context, .8),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: globals.getHeight(context, .35),
+            child: const Image(
+              image: AssetImage('img/Supreme-Logo.png'),
+              fit: BoxFit.contain,
+            ),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .05),
+            width: globals.getWidth(context, .4),
+            child: const Text(
+              'NOTICE',
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: globals.getHeight(context, .3),
+            ),
+            child: FutureBuilder(
+              future: BlogController.instance.getAllBlogs(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  var temp = snapshot.data! as List<Object?>;
+                  blogSliders = temp
+                      .map(
+                        (doc) => BlogCardDesktop(
+                          blog: doc as Map,
+                          myUid: myUid,
+                        ),
+                      )
+                      .toList();
+                  return SizedBox(
+                    height: globals.getHeight(context, .1),
+                    width: globals.getWidth(context, .4),
+                    child: ListView(
+                      shrinkWrap: true,
+                      // reverse: true,
+                      children: blogSliders,
+                    ),
+                  );
+                } else {
+                  return const Text('Error');
+                }
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
