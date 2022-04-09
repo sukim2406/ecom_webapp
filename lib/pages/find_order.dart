@@ -20,541 +20,14 @@ class FindOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
     return ResponsiveLayout(
-      mobileVer: Scaffold(
-        appBar: AppbarWidget(
-          myUid: myUid,
-          tabBar: false,
-        ),
-        body: Container(
-          width: globals.getWidth(context, 1),
-          height: globals.getHeight(context, 1),
-          color: Colors.black,
-          child: (myUid == '')
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: globals.getHeight(context, .2),
-                    ),
-                    const Text(
-                      'SEARCH ORDER BY ORDER ID',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(
-                      height: globals.getHeight(context, .05),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(child: Container()),
-                        SizedBox(
-                          width: globals.getWidth(context, .5),
-                          child: TextInput(
-                            controller: searchController,
-                            obsecure: false,
-                            label: '',
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () async {
-                            if (searchController.text.isNotEmpty) {
-                              var orderData;
-                              orderData = await OrderController.instance
-                                  .getOrderDocument(searchController.text);
-                              if (orderData != null) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => OrderReceipt(
-                                      orderId: searchController.text,
-                                      myUid: myUid,
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                Fluttertoast.showToast(
-                                  msg: 'ORDER NOT FOUND',
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0,
-                                );
-                              }
-                            } else {
-                              Container();
-                            }
-                          },
-                          child: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                  ],
-                )
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'ORDER HISTORY',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: globals.getHeight(context, .025),
-                    ),
-                    SizedBox(
-                      height: globals.getHeight(context, .5),
-                      width: globals.getWidth(context, .8),
-                      child: FutureBuilder(
-                        future: OrderController.instance.findOrdersByUid(myUid),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            List data = snapshot.data as List;
-                            return ListView.builder(
-                              itemCount: data.length,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => OrderReceipt(
-                                            orderId: data[index]['oid'],
-                                            myUid: myUid),
-                                      ),
-                                    );
-                                  },
-                                  child: Container(
-                                    padding: const EdgeInsets.only(
-                                        top: 10, bottom: 10),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        SizedBox(
-                                          width: globals.getWidth(context, .1),
-                                        ),
-                                        Text(
-                                          data[index]['time']
-                                              .toDate()
-                                              .toString()
-                                              .substring(0, 10),
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Container(),
-                                        ),
-                                        Text(
-                                          data[index]['oid'],
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: globals.getWidth(context, .1),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
-                          } else {
-                            return const Text('error');
-                          }
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-        ),
+      mobileVer: FindOrderMobile(
+        myUid: myUid,
       ),
-      tabletVer: Scaffold(
-        body: Container(
-          height: globals.getHeight(context, 1),
-          width: globals.getWidth(context, 1),
-          color: Colors.black,
-          child: (myUid == '')
-              ? Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      width: 400,
-                      height: 150,
-                      child: Image(
-                        image: AssetImage('img/Supreme-Logo.png'),
-                        fit: BoxFit.fitWidth,
-                      ),
-                    ),
-                    SizedBox(
-                      height: globals.getHeight(context, .03),
-                    ),
-                    const Text(
-                      'SEARCH ORDER BY ORDER ID',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(
-                      height: globals.getHeight(context, .03),
-                    ),
-                    Row(
-                      children: [
-                        Expanded(child: Container()),
-                        SizedBox(
-                          width: globals.getWidth(context, .5),
-                          child: TextInput(
-                            controller: searchController,
-                            obsecure: false,
-                            label: '',
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () async {
-                            if (searchController.text.isNotEmpty) {
-                              var orderData;
-                              orderData = await OrderController.instance
-                                  .getOrderDocument(searchController.text);
-                              if (orderData != null) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => OrderReceipt(
-                                      orderId: searchController.text,
-                                      myUid: myUid,
-                                    ),
-                                  ),
-                                );
-                              } else {
-                                Fluttertoast.showToast(
-                                  msg: 'ORDER NOT FOUND',
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
-                                  textColor: Colors.white,
-                                  fontSize: 16.0,
-                                );
-                              }
-                            } else {
-                              Container();
-                            }
-                          },
-                          child: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                        ),
-                        Expanded(
-                          child: Container(),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: globals.getHeight(context, .1),
-                    ),
-                    MenuList(myUid: myUid),
-                  ],
-                )
-              : Container(
-                  height: globals.getHeight(context, 1),
-                  width: globals.getWidth(context, 1),
-                  color: Colors.black,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        width: 400,
-                        height: 150,
-                        child: Image(
-                          image: AssetImage('img/Supreme-Logo.png'),
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      SizedBox(
-                        height: globals.getHeight(context, .03),
-                      ),
-                      const Text(
-                        'ORDER HISTORY',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                      SizedBox(
-                        height: globals.getHeight(context, .03),
-                      ),
-                      Container(
-                        height: globals.getHeight(context, .5),
-                        width: globals.getWidth(context, .8),
-                        color: Colors.grey,
-                        child: FutureBuilder(
-                          future:
-                              OrderController.instance.findOrdersByUid(myUid),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              List data = snapshot.data as List;
-                              return ListView.builder(
-                                itemCount: data.length,
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => OrderReceipt(
-                                              orderId: data[index]['oid'],
-                                              myUid: myUid),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.only(
-                                          top: 10, bottom: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            width:
-                                                globals.getWidth(context, .1),
-                                          ),
-                                          Text(
-                                            data[index]['time']
-                                                .toDate()
-                                                .toString()
-                                                .substring(0, 10),
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Container(),
-                                          ),
-                                          Text(
-                                            data[index]['oid'],
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width:
-                                                globals.getWidth(context, .1),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              );
-                            } else {
-                              return const Text('error');
-                            }
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: globals.getHeight(context, .03),
-                      ),
-                      MenuList(myUid: myUid),
-                    ],
-                  ),
-                ),
-        ),
+      tabletVer: FindOrderTablet(
+        myUid: myUid,
       ),
-      desktopVer: SizedBox(
-        height: globals.getHeight(context, .8),
-        width: globals.getWidth(context, .8),
-        child: (myUid == '')
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: globals.getHeight(context, .3),
-                    width: globals.getWidth(context, .8),
-                    child: const Image(
-                      image: AssetImage('img/Supreme-Logo.png'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: globals.getHeight(context, .1),
-                    width: globals.getWidth(context, .8),
-                    child: const Text(
-                      'SEARCH ORDER BY ORDER ID',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(child: Container()),
-                      SizedBox(
-                        width: globals.getWidth(context, .5),
-                        child: TextInput(
-                          controller: searchController,
-                          obsecure: false,
-                          label: '',
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          if (searchController.text.isNotEmpty) {
-                            var orderData;
-                            orderData = await OrderController.instance
-                                .getOrderDocument(searchController.text);
-                            if (orderData != null) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => OrderReceipt(
-                                    orderId: searchController.text,
-                                    myUid: myUid,
-                                  ),
-                                ),
-                              );
-                            } else {
-                              Fluttertoast.showToast(
-                                msg: 'ORDER NOT FOUND',
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0,
-                              );
-                            }
-                          } else {
-                            Container();
-                          }
-                        },
-                        child: const Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: globals.getHeight(context, .2),
-                    width: globals.getWidth(context, .8),
-                    child: const Image(
-                      image: AssetImage('img/Supreme-Logo.png'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: globals.getHeight(context, .1),
-                    width: globals.getWidth(context, .8),
-                    child: const Text(
-                      'ORDER HISTORY',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: globals.getHeight(context, .4),
-                    width: globals.getWidth(context, .8),
-                    color: Colors.grey,
-                    child: FutureBuilder(
-                      future: OrderController.instance.findOrdersByUid(myUid),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          List data = snapshot.data as List;
-                          return ListView.builder(
-                            itemCount: data.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => OrderReceipt(
-                                          orderId: data[index]['oid'],
-                                          myUid: myUid),
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.only(
-                                      top: 10, bottom: 10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                        width: globals.getWidth(context, .1),
-                                      ),
-                                      Text(
-                                        data[index]['time']
-                                            .toDate()
-                                            .toString()
-                                            .substring(0, 10),
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Container(),
-                                      ),
-                                      Text(
-                                        data[index]['oid'],
-                                        style: const TextStyle(
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: globals.getWidth(context, .1),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        } else {
-                          return const Text('error');
-                        }
-                      },
-                    ),
-                  ),
-                ],
-              ),
+      desktopVer: FindOrderDesktop(
+        myUid: myUid,
       ),
     );
   }
@@ -736,6 +209,392 @@ class FindOrderMobile extends StatelessWidget {
                 ],
               ),
       ),
+    );
+  }
+}
+
+class FindOrderTablet extends StatelessWidget {
+  final String myUid;
+  const FindOrderTablet({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController searchController = TextEditingController();
+    return Scaffold(
+      body: Container(
+        height: globals.getHeight(context, 1),
+        width: globals.getWidth(context, 1),
+        color: Colors.black,
+        child: (myUid == '')
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    width: 400,
+                    height: 150,
+                    child: Image(
+                      image: AssetImage('img/Supreme-Logo.png'),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                  SizedBox(
+                    height: globals.getHeight(context, .03),
+                  ),
+                  const Text(
+                    'SEARCH ORDER BY ORDER ID',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                  SizedBox(
+                    height: globals.getHeight(context, .03),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(child: Container()),
+                      SizedBox(
+                        width: globals.getWidth(context, .5),
+                        child: TextInput(
+                          controller: searchController,
+                          obsecure: false,
+                          label: '',
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          if (searchController.text.isNotEmpty) {
+                            var orderData;
+                            orderData = await OrderController.instance
+                                .getOrderDocument(searchController.text);
+                            if (orderData != null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OrderReceipt(
+                                    orderId: searchController.text,
+                                    myUid: myUid,
+                                  ),
+                                ),
+                              );
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: 'ORDER NOT FOUND',
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0,
+                              );
+                            }
+                          } else {
+                            Container();
+                          }
+                        },
+                        child: const Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: globals.getHeight(context, .1),
+                  ),
+                  MenuList(myUid: myUid),
+                ],
+              )
+            : Container(
+                height: globals.getHeight(context, 1),
+                width: globals.getWidth(context, 1),
+                color: Colors.black,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      width: 400,
+                      height: 150,
+                      child: Image(
+                        image: AssetImage('img/Supreme-Logo.png'),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
+                    SizedBox(
+                      height: globals.getHeight(context, .03),
+                    ),
+                    const Text(
+                      'ORDER HISTORY',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    SizedBox(
+                      height: globals.getHeight(context, .03),
+                    ),
+                    Container(
+                      height: globals.getHeight(context, .5),
+                      width: globals.getWidth(context, .8),
+                      color: Colors.grey,
+                      child: FutureBuilder(
+                        future: OrderController.instance.findOrdersByUid(myUid),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            List data = snapshot.data as List;
+                            return ListView.builder(
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => OrderReceipt(
+                                            orderId: data[index]['oid'],
+                                            myUid: myUid),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 10),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: globals.getWidth(context, .1),
+                                        ),
+                                        Text(
+                                          data[index]['time']
+                                              .toDate()
+                                              .toString()
+                                              .substring(0, 10),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Container(),
+                                        ),
+                                        Text(
+                                          data[index]['oid'],
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: globals.getWidth(context, .1),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          } else {
+                            return const Text('error');
+                          }
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: globals.getHeight(context, .03),
+                    ),
+                    MenuList(myUid: myUid),
+                  ],
+                ),
+              ),
+      ),
+    );
+  }
+}
+
+class FindOrderDesktop extends StatelessWidget {
+  final String myUid;
+  const FindOrderDesktop({
+    Key? key,
+    required this.myUid,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController searchController = TextEditingController();
+    return SizedBox(
+      height: globals.getHeight(context, .7),
+      width: globals.getWidth(context, .8),
+      child: (myUid == '')
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: globals.getHeight(context, .3),
+                  child: const Image(
+                    image: AssetImage('img/Supreme-Logo.png'),
+                  ),
+                ),
+                SizedBox(
+                  height: globals.getHeight(context, .1),
+                  child: const Text(
+                    'SEARCH ORDER BY ORDER ID',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Container()),
+                    SizedBox(
+                      width: globals.getWidth(context, .5),
+                      child: TextInput(
+                        controller: searchController,
+                        obsecure: false,
+                        label: '',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        if (searchController.text.isNotEmpty) {
+                          var orderData;
+                          orderData = await OrderController.instance
+                              .getOrderDocument(searchController.text);
+                          if (orderData != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OrderReceipt(
+                                  orderId: searchController.text,
+                                  myUid: myUid,
+                                ),
+                              ),
+                            );
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'ORDER NOT FOUND',
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0,
+                            );
+                          }
+                        } else {
+                          Container();
+                        }
+                      },
+                      child: const Icon(
+                        Icons.search,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: globals.getHeight(context, .2),
+                  child: const Image(
+                    image: AssetImage('img/Supreme-Logo.png'),
+                  ),
+                ),
+                SizedBox(
+                  height: globals.getHeight(context, .1),
+                  child: const Text(
+                    'ORDER HISTORY',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+                Container(
+                  height: globals.getHeight(context, .4),
+                  color: Colors.grey,
+                  child: FutureBuilder(
+                    future: OrderController.instance.findOrdersByUid(myUid),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List data = snapshot.data as List;
+                        return ListView.builder(
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OrderReceipt(
+                                        orderId: data[index]['oid'],
+                                        myUid: myUid),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding:
+                                    const EdgeInsets.only(top: 10, bottom: 10),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: globals.getWidth(context, .1),
+                                    ),
+                                    Text(
+                                      data[index]['time']
+                                          .toDate()
+                                          .toString()
+                                          .substring(0, 10),
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Container(),
+                                    ),
+                                    Text(
+                                      data[index]['oid'],
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: globals.getWidth(context, .1),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      } else {
+                        return const Text('error');
+                      }
+                    },
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }

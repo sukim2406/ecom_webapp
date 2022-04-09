@@ -180,7 +180,6 @@ class LandingDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     ScrollController scrollController = ScrollController();
     scrollFunction(to) {
-      print('hi?');
       scrollController.animateTo(globals.getHeight(context, to),
           duration: const Duration(
             seconds: 1,
@@ -276,14 +275,11 @@ class LandingDesktop extends StatelessWidget {
                       SizedBox(
                         height: globals.getHeight(context, .05),
                       ),
-                      Container(
-                        height: globals.getHeight(context, .75),
-                        width: globals.getWidth(context, .8),
-                        color: Colors.black,
-                        child: Cart(myUid: myUid),
+                      Cart(
+                        myUid: myUid,
                       ),
                       SizedBox(
-                        height: globals.getHeight(context, .05),
+                        height: globals.getHeight(context, .1),
                       ),
                     ],
                   ),
@@ -300,9 +296,11 @@ class LandingDesktop extends StatelessWidget {
                         scrollTo: scrollFunction,
                       ),
                       SizedBox(
-                        height: globals.getHeight(context, .8),
-                        width: globals.getWidth(context, .8),
-                        child: FindOrder(myUid: myUid),
+                        height: globals.getHeight(context, .1),
+                      ),
+                      FindOrder(myUid: myUid),
+                      SizedBox(
+                        height: globals.getHeight(context, .1),
                       ),
                     ],
                   ),
@@ -319,9 +317,21 @@ class LandingDesktop extends StatelessWidget {
                         scrollTo: scrollFunction,
                       ),
                       SizedBox(
-                        height: globals.getHeight(context, .8),
                         width: globals.getWidth(context, .8),
-                        child: About(myUid: myUid),
+                        height: globals.getHeight(context, .05),
+                        child: const Image(
+                          image: AssetImage('img/Supreme-Logo.png'),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(context, .05),
+                      ),
+                      About(
+                        myUid: myUid,
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(context, .1),
                       ),
                     ],
                   ),
@@ -337,9 +347,15 @@ class LandingDesktop extends StatelessWidget {
                         myUid: myUid,
                         scrollTo: scrollFunction,
                       ),
+                      SizedBox(
+                        height: globals.getHeight(context, .1),
+                      ),
                       LogIn(
                         myUid: myUid,
                         // func: scrollTo,
+                      ),
+                      SizedBox(
+                        height: globals.getHeight(context, .1),
                       ),
                     ],
                   ),

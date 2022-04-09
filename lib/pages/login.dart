@@ -9,15 +9,14 @@ import '../controllers/auth_controller.dart';
 import '../widgets/text_input.dart';
 import '../widgets/text_btn.dart';
 import '../widgets/responsive_layout.dart';
-import '../pages/landing.dart';
 
 class LogIn extends StatelessWidget {
   final String myUid;
-  Function? func;
+  Function? refreshFunc;
   LogIn({
     Key? key,
     required this.myUid,
-    this.func,
+    this.refreshFunc,
   }) : super(key: key);
 
   @override
@@ -25,233 +24,15 @@ class LogIn extends StatelessWidget {
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     return ResponsiveLayout(
-      mobileVer: Scaffold(
-        appBar: AppbarWidget(
-          tabBar: false,
-          myUid: myUid,
-        ),
-        drawer: Drawer(
-          child: MenuList(
-            myUid: myUid,
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            height: globals.getHeight(context, 1),
-            width: globals.getWidth(context, 1),
-            color: Colors.black,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: globals.getWidth(context, .5),
-                  child: TextInput(
-                    controller: emailController,
-                    obsecure: false,
-                    label: 'EMAIL',
-                  ),
-                ),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                SizedBox(
-                  width: globals.getWidth(context, .5),
-                  child: TextInput(
-                    controller: passwordController,
-                    obsecure: true,
-                    label: 'PASSWORD',
-                  ),
-                ),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                SizedBox(
-                  width: globals.getWidth(context, .4),
-                  child: TextBtn(
-                    label: 'LOG IN',
-                    function: () {
-                      AuthController.instance
-                          .login(emailController.text, passwordController.text);
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 30.0,
-                ),
-                SizedBox(
-                  width: globals.getWidth(context, .4),
-                  child: TextBtn(
-                    label: 'SIGN UP',
-                    function: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUp(
-                            myUid: myUid,
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+      mobileVer: LogInMobile(
+        myUid: myUid,
       ),
-      tabletVer: Scaffold(
-        body: Container(
-          color: Colors.black,
-          height: globals.getHeight(context, 1),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 400,
-                  height: 150,
-                  child: Image(
-                    image: AssetImage('img/Supreme-Logo.png'),
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-                SizedBox(
-                  height: globals.getHeight(context, .03),
-                ),
-                SizedBox(
-                  width: globals.getWidth(context, .5),
-                  child: TextInput(
-                      controller: emailController,
-                      obsecure: false,
-                      label: 'EMAIL'),
-                ),
-                SizedBox(
-                  height: globals.getHeight(context, .02),
-                ),
-                SizedBox(
-                  width: globals.getWidth(context, .5),
-                  child: TextInput(
-                      controller: passwordController,
-                      obsecure: true,
-                      label: 'PASSWORD'),
-                ),
-                SizedBox(
-                  height: globals.getHeight(context, .03),
-                ),
-                SizedBox(
-                  width: globals.getWidth(context, .5),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: globals.getWidth(context, .2),
-                        child: TextBtn(
-                          function: () {
-                            AuthController.instance.login(
-                                emailController.text, passwordController.text);
-                          },
-                          label: 'LOG IN',
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(),
-                      ),
-                      SizedBox(
-                        width: globals.getWidth(context, .2),
-                        child: TextBtn(
-                          function: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SignUp(myUid: myUid),
-                              ),
-                            );
-                          },
-                          label: 'SIGN UP',
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: globals.getHeight(context, .1),
-                ),
-                MenuList(myUid: myUid),
-              ],
-            ),
-          ),
-        ),
+      tabletVer: LogInTablet(
+        myUid: myUid,
       ),
-      desktopVer: SizedBox(
-        width: globals.getWidth(context, .8),
-        height: globals.getHeight(context, .8),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: globals.getHeight(context, .3),
-              width: globals.getWidth(context, .8),
-              child: const Image(
-                image: AssetImage('img/Supreme-Logo.png'),
-              ),
-            ),
-            SizedBox(
-              height: globals.getHeight(context, .03),
-            ),
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: TextInput(
-                  controller: emailController, obsecure: false, label: 'EMAIL'),
-            ),
-            SizedBox(
-              height: globals.getHeight(context, .02),
-            ),
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: TextInput(
-                  controller: passwordController,
-                  obsecure: true,
-                  label: 'PASSWORD'),
-            ),
-            SizedBox(
-              height: globals.getHeight(context, .1),
-            ),
-            SizedBox(
-              width: globals.getWidth(context, .5),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: globals.getWidth(context, .2),
-                    child: TextBtn(
-                      function: () {
-                        AuthController.instance.login(
-                            emailController.text, passwordController.text);
-                        func!(0);
-                      },
-                      label: 'LOG IN',
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                  SizedBox(
-                    width: globals.getWidth(context, .2),
-                    child: TextBtn(
-                      function: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUp(myUid: myUid),
-                          ),
-                        );
-                      },
-                      label: 'SIGN UP',
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+      desktopVer: LogInDesktop(
+        myUid: myUid,
+        refreshFunc: refreshFunc,
       ),
     );
   }
@@ -274,7 +55,7 @@ class LogInMobile extends StatelessWidget {
         myUid: myUid,
       ),
       drawer: Drawer(
-        child: MenuListMobile(
+        child: MenuList(
           myUid: myUid,
         ),
       ),
@@ -329,7 +110,7 @@ class LogInMobile extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignupMobile(
+                        builder: (context) => SignUp(
                           myUid: myUid,
                         ),
                       ),
@@ -359,6 +140,7 @@ class LogInTablet extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.black,
+        height: globals.getHeight(context, 1),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -418,14 +200,7 @@ class LogInTablet extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ResponsiveLayout(
-                                mobileVer: SignupMobile(
-                                  myUid: myUid,
-                                ),
-                                tabletVer: SingupTablet(
-                                  myUid: myUid,
-                                ),
-                              ),
+                              builder: (context) => SignUp(myUid: myUid),
                             ),
                           );
                         },
@@ -438,10 +213,104 @@ class LogInTablet extends StatelessWidget {
               SizedBox(
                 height: globals.getHeight(context, .1),
               ),
-              MenuListTablet(myUid: myUid),
+              MenuList(myUid: myUid),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class LogInDesktop extends StatelessWidget {
+  final String myUid;
+  Function? refreshFunc;
+  LogInDesktop({
+    Key? key,
+    required this.myUid,
+    this.refreshFunc,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    return SizedBox(
+      width: globals.getWidth(context, .8),
+      height: globals.getHeight(context, .7),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: globals.getHeight(context, .3),
+            width: globals.getWidth(context, .8),
+            child: const Image(
+              image: AssetImage('img/Supreme-Logo.png'),
+            ),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .03),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .05),
+            width: globals.getWidth(context, .5),
+            child: TextInput(
+                controller: emailController, obsecure: false, label: 'EMAIL'),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .02),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .05),
+            width: globals.getWidth(context, .5),
+            child: TextInput(
+                controller: passwordController,
+                obsecure: true,
+                label: 'PASSWORD'),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .1),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .05),
+            width: globals.getWidth(context, .5),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: globals.getWidth(context, .2),
+                  child: TextBtn(
+                    function: () {
+                      AuthController.instance
+                          .login(emailController.text, passwordController.text);
+                      refreshFunc!(0);
+                    },
+                    label: 'LOG IN',
+                  ),
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                SizedBox(
+                  width: globals.getWidth(context, .2),
+                  child: TextBtn(
+                    function: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUp(myUid: myUid),
+                        ),
+                      );
+                    },
+                    label: 'SIGN UP',
+                  ),
+                )
+              ],
+            ),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .1),
+          )
+        ],
       ),
     );
   }
