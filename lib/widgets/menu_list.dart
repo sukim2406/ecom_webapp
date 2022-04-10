@@ -15,7 +15,7 @@ import '../widgets/responsive_layout.dart';
 class MenuList extends StatelessWidget {
   final Function? scrollTo;
   final String myUid;
-  MenuList({
+  const MenuList({
     Key? key,
     required this.myUid,
     this.scrollTo,
@@ -34,109 +34,6 @@ class MenuList extends StatelessWidget {
         myUid: myUid,
         scrollTo: scrollTo,
       ),
-      // SizedBox(
-      //   height: globals.getHeight(context, .1),
-      //   child: Column(
-      //     children: [
-      //       SizedBox(
-      //         height: globals.getHeight(context, .01),
-      //       ),
-      //       SizedBox(
-      //         height: globals.getHeight(context, .09),
-      //         child: Row(
-      //           mainAxisAlignment: MainAxisAlignment.center,
-      //           children: [
-      //             TextButton(
-      //               onPressed: () {
-      //                 scrollTo!(0);
-      //               },
-      //               child: const Text(
-      //                 'HOME',
-      //                 style: TextStyle(
-      //                   color: Colors.white,
-      //                   fontWeight: FontWeight.bold,
-      //                 ),
-      //               ),
-      //             ),
-      //             TextButton(
-      //               onPressed: () {
-      //                 scrollTo!(1);
-      //               },
-      //               child: const Text(
-      //                 'PRODUCTS',
-      //                 style: TextStyle(
-      //                   color: Colors.white,
-      //                   fontWeight: FontWeight.bold,
-      //                 ),
-      //               ),
-      //             ),
-      //             TextButton(
-      //               onPressed: () {
-      //                 scrollTo!(2);
-      //               },
-      //               child: const Text(
-      //                 'CART',
-      //                 style: TextStyle(
-      //                   color: Colors.white,
-      //                   fontWeight: FontWeight.bold,
-      //                 ),
-      //               ),
-      //             ),
-      //             TextButton(
-      //               onPressed: () {
-      //                 scrollTo!(3);
-      //               },
-      //               child: const Text(
-      //                 'ORDERS',
-      //                 style: TextStyle(
-      //                   color: Colors.white,
-      //                   fontWeight: FontWeight.bold,
-      //                 ),
-      //               ),
-      //             ),
-      //             TextButton(
-      //               onPressed: () {
-      //                 scrollTo!(4);
-      //               },
-      //               child: const Text(
-      //                 'ABOUT',
-      //                 style: TextStyle(
-      //                   color: Colors.white,
-      //                   fontWeight: FontWeight.bold,
-      //                 ),
-      //               ),
-      //             ),
-      //             (myUid == '')
-      //                 ? TextButton(
-      //                     onPressed: () {
-      //                       scrollTo!(5);
-      //                     },
-      //                     child: const Text(
-      //                       'LOG IN',
-      //                       style: TextStyle(
-      //                         color: Colors.white,
-      //                         fontWeight: FontWeight.bold,
-      //                       ),
-      //                     ),
-      //                   )
-      //                 : TextButton(
-      //                     onPressed: () {
-      //                       AuthController.instance.logout();
-      //                     },
-      //                     child: const Text(
-      //                       'LOG OUT',
-      //                       style: TextStyle(
-      //                         color: Colors.white,
-      //                         fontWeight: FontWeight.bold,
-      //                       ),
-      //                     ),
-      //                   ),
-      //           ],
-      //         ),
-      //       ),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
@@ -472,18 +369,10 @@ class MenuListTablet extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LogIn(
-                              myUid: myUid,
-                            )
-                        // ResponsiveLayout(
-                        //   mobileVer: LogInMobile(
-                        //     myUid: myUid,
-                        //   ),
-                        //   tabletVer: LogInTablet(
-                        //     myUid: myUid,
-                        //   ),
-                        // ),
-                        ),
+                      builder: (context) => LogIn(
+                        myUid: myUid,
+                      ),
+                    ),
                   );
                 },
                 child: const Text(
@@ -532,8 +421,8 @@ class MenuListTablet extends StatelessWidget {
 
 class MenuListDesktop extends StatelessWidget {
   final String myUid;
-  Function? scrollTo;
-  MenuListDesktop({
+  final Function? scrollTo;
+  const MenuListDesktop({
     Key? key,
     required this.myUid,
     this.scrollTo,

@@ -77,17 +77,29 @@ class _CartState extends State<Cart> {
 
   getProducts() async {
     setState(() {});
-    cartItems.forEach(
-      (item) async {
-        var temp =
-            await ProductController.instance.getProductByPid(item['pid']);
-        Map tempMap = temp.data();
-        tempMap['qty'] = item['cnt'];
-        setState(() {
+    for (var item in cartItems) {
+      var temp = await ProductController.instance.getProductByPid(item['pid']);
+      Map tempMap = temp.data();
+      tempMap['qty'] = item['cnt'];
+      setState(
+        () {
           productList.add(tempMap);
-        });
-      },
-    );
+        },
+      );
+    }
+    // cartItems.forEach(
+    //   (item) async {
+    //     var temp =
+    //         await ProductController.instance.getProductByPid(item['pid']);
+    //     Map tempMap = temp.data();
+    //     tempMap['qty'] = item['cnt'];
+    //     setState(
+    //       () {
+    //         productList.add(tempMap);
+    //       },
+    //     );
+    //   },
+    // );
   }
 
   num getTotalItemCnt() {
@@ -104,11 +116,16 @@ class _CartState extends State<Cart> {
   generateCartItems() {
     List<Widget> cartItems = [];
 
-    productList.forEach((item) {
+    for (var item in productList) {
       cartItems.add(
         CartItemMobile(item: item, update: updateCart, myUid: widget.myUid),
       );
-    });
+    }
+    // productList.forEach((item) {
+    //   cartItems.add(
+    //     CartItemMobile(item: item, update: updateCart, myUid: widget.myUid),
+    //   );
+    // });
 
     return cartItems;
   }

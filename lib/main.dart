@@ -1,12 +1,8 @@
 import 'package:ecom_webapp/controllers/auth_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
-import './pages/landing.dart';
-import './widgets/responsive_layout.dart';
-import './widgets/max_width_container.dart';
 import './controllers/auth_controller.dart';
 import './controllers/product_controller.dart';
 import './controllers/storage_controller.dart';
@@ -77,22 +73,10 @@ class MyApp extends StatelessWidget {
         future: _initialization,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            print(snapshot.error.toString());
+            return const Text('Error');
           }
-          // if (snapshot.connectionState == ConnectionState.done) {
-          //   return const MaxWidthContainer(
-          //     child: ResponsiveLayout(
-          //       mobileVer: LandingMobile(
-          //         user: User
-          //       ),
-          //       tabletVer: LandingTablet(),
-          //       desktopVer: DesktopTest(),
-          //     ),
-          //   );
-          // }
           return const CircularProgressIndicator();
         },
-        // child: const MyHomePage(title: 'Flutter Demo Home Page')
       ),
     );
   }

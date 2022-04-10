@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../globals.dart' as globals;
 import '../widgets/appbar_padding.dart';
-import '../pages/login.dart';
 import '../widgets/search_product.dart';
 
 class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {

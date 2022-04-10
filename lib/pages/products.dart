@@ -12,8 +12,8 @@ import '../globals.dart' as globals;
 
 class Products extends StatelessWidget {
   final String myUid;
-  int initialIndex;
-  Products({
+  final int initialIndex;
+  const Products({
     Key? key,
     required this.myUid,
     this.initialIndex = 0,
@@ -21,7 +21,6 @@ class Products extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> productList = [];
     return ResponsiveLayout(
       mobileVer: ProductsMobile(
         myUid: myUid,
@@ -89,8 +88,8 @@ class ProductsMobile extends StatelessWidget {
 
 class ProductsTablet extends StatelessWidget {
   final String myUid;
-  int initialIndex;
-  ProductsTablet({
+  final int initialIndex;
+  const ProductsTablet({
     Key? key,
     required this.myUid,
     this.initialIndex = 0,

@@ -76,7 +76,6 @@ class ProductCardTablet extends StatelessWidget {
             product['image'],
             fit: BoxFit.contain,
             width: globals.getWidth(context, .4),
-            // height: globals.getHeight(context, .2),
           ),
         ),
       ),

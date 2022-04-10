@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class OrderController extends GetxController {
   static OrderController instance = Get.find();
@@ -13,8 +15,15 @@ class OrderController extends GetxController {
         },
       );
     } catch (e) {
-      print('createOrderDocument error');
-      print(e.toString());
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 
@@ -26,11 +35,14 @@ class OrderController extends GetxController {
         },
       );
     } catch (e) {
-      print(
-        'getOrderDocument error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -53,8 +65,15 @@ class OrderController extends GetxController {
         return result;
       });
     } catch (e) {
-      print('findOrdersByUid error');
-      print(e.toString());
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
     }
   }
 }

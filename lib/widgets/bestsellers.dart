@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
 import '../widgets/product_card.dart';
 import '../controllers/product_controller.dart';
 import '../globals.dart' as globals;
 
 class BestsellersMobile extends StatelessWidget {
-  final myUid;
+  final String myUid;
   const BestsellersMobile({
     Key? key,
     required this.myUid,

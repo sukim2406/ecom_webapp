@@ -1,6 +1,4 @@
-import 'package:ecom_webapp/static.dart';
 import 'package:flutter/material.dart';
-
 import '../globals.dart' as globals;
 import '../pages/cart.dart';
 

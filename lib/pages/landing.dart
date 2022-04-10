@@ -17,8 +17,8 @@ import '../pages/about.dart';
 
 class Landing extends StatefulWidget {
   final String myUid;
-  int initialIndex;
-  Landing({
+  final int initialIndex;
+  const Landing({
     Key? key,
     required this.myUid,
     this.initialIndex = 0,
@@ -34,7 +34,6 @@ class _LandingState extends State<Landing> {
     ScrollController scrollController = ScrollController();
 
     scrollFunction(to) {
-      print('hi?');
       scrollController.animateTo(globals.getHeight(context, to),
           duration: const Duration(
             seconds: 1,
@@ -64,8 +63,8 @@ class _LandingState extends State<Landing> {
 
 class LandingMobile extends StatelessWidget {
   final String myUid;
-  int initialIndex;
-  LandingMobile({
+  final int initialIndex;
+  const LandingMobile({
     Key? key,
     required this.myUid,
     this.initialIndex = 0,
@@ -123,8 +122,8 @@ class LandingMobile extends StatelessWidget {
 
 class LandingTablet extends StatelessWidget {
   final String myUid;
-  int initialIndex;
-  LandingTablet({
+  final int initialIndex;
+  const LandingTablet({
     Key? key,
     required this.myUid,
     this.initialIndex = 0,
@@ -169,8 +168,8 @@ class LandingTablet extends StatelessWidget {
 
 class LandingDesktop extends StatelessWidget {
   final String myUid;
-  Function? refreshFunction;
-  LandingDesktop({
+  final Function? refreshFunction;
+  const LandingDesktop({
     Key? key,
     required this.myUid,
     this.refreshFunction,

@@ -25,7 +25,6 @@ class _FavoritesMobileState extends State<FavoritesMobile> {
   @override
   void initState() {
     getFavorites();
-    // TODO: implement initState
     super.initState();
   }
 
@@ -68,7 +67,7 @@ class _FavoritesMobileState extends State<FavoritesMobile> {
               );
             },
           )
-        : Text(
+        : const Text(
             'Log In to see favorites',
             style: TextStyle(color: Colors.white),
           );

@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class StorageController extends GetxController {
   static StorageController instance = Get.find();
@@ -11,9 +13,14 @@ class StorageController extends GetxController {
           await storage.ref('products/$imageName').getDownloadURL();
       return downloadUrl;
     } catch (e) {
-      print('downloadUrl error');
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
       return '';
     }

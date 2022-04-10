@@ -12,8 +12,8 @@ import '../widgets/responsive_layout.dart';
 
 class LogIn extends StatelessWidget {
   final String myUid;
-  Function? refreshFunc;
-  LogIn({
+  final Function? refreshFunc;
+  const LogIn({
     Key? key,
     required this.myUid,
     this.refreshFunc,
@@ -21,8 +21,6 @@ class LogIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
     return ResponsiveLayout(
       mobileVer: LogInMobile(
         myUid: myUid,
@@ -224,8 +222,8 @@ class LogInTablet extends StatelessWidget {
 
 class LogInDesktop extends StatelessWidget {
   final String myUid;
-  Function? refreshFunc;
-  LogInDesktop({
+  final Function? refreshFunc;
+  const LogInDesktop({
     Key? key,
     required this.myUid,
     this.refreshFunc,

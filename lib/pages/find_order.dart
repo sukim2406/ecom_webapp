@@ -18,7 +18,6 @@ class FindOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController searchController = TextEditingController();
     return ResponsiveLayout(
       mobileVer: FindOrderMobile(
         myUid: myUid,
@@ -85,8 +84,7 @@ class FindOrderMobile extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           if (searchController.text.isNotEmpty) {
-                            var orderData;
-                            orderData = await OrderController.instance
+                            var orderData = await OrderController.instance
                                 .getOrderDocument(searchController.text);
                             if (orderData != null) {
                               Navigator.push(
@@ -268,8 +266,7 @@ class FindOrderTablet extends StatelessWidget {
                       GestureDetector(
                         onTap: () async {
                           if (searchController.text.isNotEmpty) {
-                            var orderData;
-                            orderData = await OrderController.instance
+                            var orderData = await OrderController.instance
                                 .getOrderDocument(searchController.text);
                             if (orderData != null) {
                               Navigator.push(
@@ -468,8 +465,7 @@ class FindOrderDesktop extends StatelessWidget {
                     GestureDetector(
                       onTap: () async {
                         if (searchController.text.isNotEmpty) {
-                          var orderData;
-                          orderData = await OrderController.instance
+                          var orderData = await OrderController.instance
                               .getOrderDocument(searchController.text);
                           if (orderData != null) {
                             Navigator.push(

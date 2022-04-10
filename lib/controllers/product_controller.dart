@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductController extends GetxController {
   static ProductController instance = Get.find();
@@ -14,11 +16,14 @@ class ProductController extends GetxController {
         },
       );
     } catch (e) {
-      print(
-        'getAllProducts error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -43,11 +48,14 @@ class ProductController extends GetxController {
         },
       );
     } catch (e) {
-      print(
-        'getAllProducts error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -68,11 +76,14 @@ class ProductController extends GetxController {
         },
       );
     } catch (e) {
-      print(
-        'getProductsByName error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -81,11 +92,14 @@ class ProductController extends GetxController {
     try {
       return await firestore.collection('Products').doc(pid).get();
     } catch (e) {
-      print(
-        'getProductByPid error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }

@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import './auth_controller.dart';
 import './product_controller.dart';
 
@@ -17,11 +18,14 @@ class UserController extends GetxController {
           )
           .set(userMap);
     } catch (e) {
-      print(
-        'createUserDocument error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -34,11 +38,14 @@ class UserController extends GetxController {
         },
       );
     } catch (e) {
-      print(
-        'getFavorites error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -47,11 +54,14 @@ class UserController extends GetxController {
     try {
       await firestore.collection('Users').doc(myUid).update({'favorite': list});
     } catch (e) {
-      print(
-        'updateFavorites error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -60,11 +70,14 @@ class UserController extends GetxController {
     try {
       return firestore.collection('Users').doc(myUid).snapshots();
     } catch (e) {
-      print(
-        'getFavoriteStream error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -80,11 +93,14 @@ class UserController extends GetxController {
       print(temp);
       return temp;
     } catch (e) {
-      print(
-        'getFavoriteProducts error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -97,11 +113,14 @@ class UserController extends GetxController {
         },
       );
     } catch (e) {
-      print(
-        'getCartFromUser error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -124,11 +143,14 @@ class UserController extends GetxController {
       var temp = await getCartFromUser(myUid);
       List<Map> sortedCart = [];
     } catch (e) {
-      print(
-        'getSortedCart error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }
@@ -139,11 +161,14 @@ class UserController extends GetxController {
         {'cart': []},
       );
     } catch (e) {
-      print(
-        'clearCart error',
-      );
-      print(
-        e.toString(),
+      Fluttertoast.showToast(
+        msg: e.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0,
       );
     }
   }

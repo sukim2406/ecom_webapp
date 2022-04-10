@@ -52,9 +52,12 @@ class _CheckoutState extends State<Checkout> {
 
   getSubtotal() {
     double subtotal = 0.0;
-    widget.items.forEach((item) {
+    for (var item in widget.items) {
       subtotal += (item['qty'] * item['price']);
-    });
+    }
+    // widget.items.forEach((item) {
+    //   subtotal += (item['qty'] * item['price']);
+    // });
     return subtotal;
   }
 
@@ -374,11 +377,12 @@ class _CheckoutState extends State<Checkout> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text('Empty field detected'),
-                                    content: Text('All fields must be filled'),
+                                    title: const Text('Empty field detected'),
+                                    content:
+                                        const Text('All fields must be filled'),
                                     actions: [
                                       TextButton(
-                                        child: Text('OK'),
+                                        child: const Text('OK'),
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
@@ -747,11 +751,12 @@ class _CheckoutState extends State<Checkout> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text('Empty field detected'),
-                                    content: Text('All fields must be filled'),
+                                    title: const Text('Empty field detected'),
+                                    content:
+                                        const Text('All fields must be filled'),
                                     actions: [
                                       TextButton(
-                                        child: Text('OK'),
+                                        child: const Text('OK'),
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
@@ -763,17 +768,26 @@ class _CheckoutState extends State<Checkout> {
                             } else {
                               Map order = {};
                               List products = [];
-                              widget.items.forEach(
-                                (element) {
-                                  Map temp = {
-                                    'name': element['name'],
-                                    'qty': element['qty'],
-                                    'price': element['price'],
-                                    'pid': element['pid'],
-                                  };
-                                  products.add(temp);
-                                },
-                              );
+                              for (var element in widget.items) {
+                                Map temp = {
+                                  'name': element['name'],
+                                  'qty': element['qty'],
+                                  'price': element['price'],
+                                  'pid': element['pid'],
+                                };
+                                products.add(temp);
+                              }
+                              // widget.items.forEach(
+                              //   (element) {
+                              //     Map temp = {
+                              //       'name': element['name'],
+                              //       'qty': element['qty'],
+                              //       'price': element['price'],
+                              //       'pid': element['pid'],
+                              //     };
+                              //     products.add(temp);
+                              //   },
+                              // );
                               order['products'] = products;
                               order['subtotal'] = getSubtotal();
                               order['tax'] = getTax();
@@ -868,9 +882,12 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
 
   getSubtotal() {
     double subtotal = 0.0;
-    widget.items.forEach((item) {
+    for (var item in widget.items) {
       subtotal += (item['qty'] * item['price']);
-    });
+    }
+    // widget.items.forEach((item) {
+    //   subtotal += (item['qty'] * item['price']);
+    // });
     return subtotal;
   }
 
@@ -1198,11 +1215,12 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                               context: context,
                               builder: (context) {
                                 return AlertDialog(
-                                  title: Text('Empty field detected'),
-                                  content: Text('All fields must be filled'),
+                                  title: const Text('Empty field detected'),
+                                  content:
+                                      const Text('All fields must be filled'),
                                   actions: [
                                     TextButton(
-                                      child: Text('OK'),
+                                      child: const Text('OK'),
                                       onPressed: () {
                                         Navigator.pop(context);
                                       },
@@ -1214,17 +1232,26 @@ class _CheckoutMobileState extends State<CheckoutMobile> {
                           } else {
                             Map order = {};
                             List products = [];
-                            widget.items.forEach(
-                              (element) {
-                                Map temp = {
-                                  'name': element['name'],
-                                  'qty': element['qty'],
-                                  'price': element['price'],
-                                  'pid': element['pid'],
-                                };
-                                products.add(temp);
-                              },
-                            );
+                            for (var element in widget.items) {
+                              Map temp = {
+                                'name': element['name'],
+                                'qty': element['qty'],
+                                'price': element['price'],
+                                'pid': element['pid'],
+                              };
+                              products.add(temp);
+                            }
+                            // widget.items.forEach(
+                            //   (element) {
+                            //     Map temp = {
+                            //       'name': element['name'],
+                            //       'qty': element['qty'],
+                            //       'price': element['price'],
+                            //       'pid': element['pid'],
+                            //     };
+                            //     products.add(temp);
+                            //   },
+                            // );
                             order['products'] = products;
                             order['subtotal'] = getSubtotal();
                             order['tax'] = getTax();

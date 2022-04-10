@@ -113,7 +113,7 @@ getWidth(context, multiple) {
 }
 
 Map getProductById(pid) {
-  var temp;
+  Map temp = {};
   tempProductData.forEach(
     (item) {
       if (item['pid'] == pid) {

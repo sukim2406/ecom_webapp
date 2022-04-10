@@ -4,9 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../widgets/max_width_container.dart';
-import '../widgets/responsive_layout.dart';
 import '../pages/landing.dart';
-import '../static.dart';
 import './user_controller.dart';
 
 class AuthController extends GetxController {
@@ -25,26 +23,11 @@ class AuthController extends GetxController {
   }
 
   _initialScreen(User? user) async {
-    if (user != null) {
-      print('currently logged in');
-      // Holder.setUid(user.uid);
-    } else {
-      print('currently logged out');
-      // Holder.setUid('');
-    }
     Get.offAll(
       () => MaxWidthContainer(
         child: Landing(
           myUid: (user != null) ? user.uid : '',
         ),
-        // child: ResponsiveLayout(
-        //   mobileVer: LandingMobile(
-        //     myUid: (user != null) ? user.uid : '',
-        //   ),
-        //   tabletVer: LandingTablet(
-        //     myUid: (user != null) ? user.uid : '',
-        //   ),
-        // ),
       ),
     );
   }
@@ -83,8 +66,6 @@ class AuthController extends GetxController {
         textColor: Colors.white,
         fontSize: 16.0,
       );
-
-      print(e.toString());
     }
   }
 

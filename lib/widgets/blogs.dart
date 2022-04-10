@@ -15,7 +15,6 @@ class Blogs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> blogSliders = [];
     return ResponsiveLayout(
       mobileVer: BlogsMobile(
         myUid: myUid,
