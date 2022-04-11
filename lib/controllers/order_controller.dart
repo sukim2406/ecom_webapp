@@ -16,7 +16,7 @@ class OrderController extends GetxController {
       );
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('createOrderDocument error\n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -36,7 +36,7 @@ class OrderController extends GetxController {
       );
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('getOrderDocument error\n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -66,7 +66,7 @@ class OrderController extends GetxController {
       });
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('findOrdersByUid error /n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

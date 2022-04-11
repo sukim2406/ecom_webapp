@@ -121,12 +121,6 @@ class _CartState extends State<Cart> {
         CartItemMobile(item: item, update: updateCart, myUid: widget.myUid),
       );
     }
-    // productList.forEach((item) {
-    //   cartItems.add(
-    //     CartItemMobile(item: item, update: updateCart, myUid: widget.myUid),
-    //   );
-    // });
-
     return cartItems;
   }
 
@@ -232,10 +226,6 @@ class CartMobile extends StatelessWidget {
                       Expanded(
                         child: Container(),
                       ),
-                      const Icon(
-                        Icons.refresh,
-                        color: Colors.white,
-                      )
                     ],
                   ),
                   const SizedBox(
@@ -416,10 +406,6 @@ class CartTablet extends StatelessWidget {
                       Expanded(
                         child: Container(),
                       ),
-                      const Icon(
-                        Icons.refresh,
-                        color: Colors.white,
-                      )
                     ],
                   ),
                   const SizedBox(

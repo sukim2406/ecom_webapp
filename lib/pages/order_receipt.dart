@@ -415,10 +415,8 @@ class OrderReceipt extends StatelessWidget {
                     onPressed: () {
                       Get.offAll(
                         () => MaxWidthContainer(
-                          child: ResponsiveLayout(
-                            mobileVer: LandingMobile(
-                              myUid: myUid,
-                            ),
+                          child: Landing(
+                            myUid: myUid,
                           ),
                         ),
                       );

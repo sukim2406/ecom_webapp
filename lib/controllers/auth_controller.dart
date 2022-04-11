@@ -58,7 +58,7 @@ class AuthController extends GetxController {
       });
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('register error \n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.SNACKBAR,
         timeInSecForIosWeb: 1,
@@ -74,7 +74,7 @@ class AuthController extends GetxController {
       await auth.signInWithEmailAndPassword(email: email, password: password);
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('login error\n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.SNACKBAR,
         timeInSecForIosWeb: 1,
@@ -95,7 +95,7 @@ class AuthController extends GetxController {
       );
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('logout error\n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.SNACKBAR,
         timeInSecForIosWeb: 1,

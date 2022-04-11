@@ -17,7 +17,7 @@ class ProductController extends GetxController {
       );
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('getAllProducts error \n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -49,7 +49,7 @@ class ProductController extends GetxController {
       );
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('getProductsByCategory error \n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -77,7 +77,7 @@ class ProductController extends GetxController {
       );
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('getProductsByName error \n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -93,7 +93,7 @@ class ProductController extends GetxController {
       return await firestore.collection('Products').doc(pid).get();
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('getProductByPid error\n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

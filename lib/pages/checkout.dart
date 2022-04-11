@@ -423,8 +423,10 @@ class _CheckoutState extends State<Checkout> {
                                   .createOrderDocument(data)
                                   .then(
                                 (orderId) {
-                                  UserController.instance
-                                      .clearCart(widget.myUid);
+                                  if (widget.myUid != '') {
+                                    UserController.instance
+                                        .clearCart(widget.myUid);
+                                  }
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(

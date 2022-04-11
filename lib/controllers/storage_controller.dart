@@ -14,7 +14,7 @@ class StorageController extends GetxController {
       return downloadUrl;
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('downloadUrl error\n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

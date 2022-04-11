@@ -90,7 +90,6 @@ class UserController extends GetxController {
           .map((doc) async =>
               await ProductController.instance.getProductByPid(doc))
           .toList();
-      print(temp);
       return temp;
     } catch (e) {
       Fluttertoast.showToast(
@@ -129,22 +128,8 @@ class UserController extends GetxController {
     try {
       await firestore.collection('Users').doc(myUid).update({'cart': list});
     } catch (e) {
-      print(
-        'updateCart error',
-      );
-      print(
-        e.toString(),
-      );
-    }
-  }
-
-  Future getSortedCart(myUid) async {
-    try {
-      var temp = await getCartFromUser(myUid);
-      List<Map> sortedCart = [];
-    } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('updateCart error\n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
@@ -155,6 +140,23 @@ class UserController extends GetxController {
     }
   }
 
+  // Future getSortedCart(myUid) async {
+  //   try {
+  //     var temp = await getCartFromUser(myUid);
+  //     List<Map> sortedCart = [];
+  //   } catch (e) {
+  //     Fluttertoast.showToast(
+  //       msg: ('getSortedCart error\n' + e.toString()),
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: ToastGravity.BOTTOM,
+  //       timeInSecForIosWeb: 1,
+  //       backgroundColor: Colors.red,
+  //       textColor: Colors.white,
+  //       fontSize: 16.0,
+  //     );
+  //   }
+  // }
+
   clearCart(myUid) async {
     try {
       await firestore.collection('Users').doc(myUid).update(
@@ -162,7 +164,7 @@ class UserController extends GetxController {
       );
     } catch (e) {
       Fluttertoast.showToast(
-        msg: e.toString(),
+        msg: ('clearCart error\n' + e.toString()),
         toastLength: Toast.LENGTH_SHORT,
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,

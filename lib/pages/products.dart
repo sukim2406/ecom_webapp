@@ -159,7 +159,7 @@ class ProductsTablet extends StatelessWidget {
                       ),
                       Container(
                         color: Colors.black,
-                        child: FavoritesMobile(
+                        child: FavoritesTablet(
                           myUid: myUid,
                         ),
                       ),
@@ -193,6 +193,32 @@ class ProductsDesktop extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            (myUid != '')
+                ? SizedBox(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: globals.getHeight(context, .05),
+                          width: globals.getWidth(context, .8),
+                          alignment: Alignment.centerLeft,
+                          child: const Text(
+                            'FAVORITES',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: globals.getHeight(context, .2),
+                          child: FavoritesDesktop(
+                            myUid: myUid,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : Container(),
             Container(
               height: globals.getHeight(context, .05),
               width: globals.getWidth(context, .8),
