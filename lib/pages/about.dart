@@ -45,24 +45,63 @@ class AboutMobile extends StatelessWidget {
       body: Container(
         color: Colors.black,
         width: globals.getWidth(context, 1),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Text(
-              'About Page',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
+        child: SizedBox(
+          width: globals.getWidth(context, .8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'THIS IS NOT REAL SUPREME WEBPAGE',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Text(
-              'About this page',
-              style: TextStyle(
-                color: Colors.white,
+              SizedBox(
+                height: globals.getHeight(context, .05),
               ),
-            ),
-          ],
+              const Text(
+                'This page is created by Soun Sean Kim ssk.sosodev@gmail.com as a personal project',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              const Text(
+                'Purpose of this page is to practice Flutter Web as frontend and Google Firebase as backend by',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              const Text(
+                'creating responsive e-commerce style web app.',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              const Text(
+                'No real information is needed to place order, it is just to generate all result pages.',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                height: globals.getHeight(context, .025),
+              ),
+              const Text(
+                'Supreme logos and product pictures from Supreme - https://www.supremenewyork.com/',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              const Text(
+                'Person icons created by Ilham Fitrotul Hayat - Flaticon https://www.flaticon.com/free-icons/person',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -87,15 +126,51 @@ class AboutTablet extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'About Page',
+              'THIS IS NOT REAL SUPREME WEBPAGE',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(
+              height: globals.getHeight(context, .05),
+            ),
             const Text(
-              'About this page',
+              'This page is created by Soun Sean Kim ssk.sosodev@gmail.com as a personal project',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            const Text(
+              'Purpose of this page is to practice Flutter Web as frontend and Google Firebase as backend by',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            const Text(
+              'creating responsive e-commerce style web app.',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            const Text(
+              'No real information is needed to place order, it is just to generate all result pages.',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: globals.getHeight(context, .025),
+            ),
+            const Text(
+              'Supreme logos and product pictures from Supreme - https://www.supremenewyork.com/',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+            const Text(
+              'Person icons created by Ilham Fitrotul Hayat - Flaticon https://www.flaticon.com/free-icons/person',
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -121,21 +196,57 @@ class AboutDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: globals.getWidth(context, .8),
+      width: globals.getWidth(context, .4),
       height: globals.getHeight(context, .7),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text(
-            'About Page',
+        children: [
+          const Text(
+            'THIS IS NOT REAL SUPREME WEBPAGE',
             style: TextStyle(
               color: Colors.white,
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            'About this page',
+          SizedBox(
+            height: globals.getHeight(context, .05),
+          ),
+          const Text(
+            'This page is created by Soun Sean Kim ssk.sosodev@gmail.com as a personal project',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          const Text(
+            'Purpose of this page is to practice Flutter Web as frontend and Google Firebase as backend by',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          const Text(
+            'creating responsive e-commerce style web app.',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          const Text(
+            'No real information is needed to place order, it is just to generate all result pages.',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          SizedBox(
+            height: globals.getHeight(context, .025),
+          ),
+          const Text(
+            'Supreme logos and product pictures from Supreme - https://www.supremenewyork.com/',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          const Text(
+            'Person icons created by Ilham Fitrotul Hayat - Flaticon https://www.flaticon.com/free-icons/person',
             style: TextStyle(
               color: Colors.white,
             ),
